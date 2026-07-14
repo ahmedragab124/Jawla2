@@ -13,7 +13,7 @@ function HeroSection({ bookings, setBookings }) {
             {/* Overlay */}
             <div className="absolute inset-0 bg-linear-to-r from-[#3b2a1c]/55 via-[#8B5E3C]/25 to-[#B8860B]/15"></div>
 
-            <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl items-center justify-between gap-16 px-6 py-6 lg:px-10">
+            <div className="relative z-10 mx-auto flex flex-col lg:flex-row min-h-screen max-w-7xl items-center justify-center lg:justify-between gap-12 lg:gap-16 px-6 py-24 lg:py-10 lg:px-10">
 
                 {/* Left Content */}
                 <div className="max-w-lg text-center lg:text-left">
