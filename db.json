@@ -1,0 +1,273 @@
+{
+  "destinations": [
+    {
+      "id": "cairo",
+      "name": "Cairo",
+      "image": "/destinations/cairo.png",
+      "heroImage": "/destinations/cairo.png",
+      "heroTitle": "Cairo: The City of Palaces",
+      "description": "Step into the world's greatest open-air museum, where the legacy of pharaohs is etched into every stone and the Nile whispers ancient secrets.",
+      "star": 4.5,
+      "capital": "Cairo",
+      "latitude": 30.0444,
+      "longitude": 31.2357,
+      "weatherLabel": "Sunny",
+      "history": "7,000+ Years",
+      "exploreLabel": "EXPLORE CAIRO",
+      "experienceTitle": "Choose Your Experience",
+      "experienceDescription": "Discover Cairo's most iconic landmarks and museums.",
+      "guideTitle": "Unveil Cairo's Secrets with a Local Expert",
+      "guideDescription": "Don't just see the monuments—understand them. Our certified Egyptologists bring the ancient world to life with stories of intrigue, mystery, and the daily lives of the pharaohs.",
+      "guideImage": "/destinations/guide.png",
+      "guideFeatures": [
+        "Certified Private Egyptologists",
+        "Flexible, Personalized Itineraries",
+        "Multi-lingual support (EN/AR/FR/DE)"
+      ],
+      "experiences": [
+        {
+          "id": "pyramids",
+          "title": "Pyramids",
+          "category": "Historical Sites",
+          "image": "/destinations/giza-pyramids.webp",
+          "description": "Explore Egypt's iconic pyramids."
+        },
+        {
+          "id": "gem",
+          "title": "Grand Egyptian Museum",
+          "category": "Museums",
+          "image": "/destinations/gem.jpg",
+          "description": "Discover thousands of ancient artifacts."
+        },
+        {
+          "id": "egyptian-museum",
+          "title": "Egyptian Museum",
+          "category": "Museums",
+          "image": "/destinations/egyptian-museum.jpg",
+          "description": "Home to priceless treasures."
+        }
+      ]
+    },
+    {
+      "id": "aswan",
+      "name": "Aswan",
+      "image": "/destinations/aswan.png",
+      "heroImage": "/destinations/aswan.png",
+      "heroTitle": "Aswan: The Nile's Golden Gateway",
+      "description": "Follow the Nile through warm Nubian hospitality, timeless temples, and golden desert landscapes in Egypt's peaceful southern jewel.",
+      "star": 4.6,
+      "capital": "Aswan",
+      "latitude": 24.0889,
+      "longitude": 32.8998,
+      "weatherLabel": "Warm & Sunny",
+      "history": "Nubian Heritage",
+      "exploreLabel": "EXPLORE ASWAN",
+      "experienceTitle": "Choose Your Aswan Experience",
+      "experienceDescription": "Sail the Nile and explore the temples, islands, and Nubian heritage of Aswan.",
+      "guideTitle": "Discover Aswan with a Local Expert",
+      "guideDescription": "See the stories behind the temples and the river with a guide who knows every hidden view, local tradition, and historic path.",
+      "guideImage": "/destinations/guide.png",
+      "guideFeatures": [
+        "Trusted local guides",
+        "Flexible Nile itineraries",
+        "Nubian culture experiences"
+      ],
+      "experiences": [
+        {
+          "id": "abu-simbel",
+          "title": "Abu Simbel Temples",
+          "category": "Historical Sites",
+          "image": "/destinations/abu-simbel.png",
+          "description": "Witness Ramses II's monumental temples carved into the rock."
+        },
+        {
+          "id": "philae",
+          "title": "Temple of Philae",
+          "category": "Temples",
+          "image": "/destinations/philae.png",
+          "description": "Visit the island sanctuary devoted to the goddess Isis."
+        },
+        {
+          "id": "kom-ombo",
+          "title": "Temple of Kom Ombo",
+          "category": "Temples",
+          "image": "/destinations/kom-ombo.png",
+          "description": "Explore the unique riverside double temple of Sobek and Horus."
+        }
+      ]
+    },
+    {
+      "id": "luxor",
+      "name": "Luxor",
+      "image": "/destinations/luxor.png",
+      "heroImage": "/destinations/luxor.png",
+      "heroTitle": "Luxor: Egypt's Open-Air Museum",
+      "description": "Walk through the heart of ancient Thebes, where grand temples, royal tombs, and the Nile reveal Egypt's most spectacular history.",
+      "star": 4.6,
+      "capital": "Luxor",
+      "latitude": 25.6872,
+      "longitude": 32.6396,
+      "weatherLabel": "Clear & Sunny",
+      "history": "Ancient Thebes",
+      "exploreLabel": "EXPLORE LUXOR",
+      "experienceTitle": "Choose Your Luxor Experience",
+      "experienceDescription": "Discover the temples and royal tombs that made Luxor the world's greatest open-air museum.",
+      "guideTitle": "Bring Ancient Thebes to Life",
+      "guideDescription": "Travel through Luxor with an expert who connects every temple, tomb, and monument to the people who built them.",
+      "guideImage": "/destinations/guide.png",
+      "guideFeatures": [
+        "Licensed Egyptologist guides",
+        "Private temple tours",
+        "Custom Valley of the Kings visits"
+      ],
+      "experiences": [
+        {
+          "id": "karnak",
+          "title": "Karnak Temple",
+          "category": "Temples",
+          "image": "/destinations/karnak.png",
+          "description": "Explore the immense temple complex dedicated to Amun-Ra."
+        },
+        {
+          "id": "valley-of-kings",
+          "title": "Valley of the Kings",
+          "category": "Historical Sites",
+          "image": "/destinations/valley-of-the-kings.png",
+          "description": "Enter the richly decorated tombs of Egypt's pharaohs."
+        },
+        {
+          "id": "hatshepsut",
+          "title": "Temple of Hatshepsut",
+          "category": "Temples",
+          "image": "/destinations/hatshepsut.png",
+          "description": "See the elegant terraced temple of Egypt's great female pharaoh."
+        }
+      ]
+    }
+  ],
+  "attractions": [
+    {
+      "id": "1",
+      "name": "Pyramids of Giza",
+      "image": "/attractions/pyramids.png",
+      "description": "The Pyramids of Giza are one of the most iconic landmarks in Egypt, built as tombs for pharaohs and showcasing ancient engineering marvels.",
+      "star": 4.2
+    },
+    {
+      "id": "2",
+      "name": "Karnak Temple",
+      "image": "/attractions/karnak.png",
+      "description": "Karnak Temple is a vast complex of temples, chapels, and pylons in Luxor, dedicated to the Theban triad of Amun, Mut, and Khonsu.",
+      "star": 4.2
+    },
+    {
+      "id": "3",
+      "name": "Abu Simbel Temples",
+      "image": "/attractions/abu-simbel.png",
+      "description": "The Abu Simbel Temples are two massive rock temples in southern Egypt, built by Pharaoh Ramses II to commemorate his victory at the Battle of Kadesh.",
+      "star": 4.8
+    },
+    {
+      "id": "4",
+      "name": "Valley of the Kings",
+      "image": "/attractions/valley-of-the-kings.png",
+      "description": "The Valley of the Kings is a burial site for pharaohs and nobles in Luxor, known for its elaborate tombs and intricate wall paintings.",
+      "star": 4.8
+    },
+    {
+      "id": "5",
+      "name": "Temple of Philae",
+      "image": "/attractions/philae.png",
+      "description": "The Temple of Philae is an ancient Egyptian temple complex located on an island in the Nile River, dedicated to the goddess Isis.",
+      "star": 4.5
+    },
+    {
+      "id": "6",
+      "name": "Sphinx of Giza",
+      "image": "/attractions/sphinx.png",
+      "description": "The Sphinx of Giza is a colossal limestone statue with the body of a lion and the head of a pharaoh, symbolizing strength and wisdom.",
+      "star": 4.8
+    },
+    {
+      "id": "7",
+      "name": "Temple of Hatshepsut",
+      "image": "/attractions/hatshepsut.png",
+      "description": "The Temple of Hatshepsut is a mortuary temple dedicated to the female pharaoh Hatshepsut, known for its unique architecture and terraces.",
+      "star": 4.9
+    },
+    {
+      "id": "8",
+      "name": "Temple of Edfu",
+      "image": "/attractions/edfu.png",
+      "description": "The Temple of Edfu is an ancient Egyptian temple dedicated to the falcon god Horus, known for its well-preserved hieroglyphics and reliefs.",
+      "star": 4.7
+    },
+    {
+      "id": "9",
+      "name": "Temple of Kom Ombo",
+      "image": "/attractions/kom-ombo.png",
+      "description": "The Temple of Kom Ombo is a unique double temple dedicated to the gods Sobek and Horus, located on the banks of the Nile River.",
+      "star": 4.6
+    },
+    {
+      "id": "10",
+      "name": "Temple of Dendera",
+      "image": "/attractions/dendera.png",
+      "description": "The Temple of Dendera is an ancient Egyptian temple complex dedicated to the goddess Hathor, known for its well-preserved reliefs and astronomical ceiling.",
+      "star": 4.9
+    },
+    {
+      "id": "11",
+      "name": "Temple of Abydos",
+      "image": "/attractions/abydos.png",
+      "description": "The Temple of Abydos is an ancient Egyptian temple complex dedicated to the god Osiris, known for its impressive reliefs and inscriptions.",
+      "star": 4.8
+    },
+    {
+      "id": "12",
+      "name": "Temple of Medinet Habu",
+      "image": "/attractions/medinet-habu.png",
+      "description": "The Temple of Medinet Habu is a mortuary temple dedicated to Pharaoh Ramses III, known for its well-preserved reliefs and inscriptions.",
+      "star": 4.7
+    },
+    {
+      "id": "13",
+      "name": "Temple of Esna",
+      "image": "/attractions/esna.png",
+      "description": "The Temple of Esna is an ancient Egyptian temple dedicated to the god Khnum, known for its well-preserved columns and reliefs.",
+      "star": 4.6
+    }
+  ],
+  "users": [
+    {
+      "id": "admin-1",
+      "name": "Explore Egypt Admin",
+      "email": "admin@exploreegypt.com",
+      "password": "admin123",
+      "role": "Admin"
+    },
+    {
+      "id": "tourist-1",
+      "name": "Sara Hassan",
+      "email": "sara@example.com",
+      "password": "tourist123",
+      "role": "Tourist"
+    }
+  ],
+  "tourGuides": [
+    {
+      "id": "guide-1",
+      "userId": "guide-user-1",
+      "name": "Omar Adel",
+      "email": "omar.guide@example.com",
+      "status": "Approved"
+    },
+    {
+      "id": "guide-2",
+      "userId": "guide-user-2",
+      "name": "Nour El Din",
+      "email": "nour.guide@example.com",
+      "status": "Pending approval"
+    }
+  ]
+}

@@ -1,0 +1,197 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-animation {
+  animation: fadeIn 0.7s ease;
+}
+
+.experience-section {
+  padding: 80px 8%;
+  background: #f8f9fa;
+  position: relative;
+  z-index: 1;
+  margin-top: 0;
+}
+
+.experience-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.section-tag {
+  color: #9b6b61;
+  font-size: 14px;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+
+.experience-header h2 {
+  font-size: 42px;
+  margin: 15px 0;
+  color: #1d1d1d;
+}
+
+.experience-header p {
+  color: #666;
+  max-width: 650px;
+  margin: auto;
+  line-height: 1.6;
+}
+
+.filter-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 40px 0;
+}
+
+.filter-buttons button {
+  border: none;
+  padding: 12px 22px;
+  border-radius: 30px;
+  background: #f1f1f1;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 15px;
+}
+
+.filter-buttons button:hover {
+  background: #9b6b61;
+  color: white;
+}
+.cards-container {
+  display: flex;
+  gap: 25px;
+}
+
+.large-card {
+  height: 800px;
+  border-radius: 20px;
+}
+
+.right-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.right-cards {
+  height: 900px;
+}
+.experience-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  height: 900px;
+  cursor: pointer;
+}
+
+.experience-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.5s;
+}
+
+.experience-card:hover img {
+  transform: scale(1.08);
+}
+
+.experience-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  padding: 25px;
+  color: white;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.75),
+    rgba(0, 0, 0, 0.15),
+    transparent
+  );
+}
+
+.experience-content h3 {
+  margin-bottom: 10px;
+  font-size: 28px;
+}
+
+.experience-content p {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+@media (max-width: 992px) {
+  .cards-container {
+    flex-direction: column;
+  }
+
+  .right-cards {
+    flex-direction: column;
+  }
+
+  .large-card,
+  .right-cards .experience-card {
+    height: 350px;
+  }
+}
+@media (max-width: 768px) {
+  .experience-content {
+    padding: 15px;
+  }
+
+  .experience-content h3 {
+    font-size: 20px;
+    margin-bottom: 6px;
+  }
+
+  .experience-content p {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+}
+
+@media (max-width: 480px) {
+  .experience-content {
+    padding: 12px;
+  }
+
+  .experience-content h3 {
+    font-size: 18px;
+  }
+
+  .experience-content p {
+    font-size: 12px;
+  }
+}
+
+.filter-buttons button.active {
+  background: #9b6b61;
+  color: white;
+}
+
+.filter-buttons button {
+  border: none;
+  padding: 12px 22px;
+  border-radius: 30px;
+  background: #f1f1f1;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-buttons button.active,
+.filter-buttons button:hover {
+  background: #9b6b61;
+  color: white;
+}
