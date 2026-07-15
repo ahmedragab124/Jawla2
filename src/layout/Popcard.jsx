@@ -1,18 +1,38 @@
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import Popcartitem from './Popcartitem'
 import './css-layout/Popcard.css'
 
 function Popcard({ Attractions }) {
   const carouselRef = useRef(null)
+  const currentIndexRef = useRef(0)
   const scrollByValue = 280
 
-  const handleScroll = (direction) => {
+ const handleScroll = (direction) => {
     if (!carouselRef.current) return
     carouselRef.current.scrollBy({
       left: direction * scrollByValue,
       behavior: 'smooth',
     })
+
+    
   }
+
+  useEffect(() => {
+    if (Attractions.length === 0) return
+
+    const interval = setInterval(() => {
+      const carousel = carouselRef.current
+      if (!carousel) return
+
+      currentIndexRef.current = (currentIndexRef.current + 1) % Attractions.length
+      carousel.scrollTo({
+        left: currentIndexRef.current * scrollByValue,
+        behavior: 'smooth',
+      })
+    }, 2100)
+
+    return () => clearInterval(interval)
+  }, [Attractions])
 
   return (
     <div className="relative mt-12">

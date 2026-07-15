@@ -38,9 +38,6 @@ function Navbar() {
 
         
           <div className="hidden md:flex items-center gap-6">
-            <button className="text-white hover:text-amber-200 transition cursor-pointer">
-              <Globe size={24} />
-            </button>
             <Link to="/booking" className="bg-[#b57a2d] text-white px-6 py-2 rounded-full hover:bg-[#9b6525] transition font-medium cursor-pointer">
               Book Now
             </Link>
@@ -49,9 +46,6 @@ function Navbar() {
 
         
           <div className="md:hidden flex items-center gap-4">
-            <button className="text-white hover:text-amber-200 transition cursor-pointer">
-              <Globe size={20} />
-            </button>
             <button
               onClick={() => setOpen(!isOpen)}
               className="text-white hover:text-amber-200"
