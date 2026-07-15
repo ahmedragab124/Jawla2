@@ -2,14 +2,13 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
-const API_URL = 'http://localhost:3000/destinations'
 
 function DestinationsPage() {
   const [destinations, setDestinations] = useState([])
   const [error, setError] = useState('')
 
   useEffect(() => {
-    axios.get(API_URL)
+    axios.get('http://localhost:3000/destinations')
       .then((response) => setDestinations(response.data))
       .catch(() => setError('Could not load destinations. Start the API server and try again.'))
   }, [])
