@@ -236,6 +236,104 @@
       "image": "/attractions/esna.png",
       "description": "The Temple of Esna is an ancient Egyptian temple dedicated to the god Khnum, known for its well-preserved columns and reliefs.",
       "star": 4.6
+    },
+    {
+      "id": "14",
+      "name": "Shali Fortress (Siwa Oasis)",
+      "image": "/attractions/shali.jpg",
+      "description": "An ancient mud-brick fortress in Siwa built from karshif (salt-rich clay). It stands as a labyrinth of ruins offering panoramic desert views.",
+      "star": 4.9
+    },
+    {
+      "id": "15",
+      "name": "Wadi Al-Hitan (Valley of Whales)",
+      "image": "/attractions/wadi-hitan.jpg",
+      "description": "A UNESCO World Heritage site in Fayoum desert containing hundreds of spectacular fossilized skeletons of primitive whales from 40 million years ago.",
+      "star": 4.8
+    },
+    {
+      "id": "16",
+      "name": "El Nayzak Lake (Marsa Alam)",
+      "image": "/attractions/nayzak.jpg",
+      "description": "A stunning natural pool formed by a meteor strike on the Red Sea coast, featuring turquoise waters that stay warm and calm year-round.",
+      "star": 4.9
+    },
+    {
+      "id": "17",
+      "name": "Colored Canyon (Sinai)",
+      "image": "/attractions/colored-canyon.jpg",
+      "description": "A spectacular natural labyrinth of narrow rocky gorges in Sinai, displaying beautiful swirls of red, yellow, and magenta sandstone.",
+      "star": 4.8
+    },
+    {
+      "id": "18",
+      "name": "Serapeum of Saqqara",
+      "image": "/attractions/serapeum.jpg",
+      "description": "A mysterious underground burial site in Saqqara containing giant, perfectly-cut black granite sarcophagi of the sacred Apis Bulls.",
+      "star": 4.9
+    },
+    {
+      "id": "19",
+      "name": "White Desert (Farafra)",
+      "image": "/attractions/white-desert.jpg",
+      "description": "A surreal desert of snow-white chalk rock formations carved by wind into spectacular abstract shapes like mushrooms and towers.",
+      "star": 4.9
+    },
+    {
+      "id": "21",
+      "name": "Wadi El Gemal (Marsa Alam)",
+      "image": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80",
+      "description": "The Valley of the Camels, a pristine national park with sandy beaches, coral reefs, desert wildlife, and ancient Roman emerald mines.",
+      "star": 4.8
+    },
+    {
+      "id": "22",
+      "name": "Blue Lagoon (Dahab)",
+      "image": "/attractions/blue-lagoon.jpg",
+      "description": "A peaceful wind-swept sanctuary of shallow turquoise water, ideal for kite-surfing and camping in traditional Bedouin bamboo huts.",
+      "star": 4.9
+    },
+    {
+      "id": "23",
+      "name": "Sannur Valley Cave (Beni Suef)",
+      "image": "https://images.unsplash.com/photo-1518156677180-95a2893f3e9f?auto=format&fit=crop&w=600&q=80",
+      "description": "A rare limestone karst cave filled with stunning geological formations of glittering stalactites and stalagmites.",
+      "star": 4.7
+    },
+    {
+      "id": "24",
+      "name": "Baron Empain Palace (Cairo)",
+      "image": "https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=600&q=80",
+      "description": "A historic Hindu-temple inspired mansion built in Heliopolis by a Belgian industrialist, featuring mystical architecture.",
+      "star": 4.6
+    },
+    {
+      "id": "25",
+      "name": "Siwa Salt Lakes (Siwa)",
+      "image": "/attractions/salt-lakes.jpg",
+      "description": "Crystalline turquoise hot-spring salt pools where you float effortlessly due to extremely high salt concentration, surrounded by salt shores.",
+      "star": 4.9
+    },
+    {
+      "id": "26",
+      "name": "Black Desert (Bahariya)",
+      "image": "https://images.unsplash.com/photo-1547127796-06bb04e4b315?auto=format&fit=crop&w=600&q=80",
+      "description": "A dramatic charcoal-colored landscape of volcanic hills topped with black basalt, contrasting beautifully with golden sands.",
+      "star": 4.8
+    },
+    {
+      "id": "27",
+      "name": "Abu Galum Protected Area",
+      "image": "https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=600&q=80",
+      "description": "A stunning Sinai nature reserve squeezed between high granite mountains and deep blue waters of the Red Sea reef.",
+      "star": 4.9
+    },
+    {
+      "id": "28",
+      "name": "St. Catherine Mountains",
+      "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
+      "description": "High rocky peaks of Sinai featuring organic olive gardens, ancient hermits paths, and the sacred Mt. Sinai summit.",
+      "star": 4.8
     }
   ],
   "users": [
