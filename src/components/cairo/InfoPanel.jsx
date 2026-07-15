@@ -23,6 +23,7 @@ function InfoPanel({ destination }) {
             <MdLocationCity />
           </div>
           <div className="info-text">
+            <h6>Government</h6>
             <p>{destination.capital}</p>
           </div>
         </div>
