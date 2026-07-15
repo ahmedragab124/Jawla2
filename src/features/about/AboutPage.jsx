@@ -12,10 +12,10 @@ function AboutPage() {
     <main className="min-h-screen bg-[#fffaf0] px-5 py-16">
       <section className="mx-auto max-w-6xl">
         <div className="overflow-hidden rounded-[36px] bg-[#3f2b1a] px-7 py-14 text-white md:px-14 md:py-20">
-          <p className="text-sm font-bold tracking-[0.25em] text-[#e4c58d]">ABOUT EXPLORE EGYPT</p>
+          <p className="text-sm font-bold tracking-[0.25em] text-[#e4c58d]">ABOUT JAWLA</p>
           <h1 className="mt-5 max-w-3xl text-4xl font-extrabold leading-tight md:text-6xl">Your journey through Egypt starts here.</h1>
           <p className="mt-6 max-w-2xl text-base leading-8 text-[#f7e7d7] md:text-lg">
-            Explore Egypt brings destinations, attractions, and local tour guides together to make planning your next adventure simple.
+            Jawla brings destinations, attractions, and local tour guides together to make planning your next adventure simple.
           </p>
           <Link to="/destinations" className="mt-9 inline-flex rounded-full bg-[#b57a2d] px-7 py-3 font-semibold transition hover:bg-[#d39743]">
             Explore destinations

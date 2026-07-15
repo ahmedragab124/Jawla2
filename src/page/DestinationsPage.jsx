@@ -16,7 +16,7 @@ function DestinationsPage() {
   return (
     <main className="min-h-screen bg-[#fffaf0] px-6 py-20">
       <div className="mx-auto max-w-6xl text-center">
-        <p className="text-sm font-bold tracking-[0.3em] text-[#b57a2d]">EXPLORE EGYPT</p>
+        <p className="text-sm font-bold tracking-[0.3em] text-[#b57a2d]">JAWLA</p>
         <h1 className="mt-4 text-4xl font-extrabold text-[#3f2b1a] md:text-6xl">Choose Your Destination</h1>
         <p className="mx-auto mt-5 max-w-2xl leading-8 text-[#5b4423]">Discover Egypt's most unforgettable cities, then build your experience with a local guide.</p>
       </div>

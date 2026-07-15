@@ -70,7 +70,7 @@ function AuthPage() {
   return (
     <main className="min-h-screen bg-[#fffaf0] px-5 py-16">
       <section className="mx-auto max-w-md rounded-4xl bg-white p-8 shadow-[0_24px_80px_rgba(76,48,24,0.16)]">
-        <p className="text-center text-sm font-bold tracking-[0.25em] text-[#b57a2d]">EXPLORE EGYPT</p>
+        <p className="text-center text-sm font-bold tracking-[0.25em] text-[#b57a2d]">JAWLA</p>
         <h1 className="mt-3 text-center text-3xl font-extrabold text-[#3f2b1a]">{mode === 'login' ? 'Welcome back' : 'Create your account'}</h1>
 
         <div className="mt-7 grid grid-cols-2 rounded-xl bg-[#f8f1e6] p-1">
@@ -115,7 +115,7 @@ function AuthPage() {
           </button>
         </form>
 
-        <p className="mt-6 text-center text-sm text-[#6d5c4a]">Demo admin: <strong>admin@exploreegypt.com</strong> / <strong>admin123</strong></p>
+        <p className="mt-6 text-center text-sm text-[#6d5c4a]">Demo admin: <strong>admin@jawla.com</strong> / <strong>admin123</strong></p>
       </section>
     </main>
   )

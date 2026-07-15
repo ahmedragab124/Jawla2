@@ -241,8 +241,8 @@
   "users": [
     {
       "id": "admin-1",
-      "name": "Explore Egypt Admin",
-      "email": "admin@exploreegypt.com",
+      "name": "Jawla Admin",
+      "email": "admin@jawla.com",
       "password": "admin123",
       "role": "Admin"
     },

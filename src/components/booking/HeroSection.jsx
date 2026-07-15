@@ -42,7 +42,7 @@ function HeroSection({ bookings, setBookings }) {
                             to="/"
                             className="rounded-xl border border-white/50 px-6 py-3 font-semibold text-white transition hover:bg-white/15"
                         >
-                            ← Explore Egypt
+                            ← Explore with Jawla
                         </Link>
                         <Link
                             to="/bookings"

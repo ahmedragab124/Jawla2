@@ -6,7 +6,7 @@ function Harosection() {
   return (
     <section ref={revealRef} className="reveal hero-section">
       <div className="hero-content ">
-        <h1 className="hero-title">Discover Egypt’s Ancient Wonders</h1>
+        <h1 className="hero-title">Discover Egypt’s With Another Eyes</h1>
         <p className="hero-text">Explore archaeological sites, heritage trails and historical journeys across the land of pharaohs.</p>
       </div>
 

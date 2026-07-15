@@ -12,10 +12,11 @@ function Navbar() {
       <nav className="relative px-6 py-4 nnv text-white">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
           
-          <Link to="/">
-            <div className="text-2xl font-bold text-white hover:text-amber-200 transition cursor-pointer">
-              Explore Egypt
-            </div>
+          <Link to="/" className="flex items-center gap-2.5 group">
+            <img src="/favicon.svg" alt="Jawla Logo" className="h-9 w-9 object-contain" />
+            <span className="text-2xl font-bold text-white group-hover:text-amber-200 transition cursor-pointer">
+              Jawla
+            </span>
           </Link>
 
         

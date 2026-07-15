@@ -12,7 +12,7 @@ function Planersection() {
         <h2 className="text-4xl md:text-5xl font-extrabold text-[#3f2b1a]">Book your guide</h2>
         <div className="mx-auto mt-4 h-1.5 w-24 rounded-full bg-[#b57a2d]" />
         <p className="mt-2 text-base md:text-lg leading-8 text-[#5b4423] max-w-2xl mx-auto">
-              Explore Egypt with a local guide
+              Explore Egypt with a local guide on Jawla
         </p>
       </div>
 

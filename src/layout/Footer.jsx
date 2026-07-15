@@ -11,7 +11,10 @@ function Footer() {
       <div className="mx-auto flex max-w-6xl flex-col gap-10 px-6 sm:px-8 lg:flex-row lg:items-start lg:justify-between">
         <div className="max-w-lg space-y-5">
           <div>
-            <h3 className="text-2xl font-bold text-[#0f3344]">Explore Egypt</h3>
+            <div className="flex items-center gap-2.5">
+              <img src="/favicon.svg" alt="Jawla Logo" className="h-8 w-8 object-contain" />
+              <h3 className="text-2xl font-bold text-[#0f3344]">Jawla</h3>
+            </div>
             <p className="mt-4 max-w-md text-sm leading-7 text-[#475569]">
               Defining the next generation of Egyptian tourism through heritage, luxury, and technology.
             </p>
@@ -52,7 +55,7 @@ function Footer() {
       </div>
 
       <div className="mx-auto mt-12 max-w-6xl border-t border-[#d8e3ea] pt-6 px-6 text-sm text-[#64748b] sm:px-8">
-        © 2026 Explore Egypt. All rights reserved.
+        © 2026 Jawla. All rights reserved.
       </div>
     </footer>
   )
