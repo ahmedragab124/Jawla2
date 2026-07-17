@@ -1,8 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
-import { useState } from 'react'
 import Landingpage from './page/Landingpage'
 import BookingHero from './components/booking/HeroSection'
-import Bookings from './components/booking/Bookings'
 import NotFound from './components/booking/NotFound'
 import DestinationPage from './page/DestinationPage'
 import DestinationsPage from './page/DestinationsPage'
@@ -19,13 +17,7 @@ import AboutPage from './features/about/AboutPage'
 
 
 function App() {
-  const [bookings, setBookings] = useState(() => {
-    try {
-      return JSON.parse(localStorage.getItem('bookings')) || []
-    } catch {
-      return []
-    }
-  })
+  
 
   const handlegototop = ()=>{
   window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -47,8 +39,7 @@ function App() {
       <Route path="/auth" element={<AuthPage />} />
       <Route path="/admin/dashboard" element={<RequireRole allowedRoles={['Admin']}><AdminDashboard /></RequireRole>} />
       <Route path="/profile" element={<RequireRole allowedRoles={['Tourist', 'Tour Guide']}><TouristProfile /></RequireRole>} />
-      <Route path="/booking" element={<BookingHero bookings={bookings} setBookings={setBookings} />} />
-      <Route path="/bookings" element={<Bookings bookings={bookings} setBookings={setBookings} />} />
+      <Route path="/booking" element={<BookingHero />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
     <Footer />

@@ -1,8 +1,9 @@
 import { Navigate } from 'react-router-dom'
-import { getCurrentUser, homeForRole } from './authStorage'
+import { homeForRole } from './authStorage'
+import { useAuth } from './AuthContext'
 
 function RequireRole({ allowedRoles, children }) {
-  const user = getCurrentUser()
+  const { user } = useAuth()
 
   if (!user) return <Navigate to="/auth" replace />
 

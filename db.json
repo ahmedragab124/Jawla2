@@ -350,6 +350,34 @@
       "email": "sara@example.com",
       "password": "tourist123",
       "role": "Tourist"
+    },
+    {
+      "name": "sdcv",
+      "email": "amin@jawla.com",
+      "password": "admin123",
+      "role": "Tourist",
+      "id": "xSmjHXxW_PQ"
+    },
+    {
+      "name": "احمد رجب",
+      "email": "ahmedfgytubfs@gmail.com",
+      "password": "12@12@12@",
+      "role": "Tourist",
+      "id": "HrvQSag7POI"
+    },
+    {
+      "name": "احمد رجب",
+      "email": "ad3in@exploreegypt.com",
+      "password": "12345345",
+      "role": "Tourist",
+      "id": "iJA38vqoipA"
+    },
+    {
+      "name": "banana",
+      "email": "omar.guide@example.com",
+      "password": "12345345",
+      "role": "Tour Guide",
+      "id": "pMovFilzs5w"
     }
   ],
   "tourGuides": [
@@ -358,6 +386,7 @@
       "userId": "guide-user-1",
       "name": "Omar Adel",
       "email": "omar.guide@example.com",
+      "password": "12345345",
       "status": "Approved"
     },
     {
@@ -365,7 +394,17 @@
       "userId": "guide-user-2",
       "name": "Nour El Din",
       "email": "nour.guide@example.com",
-      "status": "Pending approval"
+      "password": "12345345",
+      "status": "Approved"
+    },
+    {
+      "userId": "pMovFilzs5w",
+      "name": "banana",
+      "email": "omar.guide@example.com",
+      "status": "Approved",
+      "id": "7w-DCYFKYXU"
     }
-  ]
+  ],
+  "bookings": [],
+  "$schema": "./node_modules/json-server/schema.json"
 }

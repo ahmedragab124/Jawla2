@@ -25,7 +25,7 @@ function Guidesection() {
               <Link to="/booking" className="inline-flex min-w-42.5 items-center justify-center rounded-[18px] bg-[#9a581b] px-6 py-3 text-base font-semibold text-white shadow-[0_15px_40px_rgba(154,88,27,0.25)] transition hover:bg-[#7b4217]">
                 Book Your Guide
               </Link>
-              <Link to="/bookings" className="inline-flex min-w-42.5 items-center justify-center rounded-[18px] border border-[#0f4a5e] bg-white px-6 py-3 text-base font-semibold text-[#0f4a5e] transition hover:bg-[#f8fafc]">
+              <Link to="/profile" className="inline-flex min-w-42.5 items-center justify-center rounded-[18px] border border-[#0f4a5e] bg-white px-6 py-3 text-base font-semibold text-[#0f4a5e] transition hover:bg-[#f8fafc]">
                 View Bookings
               </Link>
             </div>

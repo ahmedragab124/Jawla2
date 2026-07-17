@@ -1,7 +1,7 @@
-import Harosection from './../layout/Harosection';
+import HeroSection from './../layout/HeroSection';
 import Featuresection from './../layout/Featuresection';
 import Popularsection from './../layout/Popularsection';
-import Planersection from '../layout/Planersection';
+import PlannerSection from '../layout/PlannerSection';
 import Guidesection from './../layout/Guidesection';
 
 
@@ -10,10 +10,10 @@ function Landingpage() {
   return (
     <>
     
-      <Harosection />
+      <HeroSection />
       <Featuresection />
       <Popularsection />
-      <Planersection />
+      <PlannerSection />
       <Guidesection />
     </>
   )

@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { LockKeyhole, Mail, UserRound } from 'lucide-react'
-import { homeForRole, saveCurrentUser } from './authStorage'
+import { homeForRole } from './authStorage'
+import { useAuth } from './AuthContext'
 
 
 function AuthPage() {
@@ -11,6 +12,7 @@ function AuthPage() {
   const [message, setMessage] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const navigate = useNavigate()
+  const { login } = useAuth()
 
   const updateField = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
@@ -35,7 +37,7 @@ function AuthPage() {
           setMessage('Invalid email or password.')
           return
         }
-        saveCurrentUser(user)
+        login(user)
         navigate(homeForRole(user.role))
         return
       }
@@ -57,7 +59,7 @@ function AuthPage() {
         })
       }
 
-      saveCurrentUser(createdUser)
+      login(createdUser)
       navigate('/profile')
     } catch {
       setMessage('Could not contact the API. Run npm.cmd run server first.')

@@ -1,9 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { clearCurrentUser, getCurrentUser, homeForRole } from './authStorage'
+import { homeForRole } from './authStorage'
+import { useAuth } from './AuthContext'
 
 function AuthNavAction({ mobile = false }) {
   const navigate = useNavigate()
-  const user = getCurrentUser()
+  const { user, logout } = useAuth()
   const buttonClass = mobile
     ? 'block w-full rounded bg-[#b57a2d] px-4 py-2 text-center font-medium text-white transition hover:bg-[#a66c28]'
     : 'rounded-full border border-white/40 px-4 py-2 font-medium text-white transition hover:bg-white/10'
@@ -16,7 +17,7 @@ function AuthNavAction({ mobile = false }) {
       <button
         type="button"
         onClick={() => {
-          clearCurrentUser()
+          logout()
           navigate('/')
         }}
         className="text-sm text-amber-100 hover:text-white"

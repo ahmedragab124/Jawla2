@@ -1,4 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useAuth } from "../../features/auth/AuthContext";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 import {
     FaUser,
@@ -14,7 +17,9 @@ import {
 import InputField from "./InputField";
 import SelectField from "./SelectField";
 
-function BookingForm({ bookings, setBookings }) {
+function BookingForm() {
+    const { user } = useAuth();
+    const [guides, setGuides] = useState([]);
     const [formData, setFormData] = useState({
         fullName: "",
         phone: "",
@@ -23,7 +28,28 @@ function BookingForm({ bookings, setBookings }) {
         date: "",
         tourType: "Historical Tour",
         requests: "",
+        guideId: "",
     });
+
+    useEffect(() => {
+        if (user) {
+            setFormData((prev) => ({
+                ...prev,
+                fullName: user.name || "",
+                email: user.email || "",
+            }));
+        }
+
+        // Fetch approved guides
+        axios.get("http://localhost:3000/tourGuides")
+            .then(res => {
+                const approved = res.data.filter(g => g.status === "Approved");
+                setGuides(approved);
+            })
+            .catch(err => {
+                console.error("Failed to fetch guides:", err);
+            });
+    }, [user]);
 
     const [successMessage, setSuccessMessage] = useState("");
     const [loading, setLoading] = useState(false);
@@ -76,48 +102,71 @@ function BookingForm({ bookings, setBookings }) {
 
         setLoading(true);
 
-        fetch("https://jsonplaceholder.typicode.com/posts", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formData),
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data);
+        const bookingPayload = {
+            ...formData,
+            touristId: user.id || "unknown",
+            touristName: user.name,
+            touristEmail: user.email,
+            status: "Pending",
+            createdAt: new Date().toISOString(),
+        };
 
-                const updatedBookings = [...bookings, formData];
-
-                setBookings(updatedBookings);
-
-                localStorage.setItem(
-                    "bookings",
-                    JSON.stringify(updatedBookings)
-                );
-
+        axios.post("http://localhost:3000/bookings", bookingPayload)
+            .then(() => {
                 setSuccessMessage(
                     "✅ Your booking request has been submitted successfully!"
                 );
 
                 setFormData({
-                    fullName: "",
+                    fullName: user.name || "",
                     phone: "",
-                    email: "",
+                    email: user.email || "",
                     people: "",
                     date: "",
                     tourType: "Historical Tour",
                     requests: "",
+                    guideId: "",
                 });
             })
             .catch((error) => {
-                console.log(error);
+                console.error("Booking error:", error);
                 alert("Something went wrong!");
             })
             .finally(() => {
                 setLoading(false);
             });
     };
+
+    if (!user) {
+        return (
+            <div className="relative w-full max-w-150 overflow-hidden rounded-2xl sm:rounded-[28px] border border-white/30 bg-white/10 p-8 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.2)] text-center animate-fadeUp">
+                <div className="pointer-events-none absolute -top-12 -left-12 h-32 w-32 rounded-full bg-white/20 blur-3xl"></div>
+                <div className="pointer-events-none absolute -bottom-16 -right-12 h-40 w-40 rounded-full bg-[#B8860B]/20 blur-3xl"></div>
+                <div className="mb-4 flex justify-center">
+                    <div className="flex h-16 w-16 items-center justify-center rounded-full border border-white/30 bg-white/20 backdrop-blur-md shadow-lg">
+                        <FaCompass className="text-3xl text-[#B8860B] animate-pulse" />
+                    </div>
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-[#8B5E3C] leading-tight">
+                    Ready to Explore?
+                </h2>
+                <p className="mt-3 mb-6 text-sm sm:text-base text-[#5C4B3B] max-w-md mx-auto">
+                    Please log in to your account to book a custom local guide and discover Egypt's hidden wonders.
+                </p>
+                <Link
+                    to="/auth"
+                    className="inline-flex items-center gap-2 rounded-xl bg-linear-to-r from-[#C79A2D] to-[#8B5E3C] px-8 py-3 text-sm sm:text-base font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-xl active:scale-95 hover:-translate-y-0.5"
+                >
+                    Login to Jawla
+                </Link>
+            </div>
+        );
+    }
+
+    const guideOptions = [
+        { value: "", label: "No guide (General Request)" },
+        ...guides.map((g) => ({ value: g.id, label: g.name })),
+    ];
 
     return (
         <div className="relative w-full max-w-150 overflow-hidden rounded-2xl sm:rounded-[28px] border border-white/30 bg-white/10 p-3 sm:p-5 lg:p-7 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.2)] sm:shadow-[0_15px_45px_rgba(0,0,0,0.35)] animate-fadeUp">
@@ -154,6 +203,7 @@ function BookingForm({ bookings, setBookings }) {
                         name="fullName"
                         value={formData.fullName}
                         onChange={handleChange}
+                        readOnly={true}
                     />
 
                     <InputField
@@ -176,6 +226,7 @@ function BookingForm({ bookings, setBookings }) {
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
+                        readOnly={true}
                     />
 
                     <InputField
@@ -213,6 +264,18 @@ function BookingForm({ bookings, setBookings }) {
                             "Adventure Tour",
                             "Food Tour",
                         ]}
+                    />
+                </div>
+
+                {/* Row 4 - Preferred Guide */}
+                <div className="mt-2 sm:mt-4">
+                    <SelectField
+                        icon={<FaUser />}
+                        label="Preferred Tour Guide"
+                        name="guideId"
+                        value={formData.guideId}
+                        onChange={handleChange}
+                        options={guideOptions}
                     />
                 </div>
 

@@ -2,7 +2,7 @@ import hero from "../../assets/guide-booking-hero.jpg";
 import BookingForm from "./BookingForm";
 import { Link } from "react-router-dom";
 
-function HeroSection({ bookings, setBookings }) {
+function HeroSection() {
     return (
         <section
             className="relative min-h-screen bg-cover bg-center bg-no-repeat"
@@ -45,7 +45,7 @@ function HeroSection({ bookings, setBookings }) {
                             ← Explore with Jawla
                         </Link>
                         <Link
-                            to="/bookings"
+                            to="/profile"
                             className="rounded-xl bg-[#B8860B] px-6 py-3 font-semibold text-white transition hover:bg-[#8B5E3C]"
                         >
                             View Bookings →
@@ -56,10 +56,7 @@ function HeroSection({ bookings, setBookings }) {
 
                 {/* Booking Form */}
                 <div className="w-full max-w-150 lg:ml-16">
-                    <BookingForm
-                        bookings={bookings}
-                        setBookings={setBookings}
-                    />
+                    <BookingForm />
                 </div>
 
             </div>

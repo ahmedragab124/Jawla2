@@ -23,15 +23,19 @@ function SelectField({
           onChange={onChange}
           className="w-full cursor-pointer rounded-xl border border-[#D8C3A5] bg-white/20 py-2.5 sm:py-3 pl-10 sm:pl-12 pr-3 sm:pr-4 text-sm text-[#4A3728] backdrop-blur-md outline-none transition-all duration-300 focus:border-[#B8860B] focus:bg-white/30"
         >
-          {options.map((item) => (
-            <option
-              key={item}
-              value={item}
-              className="bg-white text-[#4A3728]"
-            >
-              {item}
-            </option>
-          ))}
+          {options.map((item) => {
+            const val = typeof item === "object" ? item.value : item;
+            const labelText = typeof item === "object" ? item.label : item;
+            return (
+              <option
+                key={val}
+                value={val}
+                className="bg-white text-[#4A3728]"
+              >
+                {labelText}
+              </option>
+            );
+          })}
         </select>
       </div>
     </div>

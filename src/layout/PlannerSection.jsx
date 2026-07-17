@@ -2,7 +2,7 @@ import useRevealOnScroll from './../hooks/useRevealOnScroll'
 import tourguideImage from '../assets/tourguide.png'
 import { Link } from 'react-router-dom'
 
-function Planersection() {
+function PlannerSection() {
   const revealRef = useRevealOnScroll()
 
   return (
@@ -69,4 +69,4 @@ function Planersection() {
   )
 }
 
-export default Planersection  
+export default PlannerSection

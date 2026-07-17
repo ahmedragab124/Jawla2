@@ -1,7 +1,7 @@
-import './css-layout/Harosection.css';
+import './css-layout/HeroSection.css';
 import useRevealOnScroll from '../hooks/useRevealOnScroll';
 
-function Harosection() {
+function HeroSection() {
   const revealRef = useRevealOnScroll()
   return (
     <section ref={revealRef} className="reveal hero-section">
@@ -24,4 +24,4 @@ function Harosection() {
   )
 }
 
-export default Harosection
+export default HeroSection
