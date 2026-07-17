@@ -8,7 +8,7 @@ import { useAuth } from './AuthContext'
 
 function AuthPage() {
   const [mode, setMode] = useState('login')
-  const [form, setForm] = useState({ name: '', email: '', password: '', role: 'Tourist' })
+  const [form, setForm] = useState({ name: '', email: '', password: '', phone: '', role: 'Tourist' })
   const [message, setMessage] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const navigate = useNavigate()
@@ -55,6 +55,8 @@ function AuthPage() {
           userId: createdUser.id,
           name: form.name,
           email: form.email,
+          phone: form.phone || '',
+          whatsapp: form.phone || '',
           status: 'Pending approval',
         })
       }
@@ -108,6 +110,16 @@ function AuthPage() {
                 <option value="Tourist">Tourist</option>
                 <option value="Tour Guide">Tour Guide</option>
               </select>
+            </label>
+          )}
+
+          {mode === 'signup' && form.role === 'Tour Guide' && (
+            <label className="block">
+              <span className="mb-2 block font-medium text-[#4e3b28]">Phone / WhatsApp</span>
+              <span className="relative block">
+                <LockKeyhole className="absolute left-3 top-3.5 h-5 w-5 text-[#a88762]" />
+                <input name="phone" type="tel" value={form.phone} onChange={updateField} className='w-full rounded-xl border border-stone-300 bg-white px-4 py-3 pl-11 outline-none transition focus:border-[#b57a2d]' placeholder="e.g. 01012345678" />
+              </span>
             </label>
           )}
 

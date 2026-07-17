@@ -387,6 +387,8 @@
       "name": "Omar Adel",
       "email": "omar.guide@example.com",
       "password": "12345345",
+      "phone": "01012345678",
+      "whatsapp": "01012345678",
       "status": "Approved"
     },
     {
@@ -395,6 +397,8 @@
       "name": "Nour El Din",
       "email": "nour.guide@example.com",
       "password": "12345345",
+      "phone": "01098765432",
+      "whatsapp": "01098765432",
       "status": "Approved"
     },
     {
