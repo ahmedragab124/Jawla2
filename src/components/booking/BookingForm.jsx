@@ -20,6 +20,7 @@ import SelectField from "./SelectField";
 function BookingForm() {
     const { user } = useAuth();
     const [guides, setGuides] = useState([]);
+    const [guidesLoading, setGuidesLoading] = useState(true);
     const [formData, setFormData] = useState({
         fullName: "",
         phone: "",
@@ -41,6 +42,7 @@ function BookingForm() {
         }
 
         // Fetch approved guides
+        setGuidesLoading(true);
         axios.get("http://localhost:3000/tourGuides")
             .then(res => {
                 const approved = res.data.filter(g => g.status === "Approved");
@@ -48,6 +50,9 @@ function BookingForm() {
             })
             .catch(err => {
                 console.error("Failed to fetch guides:", err);
+            })
+            .finally(() => {
+                setGuidesLoading(false);
             });
     }, [user]);
 
@@ -269,14 +274,26 @@ function BookingForm() {
 
                 {/* Row 4 - Preferred Guide */}
                 <div className="mt-2 sm:mt-4">
-                    <SelectField
-                        icon={<FaUser />}
-                        label="Preferred Tour Guide"
-                        name="guideId"
-                        value={formData.guideId}
-                        onChange={handleChange}
-                        options={guideOptions}
-                    />
+                    {guidesLoading ? (
+                        <div>
+                            <label className="mb-2 block text-xs sm:text-sm font-semibold text-[#4A3728]">
+                                Preferred Tour Guide
+                            </label>
+                            <div className="flex items-center gap-2 w-full rounded-xl border border-[#D8C3A5] bg-white/20 py-3 px-4">
+                                <FaSpinner className="animate-spin text-[#B8860B]" size={14} />
+                                <span className="text-xs text-[#8B7355]">Loading available guides...</span>
+                            </div>
+                        </div>
+                    ) : (
+                        <SelectField
+                            icon={<FaUser />}
+                            label="Preferred Tour Guide"
+                            name="guideId"
+                            value={formData.guideId}
+                            onChange={handleChange}
+                            options={guideOptions}
+                        />
+                    )}
                 </div>
 
                 {/* Textarea */}
