@@ -147,193 +147,400 @@
   ],
   "attractions": [
     {
-      "id": "1",
+      "id": "cairo-1",
+      "destinationId": "cairo",
       "name": "Pyramids of Giza",
+      "category": "Historical",
+      "description": "The last surviving wonder of the ancient world — three colossal pyramids built for pharaohs Khufu, Khafre, and Menkaure, standing for over 4,500 years.",
       "image": "/attractions/pyramids.png",
-      "description": "The Pyramids of Giza are one of the most iconic landmarks in Egypt, built as tombs for pharaohs and showcasing ancient engineering marvels.",
-      "star": 4.2
+      "duration": 180,
+      "bestTime": "Morning",
+      "star": 4.9
     },
     {
-      "id": "2",
-      "name": "Karnak Temple",
-      "image": "/attractions/karnak.png",
-      "description": "Karnak Temple is a vast complex of temples, chapels, and pylons in Luxor, dedicated to the Theban triad of Amun, Mut, and Khonsu.",
-      "star": 4.2
+      "id": "cairo-2",
+      "destinationId": "cairo",
+      "name": "Great Sphinx of Giza",
+      "category": "Historical",
+      "description": "A monumental limestone statue with the body of a lion and the face of a pharaoh, guarding the Giza plateau for millennia.",
+      "image": "/attractions/sphinx.png",
+      "duration": 60,
+      "bestTime": "Morning",
+      "star": 4.8
     },
     {
-      "id": "3",
-      "name": "Abu Simbel Temples",
+      "id": "cairo-3",
+      "destinationId": "cairo",
+      "name": "Egyptian Museum",
+      "category": "Culture",
+      "description": "Home to the world's largest collection of ancient Egyptian antiquities, including the golden mask of Tutankhamun.",
+      "image": "/destinations/egyptian-museum.jpg",
+      "duration": 150,
+      "bestTime": "Afternoon",
+      "star": 4.7
+    },
+    {
+      "id": "cairo-4",
+      "destinationId": "cairo",
+      "name": "Grand Egyptian Museum",
+      "category": "Culture",
+      "description": "The world's largest archaeological museum near the Giza Pyramids, showcasing over 100,000 ancient Egyptian artifacts.",
+      "image": "/destinations/gem.jpg",
+      "duration": 180,
+      "bestTime": "Morning",
+      "star": 4.9
+    },
+    {
+      "id": "cairo-5",
+      "destinationId": "cairo",
+      "name": "Khan el-Khalili Bazaar",
+      "category": "Shopping",
+      "description": "A famous medieval Islamic bazaar in the heart of Cairo, filled with spices, jewelry, souvenirs, and traditional cafés.",
+      "image": "/attractions/pyramids.png",
+      "duration": 120,
+      "bestTime": "Evening",
+      "star": 4.6
+    },
+    {
+      "id": "cairo-6",
+      "destinationId": "cairo",
+      "name": "Citadel of Saladin",
+      "category": "Historical",
+      "description": "A medieval Islamic fortification on Mokattam Hill, home to the stunning Muhammad Ali Mosque and panoramic city views.",
+      "image": "/attractions/sphinx.png",
+      "duration": 90,
+      "bestTime": "Afternoon",
+      "star": 4.7
+    },
+    {
+      "id": "cairo-7",
+      "destinationId": "cairo",
+      "name": "Coptic Cairo",
+      "category": "Culture",
+      "description": "An ancient district containing some of Egypt's oldest Christian churches, the Ben Ezra Synagogue, and rich religious heritage.",
       "image": "/attractions/abu-simbel.png",
-      "description": "The Abu Simbel Temples are two massive rock temples in southern Egypt, built by Pharaoh Ramses II to commemorate his victory at the Battle of Kadesh.",
-      "star": 4.8
-    },
-    {
-      "id": "4",
-      "name": "Valley of the Kings",
-      "image": "/attractions/valley-of-the-kings.png",
-      "description": "The Valley of the Kings is a burial site for pharaohs and nobles in Luxor, known for its elaborate tombs and intricate wall paintings.",
-      "star": 4.8
-    },
-    {
-      "id": "5",
-      "name": "Temple of Philae",
-      "image": "/attractions/philae.png",
-      "description": "The Temple of Philae is an ancient Egyptian temple complex located on an island in the Nile River, dedicated to the goddess Isis.",
+      "duration": 90,
+      "bestTime": "Morning",
       "star": 4.5
     },
     {
-      "id": "6",
-      "name": "Sphinx of Giza",
-      "image": "/attractions/sphinx.png",
-      "description": "The Sphinx of Giza is a colossal limestone statue with the body of a lion and the head of a pharaoh, symbolizing strength and wisdom.",
-      "star": 4.8
-    },
-    {
-      "id": "7",
-      "name": "Temple of Hatshepsut",
-      "image": "/attractions/hatshepsut.png",
-      "description": "The Temple of Hatshepsut is a mortuary temple dedicated to the female pharaoh Hatshepsut, known for its unique architecture and terraces.",
-      "star": 4.9
-    },
-    {
-      "id": "8",
-      "name": "Temple of Edfu",
-      "image": "/attractions/edfu.png",
-      "description": "The Temple of Edfu is an ancient Egyptian temple dedicated to the falcon god Horus, known for its well-preserved hieroglyphics and reliefs.",
-      "star": 4.7
-    },
-    {
-      "id": "9",
-      "name": "Temple of Kom Ombo",
-      "image": "/attractions/kom-ombo.png",
-      "description": "The Temple of Kom Ombo is a unique double temple dedicated to the gods Sobek and Horus, located on the banks of the Nile River.",
-      "star": 4.6
-    },
-    {
-      "id": "10",
-      "name": "Temple of Dendera",
-      "image": "/attractions/dendera.png",
-      "description": "The Temple of Dendera is an ancient Egyptian temple complex dedicated to the goddess Hathor, known for its well-preserved reliefs and astronomical ceiling.",
-      "star": 4.9
-    },
-    {
-      "id": "11",
-      "name": "Temple of Abydos",
-      "image": "/attractions/abydos.png",
-      "description": "The Temple of Abydos is an ancient Egyptian temple complex dedicated to the god Osiris, known for its impressive reliefs and inscriptions.",
-      "star": 4.8
-    },
-    {
-      "id": "12",
-      "name": "Temple of Medinet Habu",
-      "image": "/attractions/medinet-habu.png",
-      "description": "The Temple of Medinet Habu is a mortuary temple dedicated to Pharaoh Ramses III, known for its well-preserved reliefs and inscriptions.",
-      "star": 4.7
-    },
-    {
-      "id": "13",
-      "name": "Temple of Esna",
-      "image": "/attractions/esna.png",
-      "description": "The Temple of Esna is an ancient Egyptian temple dedicated to the god Khnum, known for its well-preserved columns and reliefs.",
-      "star": 4.6
-    },
-    {
-      "id": "14",
-      "name": "Shali Fortress (Siwa Oasis)",
-      "image": "/attractions/shali.jpg",
-      "description": "An ancient mud-brick fortress in Siwa built from karshif (salt-rich clay). It stands as a labyrinth of ruins offering panoramic desert views.",
-      "star": 4.9
-    },
-    {
-      "id": "15",
-      "name": "Wadi Al-Hitan (Valley of Whales)",
-      "image": "/attractions/wadi-hitan.jpg",
-      "description": "A UNESCO World Heritage site in Fayoum desert containing hundreds of spectacular fossilized skeletons of primitive whales from 40 million years ago.",
-      "star": 4.8
-    },
-    {
-      "id": "16",
-      "name": "El Nayzak Lake (Marsa Alam)",
-      "image": "/attractions/nayzak.jpg",
-      "description": "A stunning natural pool formed by a meteor strike on the Red Sea coast, featuring turquoise waters that stay warm and calm year-round.",
-      "star": 4.9
-    },
-    {
-      "id": "17",
-      "name": "Colored Canyon (Sinai)",
-      "image": "/attractions/colored-canyon.jpg",
-      "description": "A spectacular natural labyrinth of narrow rocky gorges in Sinai, displaying beautiful swirls of red, yellow, and magenta sandstone.",
-      "star": 4.8
-    },
-    {
-      "id": "18",
+      "id": "cairo-8",
+      "destinationId": "cairo",
       "name": "Serapeum of Saqqara",
+      "category": "Historical",
+      "description": "A mysterious underground burial complex containing giant black granite sarcophagi of the sacred Apis Bulls.",
       "image": "/attractions/serapeum.jpg",
-      "description": "A mysterious underground burial site in Saqqara containing giant, perfectly-cut black granite sarcophagi of the sacred Apis Bulls.",
+      "duration": 120,
+      "bestTime": "Morning",
       "star": 4.9
     },
     {
-      "id": "19",
-      "name": "White Desert (Farafra)",
-      "image": "/attractions/white-desert.jpg",
-      "description": "A surreal desert of snow-white chalk rock formations carved by wind into spectacular abstract shapes like mushrooms and towers.",
+      "id": "luxor-1",
+      "destinationId": "luxor",
+      "name": "Karnak Temple",
+      "category": "Historical",
+      "description": "The largest ancient religious site in the world — a breathtaking complex of temples, chapels, pylons, and obelisks built over 2,000 years.",
+      "image": "/attractions/karnak.png",
+      "duration": 180,
+      "bestTime": "Morning",
       "star": 4.9
     },
     {
-      "id": "21",
-      "name": "Wadi El Gemal (Marsa Alam)",
-      "image": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80",
-      "description": "The Valley of the Camels, a pristine national park with sandy beaches, coral reefs, desert wildlife, and ancient Roman emerald mines.",
+      "id": "luxor-2",
+      "destinationId": "luxor",
+      "name": "Luxor Temple",
+      "category": "Historical",
+      "description": "A magnificent temple on the east bank of the Nile, illuminated at night — one of the most photogenic sites in Egypt.",
+      "image": "/destinations/luxor.png",
+      "duration": 90,
+      "bestTime": "Evening",
       "star": 4.8
     },
     {
-      "id": "22",
-      "name": "Blue Lagoon (Dahab)",
-      "image": "/attractions/blue-lagoon.jpg",
-      "description": "A peaceful wind-swept sanctuary of shallow turquoise water, ideal for kite-surfing and camping in traditional Bedouin bamboo huts.",
+      "id": "luxor-3",
+      "destinationId": "luxor",
+      "name": "Valley of the Kings",
+      "category": "Historical",
+      "description": "The royal necropolis where pharaohs of the New Kingdom were buried in elaborately decorated tombs, including Tutankhamun's.",
+      "image": "/attractions/valley-of-the-kings.png",
+      "duration": 180,
+      "bestTime": "Morning",
       "star": 4.9
     },
     {
-      "id": "23",
-      "name": "Sannur Valley Cave (Beni Suef)",
-      "image": "https://images.unsplash.com/photo-1518156677180-95a2893f3e9f?auto=format&fit=crop&w=600&q=80",
-      "description": "A rare limestone karst cave filled with stunning geological formations of glittering stalactites and stalagmites.",
+      "id": "luxor-4",
+      "destinationId": "luxor",
+      "name": "Temple of Hatshepsut",
+      "category": "Historical",
+      "description": "A stunning terraced mortuary temple carved into the cliffs of Deir el-Bahari, dedicated to Egypt's greatest female pharaoh.",
+      "image": "/attractions/hatshepsut.png",
+      "duration": 90,
+      "bestTime": "Morning",
+      "star": 4.8
+    },
+    {
+      "id": "luxor-5",
+      "destinationId": "luxor",
+      "name": "Temple of Medinet Habu",
+      "category": "Historical",
+      "description": "A well-preserved mortuary temple of Ramses III featuring enormous pylons and some of the finest reliefs in Egypt.",
+      "image": "/attractions/medinet-habu.png",
+      "duration": 90,
+      "bestTime": "Afternoon",
       "star": 4.7
     },
     {
-      "id": "24",
-      "name": "Baron Empain Palace (Cairo)",
-      "image": "https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=600&q=80",
-      "description": "A historic Hindu-temple inspired mansion built in Heliopolis by a Belgian industrialist, featuring mystical architecture.",
+      "id": "luxor-6",
+      "destinationId": "luxor",
+      "name": "Luxor Museum",
+      "category": "Culture",
+      "description": "An elegant museum on the Nile corniche housing a carefully curated collection of artifacts from the Theban region.",
+      "image": "/attractions/karnak.png",
+      "duration": 90,
+      "bestTime": "Afternoon",
       "star": 4.6
     },
     {
-      "id": "25",
-      "name": "Siwa Salt Lakes (Siwa)",
-      "image": "/attractions/salt-lakes.jpg",
+      "id": "luxor-7",
+      "destinationId": "luxor",
+      "name": "Nile Felucca Cruise",
+      "category": "Nature",
+      "description": "A traditional sailing boat ride on the Nile at sunset — the most relaxing and iconic experience in Luxor.",
+      "image": "/attractions/philae.png",
+      "duration": 60,
+      "bestTime": "Evening",
+      "star": 4.8
+    },
+    {
+      "id": "luxor-8",
+      "destinationId": "luxor",
+      "name": "Hot Air Balloon Ride",
+      "category": "Adventure",
+      "description": "Soar over the West Bank temples and Valley of the Kings at sunrise for a breathtaking bird's-eye view of ancient Thebes.",
+      "image": "/attractions/valley-of-the-kings.png",
+      "duration": 60,
+      "bestTime": "Morning",
+      "star": 4.9
+    },
+    {
+      "id": "aswan-1",
+      "destinationId": "aswan",
+      "name": "Abu Simbel Temples",
+      "category": "Historical",
+      "description": "Two massive rock temples built by Ramses II — a UNESCO World Heritage Site and one of Egypt's most awe-inspiring monuments.",
+      "image": "/attractions/abu-simbel.png",
+      "duration": 180,
+      "bestTime": "Morning",
+      "star": 4.9
+    },
+    {
+      "id": "aswan-2",
+      "destinationId": "aswan",
+      "name": "Temple of Philae",
+      "category": "Historical",
+      "description": "A beautiful island temple complex dedicated to the goddess Isis, rescued from the rising Nile and reassembled stone by stone.",
+      "image": "/attractions/philae.png",
+      "duration": 90,
+      "bestTime": "Morning",
+      "star": 4.8
+    },
+    {
+      "id": "aswan-3",
+      "destinationId": "aswan",
+      "name": "Temple of Kom Ombo",
+      "category": "Historical",
+      "description": "A unique double temple on the Nile banks dedicated to both Sobek the crocodile god and Horus the Elder.",
+      "image": "/attractions/kom-ombo.png",
+      "duration": 75,
+      "bestTime": "Afternoon",
+      "star": 4.7
+    },
+    {
+      "id": "aswan-4",
+      "destinationId": "aswan",
+      "name": "Nubian Village",
+      "category": "Culture",
+      "description": "Colorful villages on the west bank of the Nile offering authentic Nubian food, music, and traditional hospitality.",
+      "image": "/attractions/abu-simbel.png",
+      "duration": 120,
+      "bestTime": "Afternoon",
+      "star": 4.7
+    },
+    {
+      "id": "aswan-5",
+      "destinationId": "aswan",
+      "name": "Aswan High Dam",
+      "category": "Nature",
+      "description": "One of the world's largest embankment dams creating Lake Nasser — an engineering marvel with panoramic desert views.",
+      "image": "/attractions/abu-simbel.png",
+      "duration": 60,
+      "bestTime": "Anytime",
+      "star": 4.4
+    },
+    {
+      "id": "aswan-6",
+      "destinationId": "aswan",
+      "name": "Elephantine Island",
+      "category": "Historical",
+      "description": "A Nile island with an ancient history spanning 3,000 years, featuring ruins of temples, a nilometer, and a small museum.",
+      "image": "/attractions/kom-ombo.png",
+      "duration": 90,
+      "bestTime": "Morning",
+      "star": 4.5
+    },
+    {
+      "id": "aswan-7",
+      "destinationId": "aswan",
+      "name": "Nile Sunset Felucca",
+      "category": "Nature",
+      "description": "Sail on the Nile past the granite boulders and islands of Aswan as the sun sets over the Sahara — utterly magical.",
+      "image": "/attractions/philae.png",
+      "duration": 90,
+      "bestTime": "Evening",
+      "star": 4.9
+    },
+    {
+      "id": "aswan-8",
+      "destinationId": "aswan",
+      "name": "Temple of Edfu",
+      "category": "Historical",
+      "description": "The best-preserved ancient temple in Egypt dedicated to the falcon god Horus — its hieroglyphic reliefs are extraordinary.",
+      "image": "/attractions/edfu.png",
+      "duration": 90,
+      "bestTime": "Morning",
+      "star": 4.8
+    },
+    {
+      "id": "extra-1",
+      "destinationId": null,
+      "name": "Shali Fortress (Siwa Oasis)",
+      "category": "Historical",
+      "description": "An ancient mud-brick fortress in Siwa built from karshif (salt-rich clay). It stands as a labyrinth of ruins offering panoramic desert views.",
+      "image": "/attractions/shali.jpg",
+      "duration": 90,
+      "bestTime": "Afternoon",
+      "star": 4.9
+    },
+    {
+      "id": "extra-2",
+      "destinationId": null,
+      "name": "Wadi Al-Hitan (Valley of Whales)",
+      "category": "Nature",
+      "description": "A UNESCO World Heritage site in Fayoum desert containing hundreds of spectacular fossilized skeletons of primitive whales from 40 million years ago.",
+      "image": "/attractions/wadi-hitan.jpg",
+      "duration": 180,
+      "bestTime": "Morning",
+      "star": 4.8
+    },
+    {
+      "id": "extra-3",
+      "destinationId": null,
+      "name": "El Nayzak Lake (Marsa Alam)",
+      "category": "Nature",
+      "description": "A stunning natural pool formed by a meteor strike on the Red Sea coast, featuring turquoise waters that stay warm and calm year-round.",
+      "image": "/attractions/nayzak.jpg",
+      "duration": 120,
+      "bestTime": "Morning",
+      "star": 4.9
+    },
+    {
+      "id": "extra-4",
+      "destinationId": null,
+      "name": "Colored Canyon (Sinai)",
+      "category": "Adventure",
+      "description": "A spectacular natural labyrinth of narrow rocky gorges in Sinai, displaying beautiful swirls of red, yellow, and magenta sandstone.",
+      "image": "/attractions/colored-canyon.jpg",
+      "duration": 120,
+      "bestTime": "Morning",
+      "star": 4.8
+    },
+    {
+      "id": "extra-5",
+      "destinationId": null,
+      "name": "White Desert (Farafra)",
+      "category": "Nature",
+      "description": "A surreal desert of snow-white chalk rock formations carved by wind into spectacular abstract shapes like mushrooms and towers.",
+      "image": "/attractions/white-desert.jpg",
+      "duration": 240,
+      "bestTime": "Afternoon",
+      "star": 4.9
+    },
+    {
+      "id": "extra-6",
+      "destinationId": null,
+      "name": "Wadi El Gemal (Marsa Alam)",
+      "category": "Nature",
+      "description": "The Valley of the Camels, a pristine national park with sandy beaches, coral reefs, desert wildlife, and ancient Roman emerald mines.",
+      "image": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80",
+      "duration": 180,
+      "bestTime": "Morning",
+      "star": 4.8
+    },
+    {
+      "id": "extra-7",
+      "destinationId": null,
+      "name": "Blue Lagoon (Dahab)",
+      "category": "Adventure",
+      "description": "A peaceful wind-swept sanctuary of shallow turquoise water, ideal for kite-surfing and camping in traditional Bedouin bamboo huts.",
+      "image": "/attractions/blue-lagoon.jpg",
+      "duration": 180,
+      "bestTime": "Morning",
+      "star": 4.9
+    },
+    {
+      "id": "extra-8",
+      "destinationId": null,
+      "name": "Siwa Salt Lakes",
+      "category": "Nature",
       "description": "Crystalline turquoise hot-spring salt pools where you float effortlessly due to extremely high salt concentration, surrounded by salt shores.",
+      "image": "/attractions/salt-lakes.jpg",
+      "duration": 120,
+      "bestTime": "Afternoon",
       "star": 4.9
     },
     {
-      "id": "26",
+      "id": "extra-9",
+      "destinationId": null,
       "name": "Black Desert (Bahariya)",
-      "image": "https://images.unsplash.com/photo-1547127796-06bb04e4b315?auto=format&fit=crop&w=600&q=80",
+      "category": "Nature",
       "description": "A dramatic charcoal-colored landscape of volcanic hills topped with black basalt, contrasting beautifully with golden sands.",
+      "image": "https://images.unsplash.com/photo-1547127796-06bb04e4b315?auto=format&fit=crop&w=600&q=80",
+      "duration": 180,
+      "bestTime": "Afternoon",
       "star": 4.8
     },
     {
-      "id": "27",
-      "name": "Abu Galum Protected Area",
-      "image": "https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=600&q=80",
-      "description": "A stunning Sinai nature reserve squeezed between high granite mountains and deep blue waters of the Red Sea reef.",
-      "star": 4.9
-    },
-    {
-      "id": "28",
+      "id": "extra-10",
+      "destinationId": null,
       "name": "St. Catherine Mountains",
-      "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
+      "category": "Adventure",
       "description": "High rocky peaks of Sinai featuring organic olive gardens, ancient hermits paths, and the sacred Mt. Sinai summit.",
+      "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
+      "duration": 300,
+      "bestTime": "Morning",
       "star": 4.8
+    },
+    {
+      "id": "extra-11",
+      "destinationId": null,
+      "name": "Baron Empain Palace (Cairo)",
+      "category": "Historical",
+      "description": "A historic Hindu-temple inspired mansion built in Heliopolis by a Belgian industrialist, featuring mystical architecture.",
+      "image": "https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=600&q=80",
+      "duration": 60,
+      "bestTime": "Afternoon",
+      "star": 4.6
+    },
+    {
+      "id": "extra-12",
+      "destinationId": null,
+      "name": "Abu Galum Protected Area",
+      "category": "Nature",
+      "description": "A stunning Sinai nature reserve squeezed between high granite mountains and deep blue waters of the Red Sea reef.",
+      "image": "https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=600&q=80",
+      "duration": 180,
+      "bestTime": "Morning",
+      "star": 4.9
     }
   ],
   "users": [
@@ -378,6 +585,20 @@
       "password": "12345345",
       "role": "Tour Guide",
       "id": "pMovFilzs5w"
+    },
+    {
+      "name": "sdcv",
+      "email": "ahmedfytubfs@gmail.com",
+      "password": "12345678",
+      "role": "Tourist",
+      "id": "fmpMsM_-XYs"
+    },
+    {
+      "name": "احمد رجب",
+      "email": "mdmin@jawla.com",
+      "password": "admin123",
+      "role": "Tourist",
+      "id": "xsS7-UYmoUQ"
     }
   ],
   "tourGuides": [
@@ -409,6 +630,23 @@
       "id": "7w-DCYFKYXU"
     }
   ],
-  "bookings": [],
+  "bookings": [
+    {
+      "fullName": "احمد رجب",
+      "phone": "01010076017",
+      "email": "mdmin@jawla.com",
+      "people": "4",
+      "date": "2026-07-25",
+      "tourType": "Historical Tour",
+      "requests": "",
+      "guideId": "guide-1",
+      "touristId": "xsS7-UYmoUQ",
+      "touristName": "احمد رجب",
+      "touristEmail": "mdmin@jawla.com",
+      "status": "Approved",
+      "createdAt": "2026-07-19T18:54:46.434Z",
+      "id": "IIacAHlNeKg"
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }

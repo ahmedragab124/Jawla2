@@ -14,6 +14,7 @@ import TouristProfile from './features/auth/TouristProfile'
 import RequireRole from './features/auth/RequireRole'
 import AttractionsPage from './features/attractions/AttractionsPage'
 import AboutPage from './features/about/AboutPage'
+import AIPlannerPage from './features/AiPlanner/pages/AIPlannerPage'
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
       <Route path="/destination/:id" element={<DestinationPage />} />
       <Route path="/attractions" element={<AttractionsPage />} />
       <Route path="/about" element={<AboutPage />} />
+      <Route path="/ai-planner" element={<AIPlannerPage />} />
       <Route path="/auth" element={<AuthPage />} />
       <Route path="/admin/dashboard" element={<RequireRole allowedRoles={['Admin']}><AdminDashboard /></RequireRole>} />
       <Route path="/profile" element={<RequireRole allowedRoles={['Tourist', 'Tour Guide']}><TouristProfile /></RequireRole>} />

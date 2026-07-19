@@ -27,6 +27,9 @@ function Navbar() {
             <Link to="/attractions" className="text-white font-medium hover:text-amber-200 transition cursor-pointer hover:border-b-2 hover:border-amber-200">
               Attractions
             </Link>
+            <Link to="/ai-planner" className="text-white font-medium hover:text-amber-200 transition cursor-pointer hover:border-b-2 hover:border-amber-200">
+              AI Planner
+            </Link>
             <Link to="/about" className="text-white font-medium hover:text-amber-200 transition cursor-pointer hover:border-b-2 hover:border-amber-200">
               About
             </Link>
@@ -69,6 +72,12 @@ function Navbar() {
                 className="block px-3 py-2 rounded-md text-white hover:bg-white/10 hover:text-amber-200 font-medium"
               >
                 Attractions
+              </Link>
+              <Link
+                to="/ai-planner"
+                className="block px-3 py-2 rounded-md text-white hover:bg-white/10 hover:text-amber-200 font-medium"
+              >
+                AI Planner
               </Link>
               <Link
                 to="/booking"

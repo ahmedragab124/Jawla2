@@ -37,7 +37,14 @@ function AttractionsPage() {
         <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map(a => (
             <article key={a.id} className="overflow-hidden rounded-[28px] bg-white shadow-lg hover:-translate-y-2 transition">
-              <img src={a.image} alt={a.name} className="h-60 w-full object-cover" />
+              <img
+                src={a.image || '/attractions/pyramids.png'}
+                alt={a.name}
+                className="h-60 w-full object-cover"
+                onError={(e) => {
+                  e.target.src = '/attractions/pyramids.png';
+                }}
+              />
               <div className="p-6">
                 <div className="flex items-start justify-between gap-3">
                   <h2 className="text-2xl font-bold text-[#3f2b1a]">{a.name}</h2>

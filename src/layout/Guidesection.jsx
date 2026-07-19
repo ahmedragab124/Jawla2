@@ -18,7 +18,7 @@ function Guidesection() {
               Your dream trip is one click away
             </h1>
             <p className="max-w-xl text-base leading-8 text-[#475569] sm:text-lg">
-              Use our intelligent AI planner to curate the perfect Egyptian itinerary based on your interests, budget, and time.
+              Discover Egypt with a smooth planning experience and book the perfect guide for your journey.
             </p>
 
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
