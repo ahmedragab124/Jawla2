@@ -12,7 +12,6 @@ function TouristDashboard({ user, onUserUpdated }) {
   const [profileForm, setProfileForm] = useState({
     name: user.name || '',
     email: user.email || '',
-    phone: user.phone || '',
     location: user.location || '',
     bio: user.bio || '',
     avatar: user.avatar || '',
@@ -208,10 +207,7 @@ function TouristDashboard({ user, onUserUpdated }) {
               <label className="block text-sm font-semibold text-[#594735]">Email address
                 <input name="email" type="email" value={profileForm.email} onChange={handleProfileChange} className="mt-1.5 w-full rounded-xl border border-[#e6d8c5] px-3 py-2.5 outline-none focus:border-[#b57a2d]" />
               </label>
-              <label className="block text-sm font-semibold text-[#594735]">Phone number
-                <input name="phone" type="tel" inputMode="tel" value={profileForm.phone} onChange={handleProfileChange} placeholder="+20 10 0000 0000" className="mt-1.5 w-full rounded-xl border border-[#e6d8c5] px-3 py-2.5 outline-none focus:border-[#b57a2d]" />
-                <span className="mt-1 block text-xs font-normal text-stone-400">Use your country code, for example +20, +44, or +1.</span>
-              </label>
+              
               <label className="block text-sm font-semibold text-[#594735]">City / country
                 <input name="location" value={profileForm.location} onChange={handleProfileChange} placeholder="Cairo, Egypt" className="mt-1.5 w-full rounded-xl border border-[#e6d8c5] px-3 py-2.5 outline-none focus:border-[#b57a2d]" />
               </label>
