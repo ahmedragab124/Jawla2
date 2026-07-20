@@ -1,0 +1,178 @@
+/* Landing planner call-to-action styles */
+.planer-section {
+  padding: 4rem 1rem;
+  background: #f8fafc;
+}
+
+.planer-container {
+  width: min(1200px, 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.planer-image-wrapper {
+  position: relative;
+}
+
+.planer-image {
+  width: 100%;
+  border-radius: 36px;
+  object-fit: cover;
+  height: 100%;
+  min-height: 440px;
+  box-shadow: 0 35px 80px rgba(15, 23, 42, 0.16);
+}
+
+.planer-badge {
+  position: absolute;
+  left: 1.25rem;
+  bottom: -1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: calc(100% - 2.5rem);
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 28px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
+  backdrop-filter: blur(10px);
+}
+
+.planer-badge-icon {
+  width: 3rem;
+  height: 3rem;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  background: #eef8ff;
+  color: #0369a1;
+}
+
+.badge-svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.badge-title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.badge-text {
+  margin: 0.15rem 0 0;
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.planer-content {
+  padding-top: 1rem;
+}
+
+.planer-subtitle {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #047481;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.planer-title {
+  margin: 1rem 0 0;
+  font-size: clamp(2.25rem, 2.8vw, 3.6rem);
+  line-height: 1.02;
+  color: #0f172a;
+}
+
+.planer-description {
+  margin: 1.25rem 0 0;
+  color: #475569;
+  font-size: 0.98rem;
+  line-height: 1.8;
+  max-width: 36rem;
+}
+
+.planer-list {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.75rem;
+}
+
+.planer-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  color: #334155;
+  font-size: 0.95rem;
+}
+
+.planer-list-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.8rem;
+  min-height: 1.8rem;
+  border-radius: 9999px;
+  background: #dbeafe;
+  color: #1d4ed8;
+  font-weight: 700;
+}
+
+.planer-button {
+  margin-top: 2rem;
+  padding: 1rem 1.75rem;
+  border-radius: 9999px;
+  border: none;
+  background: #0465a1;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: 0 20px 40px rgba(4, 81, 130, 0.22);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.planer-button:hover {
+  transform: translateY(-2px);
+  background: #0c6b99;
+}
+
+@media (max-width: 960px) {
+  .planer-container {
+    grid-template-columns: 1fr;
+  }
+
+  .planer-badge {
+    position: static;
+    width: auto;
+    transform: none;
+    margin-top: -3rem;
+  }
+
+  .planer-image {
+    min-height: 360px;
+  }
+}
+
+@media (max-width: 640px) {
+  .planer-section {
+    padding: 3rem 1rem;
+  }
+
+  .planer-title {
+    font-size: 2rem;
+  }
+
+  .planer-description {
+    font-size: 0.95rem;
+  }
+
+  .planer-button {
+    width: 100%;
+  }
+}

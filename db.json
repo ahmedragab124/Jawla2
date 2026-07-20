@@ -143,6 +143,133 @@
           "description": "See the elegant terraced temple of Egypt's great female pharaoh."
         }
       ]
+    },
+    {
+      "id": "alexandria",
+      "name": "Alexandria",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/c/ce/%D9%82%D9%84%D8%B9%D8%A9_%D9%82%D8%A7%D9%8A%D8%AA%D8%A8%D8%A7%D9%8A_-_5.jpg",
+      "heroImage": "https://upload.wikimedia.org/wikipedia/commons/c/ce/%D9%82%D9%84%D8%B9%D8%A9_%D9%82%D8%A7%D9%8A%D8%AA%D8%A8%D8%A7%D9%8A_-_5.jpg",
+      "heroTitle": "Alexandria: Egypt's Mediterranean Jewel",
+      "description": "Discover a coastal city shaped by Greek, Roman, and Egyptian history, with grand libraries, sea fortresses, and timeless streets.",
+      "star": 4.7,
+      "capital": "Alexandria",
+      "latitude": 31.2001,
+      "longitude": 29.9187,
+      "weatherLabel": "Sea breeze",
+      "history": "2,300+ Years",
+      "exploreLabel": "EXPLORE ALEXANDRIA",
+      "experienceTitle": "Choose Your Alexandria Experience",
+      "experienceDescription": "Move between the Mediterranean waterfront, classical museums, and remarkable landmarks.",
+      "guideTitle": "Explore Alexandria with a Local Storyteller",
+      "guideDescription": "See the layers of the ancient port city through a guide who connects its Greek, Roman, and modern identities.",
+      "guideImage": "/destinations/guide.png",
+      "guideFeatures": ["Local history experts", "Flexible coastal itineraries", "Museum and heritage tours"],
+      "experiences": [
+        { "id": "alex-qaitbay", "title": "Citadel of Qaitbay", "category": "Historical Sites", "image": "https://upload.wikimedia.org/wikipedia/commons/c/ce/%D9%82%D9%84%D8%B9%D8%A9_%D9%82%D8%A7%D9%8A%D8%AA%D8%A8%D8%A7%D9%8A_-_5.jpg", "description": "Explore the 15th-century fortress overlooking the Mediterranean." },
+        { "id": "alex-bibliotheca", "title": "Bibliotheca Alexandrina", "category": "Museums", "image": "https://upload.wikimedia.org/wikipedia/commons/0/0c/Space_in_bibliotheca_Alexandrina_02.jpg", "description": "Visit Alexandria's landmark library and cultural center." },
+        { "id": "alex-kom-el-shoqafa", "title": "Catacombs of Kom El Shoqafa", "category": "Historical Sites", "image": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Flickr_-_archer10_%28Dennis%29_-_Egypt-14A-053.jpg", "description": "Descend into an extraordinary blend of Egyptian, Greek, and Roman art." }
+      ]
+    },
+    {
+      "id": "giza",
+      "name": "Giza",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/5/58/Flickr_-_Gaspa_-_Giza%2C_la_piramide_grande.jpg",
+      "heroImage": "https://upload.wikimedia.org/wikipedia/commons/9/9b/P2090116_desert.JPG",
+      "heroTitle": "Giza: Where Wonders Rise from the Desert",
+      "description": "Stand beside the world's most famous pyramids, monumental statues, and Egypt's newest cultural landmark.",
+      "star": 4.9,
+      "capital": "Giza",
+      "latitude": 29.9773,
+      "longitude": 31.1325,
+      "weatherLabel": "Sunny",
+      "history": "4,500+ Years",
+      "exploreLabel": "EXPLORE GIZA",
+      "experienceTitle": "Choose Your Giza Experience",
+      "experienceDescription": "Trace the stories of the pharaohs from the plateau to the great museums.",
+      "guideTitle": "Read the Pyramids with an Egyptologist",
+      "guideDescription": "A local guide turns the Giza plateau into a living story of engineering, ritual, and royal ambition.",
+      "guideImage": "/destinations/guide.png",
+      "guideFeatures": ["Licensed Egyptologists", "Private pyramid tours", "Museum visit planning"],
+      "experiences": [
+        { "id": "giza-great-pyramid", "title": "Great Pyramid of Giza", "category": "Historical Sites", "image": "https://upload.wikimedia.org/wikipedia/commons/5/58/Flickr_-_Gaspa_-_Giza%2C_la_piramide_grande.jpg", "description": "See the last surviving wonder of the ancient world." },
+        { "id": "giza-sphinx", "title": "Great Sphinx", "category": "Historical Sites", "image": "https://upload.wikimedia.org/wikipedia/commons/2/25/The_Great_Sphinx_of_Giza.JPG", "description": "Meet the enduring guardian of the Giza plateau." },
+        { "id": "giza-gem", "title": "Grand Egyptian Museum", "category": "Museums", "image": "https://upload.wikimedia.org/wikipedia/commons/6/64/By_ovedc_-_Grand_Egyptian_Museum_-_08.jpg", "description": "Discover a major new home for Egypt's ancient treasures." }
+      ]
+    },
+    {
+      "id": "fayoum",
+      "name": "Fayoum",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Wadi_El-Rayyan%2C_Fayoum%2C_Egypt_%281%29.jpg",
+      "heroImage": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Wadi_El-Rayyan%2C_Fayoum%2C_Egypt_%281%29.jpg",
+      "heroTitle": "Fayoum: Egypt's Green Desert Oasis",
+      "description": "A fertile oasis where lakes, waterfalls, fossils, and ancient temples meet the edge of the Western Desert.",
+      "star": 4.6,
+      "capital": "Fayoum",
+      "latitude": 29.3084,
+      "longitude": 30.8428,
+      "weatherLabel": "Clear",
+      "history": "Ancient Oasis",
+      "exploreLabel": "EXPLORE FAYOUM",
+      "experienceTitle": "Choose Your Fayoum Experience",
+      "experienceDescription": "Pair nature, archaeology, and quiet desert landscapes in one memorable escape.",
+      "guideTitle": "Discover Fayoum Beyond the City",
+      "guideDescription": "Travel with a guide who can connect the oasis's natural beauty with its pharaonic and Greco-Roman heritage.",
+      "guideImage": "/destinations/guide.png",
+      "guideFeatures": ["Nature-focused day trips", "Archaeology routes", "Flexible desert transport"],
+      "experiences": [
+        { "id": "fayoum-rayyan", "title": "Wadi El Rayan", "category": "Nature", "image": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Wadi_El-Rayyan%2C_Fayoum%2C_Egypt_%281%29.jpg", "description": "Enjoy lakes, waterfalls, and wide desert scenery." },
+        { "id": "fayoum-medinet-madi", "title": "Medinet Madi", "category": "Historical Sites", "image": "https://upload.wikimedia.org/wikipedia/commons/e/ec/Medinet_Madi_03.JPG", "description": "Walk through an important temple site in the Fayoum oasis." },
+        { "id": "fayoum-hawara", "title": "Hawara Pyramid", "category": "Historical Sites", "image": "https://upload.wikimedia.org/wikipedia/commons/2/23/Hawara-plan-complexe.jpg", "description": "Explore the remains of Amenemhat III's pyramid complex." }
+      ]
+    },
+    {
+      "id": "siwa",
+      "name": "Siwa",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Siwa_oasis_-_Egypt.jpg",
+      "heroImage": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Siwa_oasis_-_Egypt.jpg",
+      "heroTitle": "Siwa: A Desert Oasis of Timeless Calm",
+      "description": "Escape to an oasis of salt lakes, palm groves, mud-brick architecture, and distinct Amazigh culture near Egypt's western border.",
+      "star": 4.8,
+      "capital": "Siwa",
+      "latitude": 29.2032,
+      "longitude": 25.5195,
+      "weatherLabel": "Dry and clear",
+      "history": "Oasis Heritage",
+      "exploreLabel": "EXPLORE SIWA",
+      "experienceTitle": "Choose Your Siwa Experience",
+      "experienceDescription": "Slow down with desert views, local traditions, and restorative natural pools.",
+      "guideTitle": "Experience Siwa with a Local Guide",
+      "guideDescription": "A local guide helps you experience the oasis respectfully, from its landscapes to its deep-rooted traditions.",
+      "guideImage": "/destinations/guide.png",
+      "guideFeatures": ["Oasis local experts", "Cultural experiences", "Desert excursion planning"],
+      "experiences": [
+        { "id": "siwa-oasis", "title": "Siwa Oasis", "category": "Nature", "image": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Siwa_oasis_-_Egypt.jpg", "description": "Explore palm groves, salt lakes, and the oasis landscape." }
+      ]
+    },
+    {
+      "id": "sinai",
+      "name": "South Sinai",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/b/bf/BlueHole_Rohscan_bearb_150d.jpg",
+      "heroImage": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Sinai_Coloured_Canyon_-_panoramio_%287%29.jpg",
+      "heroTitle": "South Sinai: Mountains, Reefs, and Desert Colour",
+      "description": "Journey through dramatic desert canyons and the Red Sea's famous underwater landscapes in Egypt's adventurous peninsula.",
+      "star": 4.8,
+      "capital": "South Sinai",
+      "latitude": 28.4996,
+      "longitude": 34.5136,
+      "weatherLabel": "Warm and clear",
+      "history": "Sacred Landscapes",
+      "exploreLabel": "EXPLORE SOUTH SINAI",
+      "experienceTitle": "Choose Your South Sinai Experience",
+      "experienceDescription": "Combine diving, desert hikes, and remarkable natural formations.",
+      "guideTitle": "Adventure Safely in South Sinai",
+      "guideDescription": "Plan desert and coast experiences with a local guide who understands the routes, seasons, and culture of Sinai.",
+      "guideImage": "/destinations/guide.png",
+      "guideFeatures": ["Licensed local guides", "Diving and hiking planning", "Flexible adventure routes"],
+      "experiences": [
+        { "id": "sinai-blue-hole", "title": "Blue Hole", "category": "Nature", "image": "https://upload.wikimedia.org/wikipedia/commons/b/bf/BlueHole_Rohscan_bearb_150d.jpg", "description": "See one of the Red Sea's most celebrated dive sites." },
+        { "id": "sinai-coloured-canyon", "title": "Coloured Canyon", "category": "Nature", "image": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Sinai_Coloured_Canyon_-_panoramio_%287%29.jpg", "description": "Walk through spectacular sandstone walls shaped by wind and time." }
+      ]
     }
   ],
   "attractions": [
@@ -541,7 +668,194 @@
       "duration": 180,
       "bestTime": "Morning",
       "star": 4.9
-    }
+    },
+    {
+      "id": "alexandria-1",
+      "destinationId": "alexandria",
+      "name": "Citadel of Qaitbay",
+      "category": "Historical",
+      "description": "A 15th-century fortress built on Alexandria's Mediterranean waterfront near the site of the ancient Pharos lighthouse.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/c/ce/%D9%82%D9%84%D8%B9%D8%A9_%D9%82%D8%A7%D9%8A%D8%AA%D8%A8%D8%A7%D9%8A_-_5.jpg",
+      "duration": 90,
+      "bestTime": "Afternoon",
+      "star": 4.8
+    },
+    {
+      "id": "alexandria-2",
+      "destinationId": "alexandria",
+      "name": "Bibliotheca Alexandrina",
+      "category": "Museum",
+      "description": "Alexandria's modern library and cultural complex, created in tribute to the ancient Library of Alexandria.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/0/0c/Space_in_bibliotheca_Alexandrina_02.jpg",
+      "duration": 120,
+      "bestTime": "Morning",
+      "star": 4.7
+    },
+    {
+      "id": "alexandria-3",
+      "destinationId": "alexandria",
+      "name": "Catacombs of Kom El Shoqafa",
+      "category": "Historical",
+      "description": "A remarkable underground necropolis where Egyptian, Greek, and Roman artistic traditions meet.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Flickr_-_archer10_%28Dennis%29_-_Egypt-14A-053.jpg",
+      "duration": 75,
+      "bestTime": "Morning",
+      "star": 4.6
+    },
+    {
+      "id": "alexandria-4",
+      "destinationId": "alexandria",
+      "name": "Alexandria National Museum",
+      "category": "Museum",
+      "description": "A museum tracing Alexandria's long history through artifacts from the Pharaonic, Greek, Roman, and modern eras.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Alexandria_National_Museum.jpg",
+      "duration": 90,
+      "bestTime": "Morning",
+      "star": 4.5
+    },
+    {
+      "id": "alexandria-5",
+      "destinationId": "alexandria",
+      "name": "Greco-Roman Museum",
+      "category": "Museum",
+      "description": "Discover sculptures, coins, and everyday objects from Alexandria's influential Greco-Roman period.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/1/17/Egypt-14A-044_%282217542760%29.jpg",
+      "duration": 90,
+      "bestTime": "Morning",
+      "star": 4.5
+    },
+    {
+      "id": "alexandria-6",
+      "destinationId": "alexandria",
+      "name": "Montaza Palace",
+      "category": "Culture",
+      "description": "A royal palace and gardens on the Mediterranean coast, known for its elegant architecture and sea views.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Al-Montazah_Palace.jpg",
+      "duration": 120,
+      "bestTime": "Afternoon",
+      "star": 4.6
+    },
+    {
+      "id": "giza-1",
+      "destinationId": "giza",
+      "name": "Great Pyramid of Giza",
+      "category": "Historical",
+      "description": "The largest pyramid at Giza and the only surviving wonder of the ancient world.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/5/58/Flickr_-_Gaspa_-_Giza%2C_la_piramide_grande.jpg",
+      "duration": 180,
+      "bestTime": "Morning",
+      "star": 4.9
+    },
+    {
+      "id": "giza-2",
+      "destinationId": "giza",
+      "name": "Great Sphinx of Giza",
+      "category": "Historical",
+      "description": "The iconic limestone guardian with a lion's body and a royal human head.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/2/25/The_Great_Sphinx_of_Giza.JPG",
+      "duration": 60,
+      "bestTime": "Morning",
+      "star": 4.8
+    },
+    {
+      "id": "giza-3",
+      "destinationId": "giza",
+      "name": "Grand Egyptian Museum",
+      "category": "Museum",
+      "description": "A vast museum complex near the pyramids showcasing Egypt's extraordinary archaeological heritage.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/6/64/By_ovedc_-_Grand_Egyptian_Museum_-_08.jpg",
+      "duration": 180,
+      "bestTime": "Morning",
+      "star": 4.8
+    },
+    {
+      "id": "giza-4",
+      "destinationId": "giza",
+      "name": "Pyramid of Djoser",
+      "category": "Historical",
+      "description": "The famous Step Pyramid at Saqqara, widely considered the earliest large-scale stone monument in Egypt.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/b/b1/Saqqara_complex_%282347193995%29.jpg",
+      "duration": 120,
+      "bestTime": "Morning",
+      "star": 4.7
+    },
+    {
+      "id": "giza-5",
+      "destinationId": "giza",
+      "name": "Red Pyramid",
+      "category": "Historical",
+      "description": "A monumental pyramid built for Sneferu at Dahshur and one of Egypt's earliest true smooth-sided pyramids.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/b/b5/Snofru%27s-Red-Pyramid.jpg",
+      "duration": 100,
+      "bestTime": "Morning",
+      "star": 4.6
+    },
+    {
+      "id": "fayoum-1",
+      "destinationId": "fayoum",
+      "name": "Wadi El Rayan",
+      "category": "Nature",
+      "description": "A protected desert landscape of lakes, waterfalls, dunes, and birdlife southwest of Fayoum.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Wadi_El-Rayyan%2C_Fayoum%2C_Egypt_%281%29.jpg",
+      "duration": 240,
+      "bestTime": "Morning",
+      "star": 4.7
+    },
+    {
+      "id": "fayoum-2",
+      "destinationId": "fayoum",
+      "name": "Medinet Madi",
+      "category": "Historical",
+      "description": "An ancient temple site in Fayoum with structures dedicated to the cobra goddess Renenutet.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/e/ec/Medinet_Madi_03.JPG",
+      "duration": 90,
+      "bestTime": "Morning",
+      "star": 4.5
+    },
+    {
+      "id": "fayoum-3",
+      "destinationId": "fayoum",
+      "name": "Hawara Pyramid",
+      "category": "Historical",
+      "description": "The pyramid complex of Amenemhat III near Hawara, part of Fayoum's rich Middle Kingdom heritage.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/2/23/Hawara-plan-complexe.jpg",
+      "duration": 90,
+      "bestTime": "Morning",
+      "star": 4.4
+    },
+    {
+      "id": "siwa-1",
+      "destinationId": "siwa",
+      "name": "Siwa Oasis",
+      "category": "Nature",
+      "description": "A serene oasis landscape of palms, lakes, springs, and traditional mud-brick settlements.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Siwa_oasis_-_Egypt.jpg",
+      "duration": 180,
+      "bestTime": "Afternoon",
+      "star": 4.8
+    },
+    {
+      "id": "sinai-1",
+      "destinationId": "sinai",
+      "name": "Blue Hole",
+      "category": "Nature",
+      "description": "A renowned Red Sea dive site near Dahab, known for its dramatic blue-water sinkhole and reefs.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/b/bf/BlueHole_Rohscan_bearb_150d.jpg",
+      "duration": 180,
+      "bestTime": "Morning",
+      "star": 4.8
+    },
+    {
+      "id": "sinai-2",
+      "destinationId": "sinai",
+      "name": "Coloured Canyon",
+      "category": "Nature",
+      "description": "A narrow Sinai canyon with layered sandstone walls shaped into striking colours and formations.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Sinai_Coloured_Canyon_-_panoramio_%287%29.jpg",
+      "duration": 150,
+      "bestTime": "Morning",
+      "star": 4.7
+   }
   ],
   "users": [
     {
