@@ -163,11 +163,33 @@
       "guideTitle": "Explore Alexandria with a Local Storyteller",
       "guideDescription": "See the layers of the ancient port city through a guide who connects its Greek, Roman, and modern identities.",
       "guideImage": "/destinations/guide.png",
-      "guideFeatures": ["Local history experts", "Flexible coastal itineraries", "Museum and heritage tours"],
+      "guideFeatures": [
+        "Local history experts",
+        "Flexible coastal itineraries",
+        "Museum and heritage tours"
+      ],
       "experiences": [
-        { "id": "alex-qaitbay", "title": "Citadel of Qaitbay", "category": "Historical Sites", "image": "https://upload.wikimedia.org/wikipedia/commons/c/ce/%D9%82%D9%84%D8%B9%D8%A9_%D9%82%D8%A7%D9%8A%D8%AA%D8%A8%D8%A7%D9%8A_-_5.jpg", "description": "Explore the 15th-century fortress overlooking the Mediterranean." },
-        { "id": "alex-bibliotheca", "title": "Bibliotheca Alexandrina", "category": "Museums", "image": "https://upload.wikimedia.org/wikipedia/commons/0/0c/Space_in_bibliotheca_Alexandrina_02.jpg", "description": "Visit Alexandria's landmark library and cultural center." },
-        { "id": "alex-kom-el-shoqafa", "title": "Catacombs of Kom El Shoqafa", "category": "Historical Sites", "image": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Flickr_-_archer10_%28Dennis%29_-_Egypt-14A-053.jpg", "description": "Descend into an extraordinary blend of Egyptian, Greek, and Roman art." }
+        {
+          "id": "alex-qaitbay",
+          "title": "Citadel of Qaitbay",
+          "category": "Historical Sites",
+          "image": "https://upload.wikimedia.org/wikipedia/commons/c/ce/%D9%82%D9%84%D8%B9%D8%A9_%D9%82%D8%A7%D9%8A%D8%AA%D8%A8%D8%A7%D9%8A_-_5.jpg",
+          "description": "Explore the 15th-century fortress overlooking the Mediterranean."
+        },
+        {
+          "id": "alex-bibliotheca",
+          "title": "Bibliotheca Alexandrina",
+          "category": "Museums",
+          "image": "https://upload.wikimedia.org/wikipedia/commons/0/0c/Space_in_bibliotheca_Alexandrina_02.jpg",
+          "description": "Visit Alexandria's landmark library and cultural center."
+        },
+        {
+          "id": "alex-kom-el-shoqafa",
+          "title": "Catacombs of Kom El Shoqafa",
+          "category": "Historical Sites",
+          "image": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Flickr_-_archer10_%28Dennis%29_-_Egypt-14A-053.jpg",
+          "description": "Descend into an extraordinary blend of Egyptian, Greek, and Roman art."
+        }
       ]
     },
     {
@@ -189,11 +211,33 @@
       "guideTitle": "Read the Pyramids with an Egyptologist",
       "guideDescription": "A local guide turns the Giza plateau into a living story of engineering, ritual, and royal ambition.",
       "guideImage": "/destinations/guide.png",
-      "guideFeatures": ["Licensed Egyptologists", "Private pyramid tours", "Museum visit planning"],
+      "guideFeatures": [
+        "Licensed Egyptologists",
+        "Private pyramid tours",
+        "Museum visit planning"
+      ],
       "experiences": [
-        { "id": "giza-great-pyramid", "title": "Great Pyramid of Giza", "category": "Historical Sites", "image": "https://upload.wikimedia.org/wikipedia/commons/5/58/Flickr_-_Gaspa_-_Giza%2C_la_piramide_grande.jpg", "description": "See the last surviving wonder of the ancient world." },
-        { "id": "giza-sphinx", "title": "Great Sphinx", "category": "Historical Sites", "image": "https://upload.wikimedia.org/wikipedia/commons/2/25/The_Great_Sphinx_of_Giza.JPG", "description": "Meet the enduring guardian of the Giza plateau." },
-        { "id": "giza-gem", "title": "Grand Egyptian Museum", "category": "Museums", "image": "https://upload.wikimedia.org/wikipedia/commons/6/64/By_ovedc_-_Grand_Egyptian_Museum_-_08.jpg", "description": "Discover a major new home for Egypt's ancient treasures." }
+        {
+          "id": "giza-great-pyramid",
+          "title": "Great Pyramid of Giza",
+          "category": "Historical Sites",
+          "image": "https://upload.wikimedia.org/wikipedia/commons/5/58/Flickr_-_Gaspa_-_Giza%2C_la_piramide_grande.jpg",
+          "description": "See the last surviving wonder of the ancient world."
+        },
+        {
+          "id": "giza-sphinx",
+          "title": "Great Sphinx",
+          "category": "Historical Sites",
+          "image": "https://upload.wikimedia.org/wikipedia/commons/2/25/The_Great_Sphinx_of_Giza.JPG",
+          "description": "Meet the enduring guardian of the Giza plateau."
+        },
+        {
+          "id": "giza-gem",
+          "title": "Grand Egyptian Museum",
+          "category": "Museums",
+          "image": "https://upload.wikimedia.org/wikipedia/commons/6/64/By_ovedc_-_Grand_Egyptian_Museum_-_08.jpg",
+          "description": "Discover a major new home for Egypt's ancient treasures."
+        }
       ]
     },
     {
@@ -215,11 +259,33 @@
       "guideTitle": "Discover Fayoum Beyond the City",
       "guideDescription": "Travel with a guide who can connect the oasis's natural beauty with its pharaonic and Greco-Roman heritage.",
       "guideImage": "/destinations/guide.png",
-      "guideFeatures": ["Nature-focused day trips", "Archaeology routes", "Flexible desert transport"],
+      "guideFeatures": [
+        "Nature-focused day trips",
+        "Archaeology routes",
+        "Flexible desert transport"
+      ],
       "experiences": [
-        { "id": "fayoum-rayyan", "title": "Wadi El Rayan", "category": "Nature", "image": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Wadi_El-Rayyan%2C_Fayoum%2C_Egypt_%281%29.jpg", "description": "Enjoy lakes, waterfalls, and wide desert scenery." },
-        { "id": "fayoum-medinet-madi", "title": "Medinet Madi", "category": "Historical Sites", "image": "https://upload.wikimedia.org/wikipedia/commons/e/ec/Medinet_Madi_03.JPG", "description": "Walk through an important temple site in the Fayoum oasis." },
-        { "id": "fayoum-hawara", "title": "Hawara Pyramid", "category": "Historical Sites", "image": "https://upload.wikimedia.org/wikipedia/commons/2/23/Hawara-plan-complexe.jpg", "description": "Explore the remains of Amenemhat III's pyramid complex." }
+        {
+          "id": "fayoum-rayyan",
+          "title": "Wadi El Rayan",
+          "category": "Nature",
+          "image": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Wadi_El-Rayyan%2C_Fayoum%2C_Egypt_%281%29.jpg",
+          "description": "Enjoy lakes, waterfalls, and wide desert scenery."
+        },
+        {
+          "id": "fayoum-medinet-madi",
+          "title": "Medinet Madi",
+          "category": "Historical Sites",
+          "image": "https://upload.wikimedia.org/wikipedia/commons/e/ec/Medinet_Madi_03.JPG",
+          "description": "Walk through an important temple site in the Fayoum oasis."
+        },
+        {
+          "id": "fayoum-hawara",
+          "title": "Hawara Pyramid",
+          "category": "Historical Sites",
+          "image": "https://upload.wikimedia.org/wikipedia/commons/2/23/Hawara-plan-complexe.jpg",
+          "description": "Explore the remains of Amenemhat III's pyramid complex."
+        }
       ]
     },
     {
@@ -241,9 +307,19 @@
       "guideTitle": "Experience Siwa with a Local Guide",
       "guideDescription": "A local guide helps you experience the oasis respectfully, from its landscapes to its deep-rooted traditions.",
       "guideImage": "/destinations/guide.png",
-      "guideFeatures": ["Oasis local experts", "Cultural experiences", "Desert excursion planning"],
+      "guideFeatures": [
+        "Oasis local experts",
+        "Cultural experiences",
+        "Desert excursion planning"
+      ],
       "experiences": [
-        { "id": "siwa-oasis", "title": "Siwa Oasis", "category": "Nature", "image": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Siwa_oasis_-_Egypt.jpg", "description": "Explore palm groves, salt lakes, and the oasis landscape." }
+        {
+          "id": "siwa-oasis",
+          "title": "Siwa Oasis",
+          "category": "Nature",
+          "image": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Siwa_oasis_-_Egypt.jpg",
+          "description": "Explore palm groves, salt lakes, and the oasis landscape."
+        }
       ]
     },
     {
@@ -265,10 +341,26 @@
       "guideTitle": "Adventure Safely in South Sinai",
       "guideDescription": "Plan desert and coast experiences with a local guide who understands the routes, seasons, and culture of Sinai.",
       "guideImage": "/destinations/guide.png",
-      "guideFeatures": ["Licensed local guides", "Diving and hiking planning", "Flexible adventure routes"],
+      "guideFeatures": [
+        "Licensed local guides",
+        "Diving and hiking planning",
+        "Flexible adventure routes"
+      ],
       "experiences": [
-        { "id": "sinai-blue-hole", "title": "Blue Hole", "category": "Nature", "image": "https://upload.wikimedia.org/wikipedia/commons/b/bf/BlueHole_Rohscan_bearb_150d.jpg", "description": "See one of the Red Sea's most celebrated dive sites." },
-        { "id": "sinai-coloured-canyon", "title": "Coloured Canyon", "category": "Nature", "image": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Sinai_Coloured_Canyon_-_panoramio_%287%29.jpg", "description": "Walk through spectacular sandstone walls shaped by wind and time." }
+        {
+          "id": "sinai-blue-hole",
+          "title": "Blue Hole",
+          "category": "Nature",
+          "image": "https://upload.wikimedia.org/wikipedia/commons/b/bf/BlueHole_Rohscan_bearb_150d.jpg",
+          "description": "See one of the Red Sea's most celebrated dive sites."
+        },
+        {
+          "id": "sinai-coloured-canyon",
+          "title": "Coloured Canyon",
+          "category": "Nature",
+          "image": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Sinai_Coloured_Canyon_-_panoramio_%287%29.jpg",
+          "description": "Walk through spectacular sandstone walls shaped by wind and time."
+        }
       ]
     }
   ],
@@ -855,7 +947,7 @@
       "duration": 150,
       "bestTime": "Morning",
       "star": 4.7
-   }
+    }
   ],
   "users": [
     {
@@ -873,46 +965,22 @@
       "role": "Tourist"
     },
     {
-      "name": "sdcv",
-      "email": "amin@jawla.com",
-      "password": "admin123",
-      "role": "Tourist",
-      "id": "xSmjHXxW_PQ"
-    },
-    {
-      "name": "احمد رجب",
-      "email": "ahmedfgytubfs@gmail.com",
-      "password": "12@12@12@",
-      "role": "Tourist",
-      "id": "HrvQSag7POI"
-    },
-    {
-      "name": "احمد رجب",
-      "email": "ad3in@exploreegypt.com",
-      "password": "12345345",
-      "role": "Tourist",
-      "id": "iJA38vqoipA"
-    },
-    {
-      "name": "banana",
+      "name": "Omar Adel",
       "email": "omar.guide@example.com",
       "password": "12345345",
       "role": "Tour Guide",
       "id": "pMovFilzs5w"
     },
     {
-      "name": "sdcv",
-      "email": "ahmedfytubfs@gmail.com",
-      "password": "12345678",
+      "name": "ahmed ragab marzouk",
+      "email": "ad3in@exploreegypt.com",
+      "password": "12@12@12@",
       "role": "Tourist",
-      "id": "fmpMsM_-XYs"
-    },
-    {
-      "name": "احمد رجب",
-      "email": "mdmin@jawla.com",
-      "password": "admin123",
-      "role": "Tourist",
-      "id": "xsS7-UYmoUQ"
+      "id": "0Gni5j7u8hU",
+      "phone": "",
+      "location": "",
+      "bio": "",
+      "avatar": ""
     }
   ],
   "tourGuides": [
@@ -944,23 +1012,6 @@
       "id": "7w-DCYFKYXU"
     }
   ],
-  "bookings": [
-    {
-      "fullName": "احمد رجب",
-      "phone": "01010076017",
-      "email": "mdmin@jawla.com",
-      "people": "4",
-      "date": "2026-07-25",
-      "tourType": "Historical Tour",
-      "requests": "",
-      "guideId": "guide-1",
-      "touristId": "xsS7-UYmoUQ",
-      "touristName": "احمد رجب",
-      "touristEmail": "mdmin@jawla.com",
-      "status": "Approved",
-      "createdAt": "2026-07-19T18:54:46.434Z",
-      "id": "IIacAHlNeKg"
-    }
-  ],
+  "bookings": [],
   "$schema": "./node_modules/json-server/schema.json"
 }
