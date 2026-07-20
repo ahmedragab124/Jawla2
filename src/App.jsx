@@ -13,6 +13,7 @@ import AdminDashboard from './features/auth/AdminDashboard'
 import TouristProfile from './features/auth/TouristProfile'
 import RequireRole from './features/auth/RequireRole'
 import AttractionsPage from './features/attractions/AttractionsPage'
+import AttractionDetailsPage from './features/attractions/AttractionDetailsPage'
 import AboutPage from './features/about/AboutPage'
 import AIPlannerPage from './features/AiPlanner/pages/AIPlannerPage'
 
@@ -36,6 +37,7 @@ function App() {
       <Route path="/destinations" element={<DestinationsPage />} />
       <Route path="/destination/:id" element={<DestinationPage />} />
       <Route path="/attractions" element={<AttractionsPage />} />
+      <Route path="/attractions/:id" element={<AttractionDetailsPage />} />
       <Route path="/about" element={<AboutPage />} />
       <Route path="/ai-planner" element={<AIPlannerPage />} />
       <Route path="/auth" element={<AuthPage />} />

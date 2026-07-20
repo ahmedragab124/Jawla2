@@ -1,12 +1,26 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import { Mail, MapPin, Calendar, Users, Compass, Trash2, CheckCircle2, AlertCircle, Clock, MessageSquare, Phone } from 'lucide-react'
+import { Mail, Calendar, Users, Compass, Trash2, CheckCircle2, AlertCircle, MessageSquare, Phone, Pencil, Save, X, ImagePlus, Sparkles, ChevronDown, ChevronUp, Globe2 } from 'lucide-react'
+import { getAITrips } from '../AiPlanner/services/aiTripsStorage'
 
-function TouristDashboard({ user }) {
+function TouristDashboard({ user, onUserUpdated }) {
   const [bookings, setBookings] = useState([])
   const [loading, setLoading] = useState(true)
   const [guides, setGuides] = useState([])
+  const [isEditingProfile, setIsEditingProfile] = useState(false)
+  const [profileForm, setProfileForm] = useState({
+    name: user.name || '',
+    email: user.email || '',
+    phone: user.phone || '',
+    location: user.location || '',
+    bio: user.bio || '',
+    avatar: user.avatar || '',
+  })
+  const [profileError, setProfileError] = useState('')
+  const [savingProfile, setSavingProfile] = useState(false)
+  const [aiTrips] = useState(() => getAITrips(user.id))
+  const [expandedTripId, setExpandedTripId] = useState(null)
 
   useEffect(() => {
     // Fetch bookings and guides in parallel
@@ -35,6 +49,70 @@ function TouristDashboard({ user }) {
           console.error('Failed to cancel booking:', err)
           alert('Failed to cancel the booking.')
         })
+    }
+  }
+
+  const handleProfileChange = (event) => {
+    const { name, value } = event.target
+    setProfileForm(current => ({ ...current, [name]: value }))
+  }
+
+  const handlePhotoChange = (event) => {
+    const photo = event.target.files?.[0]
+    if (!photo) return
+
+    if (!photo.type.startsWith('image/') || photo.size > 2 * 1024 * 1024) {
+      setProfileError('Please choose an image smaller than 2 MB.')
+      return
+    }
+
+    const reader = new FileReader()
+    reader.onload = () => setProfileForm(current => ({ ...current, avatar: reader.result }))
+    reader.readAsDataURL(photo)
+    setProfileError('')
+  }
+
+  const handleProfileSave = async (event) => {
+    event.preventDefault()
+    const name = profileForm.name.trim()
+    const email = profileForm.email.trim().toLowerCase()
+    const phone = profileForm.phone.trim()
+    const location = profileForm.location.trim()
+    const bio = profileForm.bio.trim()
+    const avatar = profileForm.avatar
+
+    if (!name || !email) {
+      setProfileError('Name and email are required.')
+      return
+    }
+
+    if (phone && !/^\+\d[\d\s()-]{6,}$/.test(phone)) {
+      setProfileError('Use an international phone number, for example +20 10 0000 0000.')
+      return
+    }
+
+    setSavingProfile(true)
+    setProfileError('')
+    try {
+      const { data: updatedUser } = await axios.patch(`http://localhost:3000/users/${user.id}`, { name, email, phone, location, bio, avatar })
+      const affectedBookings = bookings.filter(booking => booking.touristId === user.id || booking.touristEmail === user.email)
+
+      await Promise.all(affectedBookings.map(booking => (
+        axios.patch(`http://localhost:3000/bookings/${booking.id}`, { touristName: name, touristEmail: email, email, phone })
+      )))
+
+      setBookings(current => current.map(booking => (
+        booking.touristId === user.id || booking.touristEmail === user.email
+          ? { ...booking, touristName: name, touristEmail: email, email, phone }
+          : booking
+      )))
+      onUserUpdated(updatedUser)
+      setProfileForm({ name, email, phone, location, bio, avatar })
+      setIsEditingProfile(false)
+    } catch {
+      setProfileError('Could not update your profile. Please make sure json-server is running and try again.')
+    } finally {
+      setSavingProfile(false)
     }
   }
 
@@ -110,20 +188,105 @@ function TouristDashboard({ user }) {
       {/* Profile Sidebar */}
       <div className="lg:col-span-1">
         <section className="rounded-3xl bg-white p-6 shadow-[0_15px_40px_rgba(76,48,24,0.08)] border border-stone-100/50 sticky top-24">
-          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#f9ecd8] text-[#7a5540]"><Compass size={32} /></div>
-          <p className="mt-5 text-xs font-bold tracking-[0.25em] text-[#b57a2d] uppercase">{user.role} Account</p>
-          <h2 className="mt-2 text-3xl font-black text-[#3f2b1a]">{user.name}</h2>
-          <p className="mt-3 text-sm text-[#6d5c4a] leading-relaxed">Welcome back to Jawla. Check your booked trips, guide updates, and cancellation status here.</p>
-
-          <div className="mt-6 space-y-4 border-t border-stone-100 pt-6 text-sm text-[#594735]">
-            <div className="flex items-center gap-3"><Mail className="text-[#b57a2d]" size={18} /><span>{user.email}</span></div>
-            <div className="flex items-center gap-3"><MapPin className="text-[#b57a2d]" size={18} /><span>Tourist Member</span></div>
+          <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-3xl bg-[#f9ecd8] text-2xl font-black text-[#7a5540] ring-4 ring-white shadow-lg">
+            {user.avatar ? <img src={user.avatar} alt={user.name} className="h-full w-full object-cover" /> : user.name?.trim().charAt(0).toUpperCase() || 'T'}
           </div>
+          <div className="mt-5 flex items-start justify-between gap-3">
+            <div>
+              <p className="text-xs font-bold tracking-[0.25em] text-[#b57a2d] uppercase">{user.role} Account</p>
+              <h2 className="mt-2 text-3xl font-black text-[#3f2b1a]">{user.name}</h2>
+            </div>
+            {!isEditingProfile && (
+              <button onClick={() => { setProfileForm({ name: user.name || '', email: user.email || '', phone: user.phone || '', location: user.location || '', bio: user.bio || '', avatar: user.avatar || '' }); setProfileError(''); setIsEditingProfile(true) }} className="rounded-xl border border-[#e6d8c5] p-2 text-[#b57a2d] transition hover:bg-[#fff7ea]" aria-label="Edit profile">
+                <Pencil size={17} />
+              </button>
+            )}
+          </div>
+          <p className="mt-3 text-sm leading-relaxed text-[#6d5c4a]">Welcome back to Jawla. Check your booked trips, guide updates, and cancellation status here.</p>
+
+          {isEditingProfile ? (
+            <form onSubmit={handleProfileSave} className="mt-6 space-y-4 border-t border-stone-100 pt-6">
+              <div className="flex items-center gap-4">
+                <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl bg-[#f9ecd8] font-black text-[#7a5540]">
+                  {profileForm.avatar ? <img src={profileForm.avatar} alt="Profile preview" className="h-full w-full object-cover" /> : profileForm.name.trim().charAt(0).toUpperCase() || 'T'}
+                </div>
+                <label className="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-[#e6d8c5] px-3 py-2 text-sm font-bold text-[#b57a2d] transition hover:bg-[#fff7ea]">
+                  <ImagePlus size={16} /> Upload photo
+                  <input type="file" accept="image/*" onChange={handlePhotoChange} className="sr-only" />
+                </label>
+              </div>
+              <label className="block text-sm font-semibold text-[#594735]">Full name
+                <input name="name" value={profileForm.name} onChange={handleProfileChange} className="mt-1.5 w-full rounded-xl border border-[#e6d8c5] px-3 py-2.5 outline-none focus:border-[#b57a2d]" />
+              </label>
+              <label className="block text-sm font-semibold text-[#594735]">Email address
+                <input name="email" type="email" value={profileForm.email} onChange={handleProfileChange} className="mt-1.5 w-full rounded-xl border border-[#e6d8c5] px-3 py-2.5 outline-none focus:border-[#b57a2d]" />
+              </label>
+              <label className="block text-sm font-semibold text-[#594735]">Phone number
+                <input name="phone" type="tel" inputMode="tel" value={profileForm.phone} onChange={handleProfileChange} placeholder="+20 10 0000 0000" className="mt-1.5 w-full rounded-xl border border-[#e6d8c5] px-3 py-2.5 outline-none focus:border-[#b57a2d]" />
+                <span className="mt-1 block text-xs font-normal text-stone-400">Use your country code, for example +20, +44, or +1.</span>
+              </label>
+              <label className="block text-sm font-semibold text-[#594735]">City / country
+                <input name="location" value={profileForm.location} onChange={handleProfileChange} placeholder="Cairo, Egypt" className="mt-1.5 w-full rounded-xl border border-[#e6d8c5] px-3 py-2.5 outline-none focus:border-[#b57a2d]" />
+              </label>
+              <label className="block text-sm font-semibold text-[#594735]">About me
+                <textarea name="bio" value={profileForm.bio} onChange={handleProfileChange} maxLength={180} rows={3} placeholder="Tell us a little about your travel style..." className="mt-1.5 w-full resize-none rounded-xl border border-[#e6d8c5] px-3 py-2.5 outline-none focus:border-[#b57a2d]" />
+              </label>
+              {profileError && <p className="text-xs font-medium text-red-600">{profileError}</p>}
+              <div className="flex gap-2">
+                <button type="submit" disabled={savingProfile} className="inline-flex items-center gap-1.5 rounded-xl bg-[#b57a2d] px-3 py-2 text-sm font-bold text-white disabled:opacity-60"><Save size={15} />{savingProfile ? 'Saving...' : 'Save changes'}</button>
+                <button type="button" onClick={() => { setIsEditingProfile(false); setProfileError('') }} className="inline-flex items-center gap-1.5 rounded-xl border border-stone-200 px-3 py-2 text-sm font-bold text-stone-600"><X size={15} />Cancel</button>
+              </div>
+            </form>
+          ) : (
+            <div className="mt-6 space-y-4 border-t border-stone-100 pt-6 text-sm text-[#594735]">
+              <div className="flex items-center gap-3"><Mail className="text-[#b57a2d]" size={18} /><span>{user.email}</span></div>
+              {user.phone && <div className="flex items-center gap-3"><Phone className="text-[#b57a2d]" size={18} /><span>{user.phone}</span></div>}
+              <div className="flex items-center gap-3"><Globe2 className="text-[#b57a2d]" size={18} /><span>{user.location || 'Tourist Member'}</span></div>
+              {user.bio && <p className="rounded-2xl bg-[#fffaf0] p-3 text-xs leading-5 text-[#6d5c4a]">{user.bio}</p>}
+            </div>
+          )}
         </section>
       </div>
 
       {/* Bookings Area */}
       <div className="lg:col-span-2">
+        <section className="mb-8 overflow-hidden rounded-3xl bg-gradient-to-br from-[#3f2b1a] to-[#80541e] p-6 text-white shadow-xl">
+          <div className="flex flex-wrap items-start justify-between gap-4">
+            <div>
+              <p className="flex items-center gap-2 text-sm font-bold text-amber-200"><Sparkles size={17} /> AI TRAVEL PLANS</p>
+              <h3 className="mt-2 text-2xl font-black">Your personalized Egypt itineraries</h3>
+              <p className="mt-2 text-sm text-white/75">Every plan you generate with AI is kept here for you.</p>
+            </div>
+            <Link to="/ai-planner" className="rounded-xl bg-white px-4 py-2.5 text-sm font-bold text-[#80541e] transition hover:bg-amber-50">Create a plan</Link>
+          </div>
+
+          {aiTrips.length === 0 ? (
+            <p className="mt-6 rounded-2xl border border-white/15 bg-white/10 p-4 text-sm text-white/80">You have not created an AI itinerary yet. Start planning your next adventure.</p>
+          ) : (
+            <div className="mt-6 space-y-3">
+              {aiTrips.map(aiTrip => {
+                const isExpanded = expandedTripId === aiTrip.id
+                const stops = Object.values(aiTrip.trip).flat()
+                return (
+                  <div key={aiTrip.id} className="rounded-2xl bg-white p-4 text-[#3f2b1a]">
+                    <button onClick={() => setExpandedTripId(isExpanded ? null : aiTrip.id)} className="flex w-full items-center gap-3 text-left">
+                      <img src={aiTrip.destination.image || '/attractions/pyramids.png'} alt="" className="h-12 w-12 rounded-xl object-cover" />
+                      <span className="min-w-0 flex-1"><span className="block truncate font-extrabold">{aiTrip.destination.name} · {aiTrip.days} days</span><span className="mt-1 block text-xs text-stone-500">{stops.length} stops · {new Date(aiTrip.createdAt).toLocaleDateString()}</span></span>
+                      {isExpanded ? <ChevronUp size={19} /> : <ChevronDown size={19} />}
+                    </button>
+                    {isExpanded && (
+                      <div className="mt-4 grid gap-3 border-t border-stone-100 pt-4 sm:grid-cols-2">
+                        {Object.entries(aiTrip.trip).map(([day, dayStops]) => (
+                          <div key={day} className="rounded-xl bg-[#fffaf0] p-3"><p className="text-xs font-black uppercase tracking-wider text-[#b57a2d]">{day}</p>{dayStops.map(stop => <p key={`${day}-${stop.attractionId}`} className="mt-1.5 text-sm font-medium"><span className="mr-2 text-xs text-stone-400">{stop.time}</span>{aiTrip.attractions.find(attraction => attraction.id === stop.attractionId)?.name || 'Attraction'}</p>)}</div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
+            </div>
+          )}
+        </section>
         <h3 className="text-2xl font-extrabold text-[#3f2b1a] mb-6">My Bookings ({bookings.length})</h3>
 
         {loading ? (
@@ -253,18 +416,7 @@ function TouristDashboard({ user }) {
                   {/* Stepper Status tracker */}
                   {renderStepper(booking.status)}
 
-                  {/* Cancel Action */}
-                  {booking.status === 'Pending' && (
-                    <div className="mt-2 pt-4 border-t border-stone-100 flex justify-end">
-                      <button
-                        onClick={() => handleCancelBooking(booking.id)}
-                        className="flex items-center gap-1 text-xs font-bold text-red-600 hover:text-red-700 transition"
-                      >
-                        <Trash2 size={14} />
-                        Cancel Booking Request
-                      </button>
-                    </div>
-                  )}
+            
                 </div>
               )
             })}

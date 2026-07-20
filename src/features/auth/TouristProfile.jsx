@@ -4,7 +4,7 @@ import TouristDashboard from './TouristDashboard'
 import TourGuideDashboard from './TourGuideDashboard'
 
 function TouristProfile() {
-  const { user } = useAuth()
+  const { user, updateUser } = useAuth()
 
   if (!user) return <Navigate to="/auth" replace />
 
@@ -14,7 +14,7 @@ function TouristProfile() {
         {user.role === 'Tour Guide' ? (
           <TourGuideDashboard user={user} />
         ) : (
-          <TouristDashboard user={user} />
+          <TouristDashboard user={user} onUserUpdated={updateUser} />
         )}
       </div>
     </main>

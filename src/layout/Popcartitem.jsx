@@ -1,7 +1,9 @@
 
+import { Link } from 'react-router-dom'
+
 function Popcartitem({attraction}) {
   return (
-    <div className="popcartitem relative max-w-[20rem] rounded-[28px] border border-[#e6e8ec] bg-white shadow-[0_18px_40px_rgba(15,23,42,0.08)] overflow-hidden transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-[0_25px_60px_rgba(15,23,42,0.18)] hover:z-10">
+    <Link to={`/attractions/${attraction.id}`} className="popcartitem relative block max-w-[20rem] overflow-hidden rounded-[28px] border border-[#e6e8ec] bg-white shadow-[0_18px_40px_rgba(15,23,42,0.08)] transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-[0_25px_60px_rgba(15,23,42,0.18)] hover:z-10">
       <img
         src={attraction.image}
         alt={attraction.name}
@@ -28,11 +30,11 @@ function Popcartitem({attraction}) {
           {attraction.description}
         </p>
 
-        <button className="w-full rounded-3xl border border-[#4062b3] bg-white px-4 py-2 text-xs font-semibold text-[#4062b3] transition hover:bg-[#eff4ff]">
+        <span className="block w-full rounded-3xl border border-[#4062b3] bg-white px-4 py-2 text-center text-xs font-semibold text-[#4062b3] transition hover:bg-[#eff4ff]">
           View Details
-        </button>
+        </span>
       </div>
-    </div>
+    </Link>
   )
 }
 

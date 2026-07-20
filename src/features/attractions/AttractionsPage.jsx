@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Search, Star } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 function AttractionsPage() {
   const [attractions, setAttractions] = useState([])
@@ -36,7 +37,7 @@ function AttractionsPage() {
 
         <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map(a => (
-            <article key={a.id} className="overflow-hidden rounded-[28px] bg-white shadow-lg hover:-translate-y-2 transition">
+            <Link key={a.id} to={`/attractions/${a.id}`} className="overflow-hidden rounded-[28px] bg-white shadow-lg hover:-translate-y-2 transition">
               <img
                 src={a.image || '/attractions/pyramids.png'}
                 alt={a.name}
@@ -54,7 +55,7 @@ function AttractionsPage() {
                 </div>
                 <p className="mt-3 text-sm leading-6 text-[#685743]">{a.description}</p>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </section>

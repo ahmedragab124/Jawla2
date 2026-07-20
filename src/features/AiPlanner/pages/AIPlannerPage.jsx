@@ -6,9 +6,12 @@ import LoadingState from '../components/LoadingState'
 import Timeline from '../components/Timeline'
 import TripSummary from '../components/TripSummary'
 import { generateTrip } from '../services/gemini'
+import { saveAITrip } from '../services/aiTripsStorage'
+import { useAuth } from '../../auth/AuthContext'
 import '../../../layout/css-layout/AiPlanner.css'
 
 function AIPlannerPage() {
+  const { user } = useAuth()
   const [destinations, setDestinations] = useState([])
   const [destinationId, setDestinationId] = useState('')
   const [days, setDays] = useState(3)
@@ -59,6 +62,14 @@ function AIPlannerPage() {
 
       setDestination({ ...destinationResponse.data, attractions })
       setTrip(generatedTrip)
+      saveAITrip({
+        user,
+        destination: destinationResponse.data,
+        days,
+        interests: selectedInterests,
+        trip: generatedTrip,
+        attractions,
+      })
     } catch (requestError) {
       const status = requestError.response?.status
       const apiMessage = requestError.response?.data?.error?.message

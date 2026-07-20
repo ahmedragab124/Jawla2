@@ -1,56 +1,14 @@
-export function buildPrompt({
-  destinationName,
-  days,
-  interests,
-  attractions,
-}) {
-  return `
-You are an expert travel planner.
+export function buildPrompt({ destinationName, days, interests, attractions }) {
+  const attractionList = attractions.map((attraction, index) => (
+    `${index + 1}. ID: "${attraction.id}" | Name: "${attraction.name}" | Category: ${attraction.category} | Duration: ${attraction.duration}min | BestTime: ${attraction.bestTime}`
+  )).join('\n')
 
-Create a ${days}-day travel itinerary for ${destinationName}.
+  return `Create a ${days}-day Egypt itinerary for ${destinationName}.
+Traveler interests: ${interests.length ? interests.join(', ') : 'General sightseeing'}
 
-User Interests:
-${interests.join(", ")}
+Use ONLY these exact attraction IDs:
+${attractionList}
 
-Available Attractions:
-
-${attractions
-  .map(
-    (place) => `
-ID: ${place.id}
-Name: ${place.name}
-Category: ${place.category}
-Duration: ${place.duration} minutes
-`
-  )
-  .join("\n")}
-
-Rules:
-- Use ONLY the attractions listed above.
-- Do NOT invent new attractions.
-- Do NOT repeat attractions.
-- Return ONLY valid JSON.
-- Return attractionId instead of attraction names.
-
-Example Response:
-
-{
-  "day1": [
-    {
-      "time": "09:00",
-      "attractionId": 1
-    },
-    {
-      "time": "13:00",
-      "attractionId": 2
-    }
-  ],
-  "day2": [
-    {
-      "time": "09:30",
-      "attractionId": 3
-    }
-  ]
-}
-`;
+Return a JSON object only. It must contain day1 through day${days}; each day is an array of 1 to 5 objects with exactly "time" and "attractionId". Do not repeat attraction IDs. Use Morning=09:00, Afternoon=13:00, Evening=18:00, Anytime=10:00.
+Example: {"day1":[{"time":"09:00","attractionId":"exact-id"}],"day2":[{"time":"13:00","attractionId":"another-exact-id"}]}`
 }

@@ -9,7 +9,7 @@ function TripCard({ attraction, time }) {
     : `${attraction.duration}m`
 
   return (
-    <div className="ai-trip-card ml-6 mb-4">
+    <Link to={`/attractions/${attraction.id}`} className="ai-trip-card ml-6 mb-4 block transition hover:-translate-y-1 hover:shadow-lg">
       <img
         src={attraction.image || '/attractions/pyramids.png'}
         alt={attraction.name}
@@ -28,12 +28,12 @@ function TripCard({ attraction, time }) {
         <div className="ai-trip-card-meta">
           <span className="flex items-center gap-1"><Clock size={11} />{duration}</span>
           <span className="flex items-center gap-1"><MapPin size={11} />{attraction.bestTime}</span>
-          <Link to="/attractions" className="ml-auto text-[#b57a2d] font-semibold text-xs hover:underline">
+          <span className="ml-auto text-[#b57a2d] font-semibold text-xs">
             View Details
-          </Link>
+          </span>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
 
