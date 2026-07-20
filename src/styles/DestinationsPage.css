@@ -1,0 +1,100 @@
+/* DestinationsPage.css — Simplified Carousel styling */
+
+.dest-page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.dest-header-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+}
+
+@media (min-width: 768px) {
+  .dest-header-flex {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    text-align: left;
+  }
+}
+
+.dest-nav-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 768px) {
+  .dest-nav-buttons {
+    margin-top: 0;
+  }
+}
+
+.dest-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #fff;
+  border: 1px solid rgba(181, 122, 45, 0.2);
+  color: #3f2b1a;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(63, 43, 26, 0.05);
+}
+
+.dest-nav-btn:hover {
+  background-color: #b57a2d;
+  color: #fff;
+  border-color: #b57a2d;
+  box-shadow: 0 6px 18px rgba(181, 122, 45, 0.25);
+  transform: translateY(-2px);
+}
+
+.dest-carousel-wrapper {
+  position: relative;
+  width: 100%;
+  padding: 1rem 0;
+}
+
+.dest-page-card {
+  background: #ffffff;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(63, 43, 26, 0.06);
+  border: 1px solid rgba(181, 122, 45, 0.1);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.dest-page-card:hover {
+  transform: translateY(12px);
+  box-shadow: 0 15px 40px rgba(63, 43, 26, 0.08);
+  border-color: rgba(181, 122, 45, 0.25);
+}
+
+.dest-page-rating {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  color: #a9681b;
+  padding: 0.35rem 0.85rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}

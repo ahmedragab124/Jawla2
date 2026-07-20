@@ -8,7 +8,7 @@ import { useAuth } from '../context/AuthContext'
 
 function AuthPage() {
   const [mode, setMode] = useState('login')
-  const [form, setForm] = useState({ name: '', email: '', password: '', phone: '', role: 'Tourist' })
+  const [form, setForm] = useState({ name: '', email: '', password: '', confirmPassword: '', phone: '', role: 'Tourist' })
   const [message, setMessage] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const navigate = useNavigate()
@@ -24,6 +24,11 @@ function AuthPage() {
 
     if (!form.email || !form.password || (mode === 'signup' && !form.name)) {
       setMessage('Please fill in all required fields.')
+      return
+    }
+
+    if (mode === 'signup' && form.password !== form.confirmPassword) {
+      setMessage('Passwords do not match.')
       return
     }
 
@@ -104,23 +109,31 @@ function AuthPage() {
           </label>
 
           {mode === 'signup' && (
-            <label className="block">
-              <span className="mb-2 block font-medium text-[#4e3b28]">Account type</span>
-              <select name="role" value={form.role} onChange={updateField} className="w-full rounded-xl border border-stone-300 bg-white px-4 py-3 outline-none focus:border-[#b57a2d]">
-                <option value="Tourist">Tourist</option>
-                <option value="Tour Guide">Tour Guide</option>
-              </select>
-            </label>
+            <>
+              <label className="block">
+                <span className="mb-2 block font-medium text-[#4e3b28]">Confirm password</span>
+                <span className="relative block"><LockKeyhole className="absolute left-3 top-3.5 h-5 w-5 text-[#a88762]" /><input name="confirmPassword" type="password" value={form.confirmPassword} onChange={updateField} className='w-full rounded-xl border border-stone-300 bg-white px-4 py-3 pl-11 outline-none transition focus:border-[#b57a2d]' placeholder="Re-enter your password" minLength="8" /></span>
+              </label>
+              <label className="block">
+                <span className="mb-2 block font-medium text-[#4e3b28]">Account type</span>
+                <select name="role" value={form.role} onChange={updateField} className="w-full rounded-xl border border-stone-300 bg-white px-4 py-3 outline-none focus:border-[#b57a2d]">
+                  <option value="Tourist">Tourist</option>
+                  <option value="Tour Guide">Tour Guide</option>
+                </select>
+              </label>
+            </>
           )}
-
+          
           {mode === 'signup' && form.role === 'Tour Guide' && (
-            <label className="block">
-              <span className="mb-2 block font-medium text-[#4e3b28]">Phone / WhatsApp</span>
-              <span className="relative block">
-                <LockKeyhole className="absolute left-3 top-3.5 h-5 w-5 text-[#a88762]" />
-                <input name="phone" type="tel" value={form.phone} onChange={updateField} className='w-full rounded-xl border border-stone-300 bg-white px-4 py-3 pl-11 outline-none transition focus:border-[#b57a2d]' placeholder="e.g. 01012345678" />
-              </span>
-            </label>
+          <>
+              <label className="block">
+                <span className="mb-2 block font-medium text-[#4e3b28]">Phone / WhatsApp</span>
+                <span className="relative block">
+                  <LockKeyhole className="absolute left-3 top-3.5 h-5 w-5 text-[#a88762]" />
+                  <input name="phone" type="tel" value={form.phone} onChange={updateField} className='w-full rounded-xl border border-stone-300 bg-white px-4 py-3 pl-11 outline-none transition focus:border-[#b57a2d]' placeholder="e.g. 01012345678" />
+                </span>
+              </label>
+            </>
           )}
 
           {message && <p className="rounded-xl bg-red-50 p-3 text-sm text-red-700">{message}</p>}
