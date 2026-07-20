@@ -1,73 +1,41 @@
-import axios from "axios";
-import { buildPrompt } from "./promptBuilder";
+import axios from 'axios'
+import { buildPrompt } from './geminiPrompt'
 
- async function generateTrip({
-  destinationName,
-  days,
-  interests,
-  attractions,
-}) {
-  const prompt = buildPrompt({
-    destinationName,
-    days,
-    interests,
-    attractions,
-  });
+const API_KEY = import.meta.env.VITE_GEMINI_API_KEY
+const GEMINI_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent'
 
-  try {
-    const response = await axios.post(
-      `${"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"}?key=${import.meta.env.VITE_GEMINI_API_KEY}`,
-      {
-        contents: [
-          {
-            parts: [
-              {
-                text: prompt,
-              },
-            ],
-          },
-        ],
-        generationConfig: {
-          temperature: 0.3,
-          responseMimeType: "application/json",
-        },
+export async function generateTrip({ destinationName, days, interests, attractions }) {
+  if (!API_KEY || API_KEY === 'your_gemini_api_key_here') {
+    throw new Error('Gemini API key is missing. Please add VITE_GEMINI_API_KEY to your .env file.')
+  }
+
+  const response = await axios.post(
+    `${GEMINI_URL}?key=${API_KEY}`,
+    {
+      contents: [{ parts: [{ text: buildPrompt({ destinationName, days, interests, attractions }) }] }],
+      generationConfig: {
+        temperature: 0.2,
+        maxOutputTokens: 1000,
+        responseMimeType: 'application/json',
       },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    
-    const text =
-      response.data?.candidates?.[0]?.content?.parts?.[0]?.text;
+    },
+    { headers: { 'Content-Type': 'application/json' } },
+  )
 
-    if (!text) {
-      throw new Error("No response received from Gemini.");
-    }
+  const text = response.data?.candidates?.[0]?.content?.parts?.[0]?.text
+  if (!text) throw new Error('Empty response from AI. Please try again.')
 
-    return parseTrip(text);
-  } catch (error) {
-    console.error("Gemini Error:", error);
-    throw new Error("Failed to generate trip.");
-  }
+  return parseTrip(text, days)
 }
 
+export function parseTrip(text, days) {
+  const cleaned = text.replace(/```json/gi, '').replace(/```/g, '').trim()
+  const trip = JSON.parse(cleaned)
+  const expectedDays = Array.from({ length: days }, (_, index) => `day${index + 1}`)
 
-
-function parseTrip(text) {
-  const cleaned = text
-    .replace(/^```json/i, "")
-    .replace(/```/g, "")
-    .trim();
-
-  const trip = JSON.parse(cleaned);
-
-  if (!trip.day1) {
-    throw new Error("Invalid trip data.");
+  if (!expectedDays.every(day => Array.isArray(trip[day]))) {
+    throw new Error('AI returned an incomplete itinerary. Please try again.')
   }
 
-  return trip;
+  return Object.fromEntries(expectedDays.map(day => [day, trip[day]]))
 }
-
-export { generateTrip, parseTrip };
