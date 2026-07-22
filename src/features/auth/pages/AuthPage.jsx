@@ -1,151 +1,123 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
-import { LockKeyhole, Mail, UserRound } from 'lucide-react'
-import { homeForRole } from '../services/authStorage'
-import { useAuth } from '../context/AuthContext'
+import { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { homeForRole } from '../services/authStorage';
+import { useAuth } from '../context/AuthContext';
+import { supabase } from '../../../supabase';
+import AuthFormFields from '../components/AuthFormFields';
+import gsap from 'gsap';
 
-
+// AuthPage Component
 function AuthPage() {
-  const [mode, setMode] = useState('login')
-  const [form, setForm] = useState({ name: '', email: '', password: '', confirmPassword: '', phone: '', role: 'Tourist' })
-  const [message, setMessage] = useState('')
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const navigate = useNavigate()
-  const { login } = useAuth()
+  const [mode, setMode] = useState('login');
+  const [form, setForm] = useState({ name: '', email: '', password: '', confirmPassword: '', phone: '', role: 'Tourist' });
+  const [message, setMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const navigate = useNavigate();
+  const { login } = useAuth();
+  const cardRef = useRef(null);
+  const formRef = useRef(null);
 
+  // Triggers initial card entry animation with GSAP
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(cardRef.current, { opacity: 0, y: 50, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: 'power3.out' });
+    }, cardRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  // Switches between Login and Sign Up tabs
+  const handleTabChange = (newMode) => {
+    setMode(newMode);
+    setMessage('');
+    if (formRef.current) {
+      gsap.fromTo(formRef.current, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
+    }
+  };
+
+  // Input change handler
   const updateField = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value })
-    setMessage('')
-  }
+    setForm({ ...form, [e.target.name]: e.target.value });
+    setMessage('');
+  };
 
+  // Form submission handler for login and signup operations
   const submit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    if (!form.email || !form.password || (mode === 'signup' && !form.name)) return setMessage('Please fill in all required fields.');
+    if (mode === 'signup' && form.password !== form.confirmPassword) return setMessage('Passwords do not match.');
 
-    if (!form.email || !form.password || (mode === 'signup' && !form.name)) {
-      setMessage('Please fill in all required fields.')
-      return
-    }
-
-    if (mode === 'signup' && form.password !== form.confirmPassword) {
-      setMessage('Passwords do not match.')
-      return
-    }
-
-    setIsSubmitting(true)
+    setIsSubmitting(true);
     try {
-      const { data: users } = await axios.get('http://localhost:3000/users')
+      const { data: users, error: usersError } = await supabase.from('users').select('*');
+      if (usersError) throw usersError;
 
       if (mode === 'login') {
-        const user = users.find(u => u.email === form.email && u.password === form.password)
-        if (!user) {
-          setMessage('Invalid email or password.')
-          return
-        }
-        login(user)
-        navigate(homeForRole(user.role))
-        return
+        const user = users.find((u) => u.email === form.email && u.password === form.password);
+        if (!user) return setMessage('Invalid email or password.');
+        login(user);
+        navigate(homeForRole(user.role));
+        return;
       }
 
-      if (users.some(u => u.email === form.email)) {
-        setMessage('This email is already registered.')
-        return
-      }
+      if (users.some((u) => u.email === form.email)) return setMessage('This email is already registered.');
 
-      const newUser = { name: form.name, email: form.email, password: form.password, role: form.role }
-      const { data: createdUser } = await axios.post('http://localhost:3000/users', newUser)
+      const id = Date.now().toString(36) + Math.random().toString(36).substring(2, 7);
+      const newUser = { id, name: form.name, email: form.email, password: form.password, role: form.role };
+
+      const { data: createdUser, error: createError } = await supabase.from('users').insert(newUser).select().single();
+      if (createError) throw createError;
 
       if (form.role === 'Tour Guide') {
-        await axios.post('http://localhost:3000/tourGuides', {
+        const guideId = Date.now().toString(36) + Math.random().toString(36).substring(2, 7);
+        await supabase.from('tourGuides').insert({
+          id: guideId,
           userId: createdUser.id,
           name: form.name,
           email: form.email,
+          password: form.password,
           phone: form.phone || '',
           whatsapp: form.phone || '',
           status: 'Pending approval',
-        })
+        });
       }
 
-      login(createdUser)
-      navigate('/profile')
-    } catch {
-      setMessage('Could not contact the API. Run npm.cmd run server first.')
+      login(createdUser);
+      navigate('/profile');
+    } catch (error) {
+      console.error(error);
+      setMessage(error.message || 'Could not connect to Supabase. Please try again.');
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
-
+  };
 
   return (
-    <main className="min-h-screen bg-[#fffaf0] px-5 py-16">
-      <section className="mx-auto max-w-md rounded-4xl bg-white p-8 shadow-[0_24px_80px_rgba(76,48,24,0.16)]">
-        <p className="text-center text-sm font-bold tracking-[0.25em] text-[#b57a2d]">JAWLA</p>
-        <h1 className="mt-3 text-center text-3xl font-extrabold text-[#3f2b1a]">{mode === 'login' ? 'Welcome back' : 'Create your account'}</h1>
+    <main className="min-h-screen bg-gradient-to-b from-[#fffaf0] via-[#f7ebe0] to-[#fffaf0] px-5 py-20 flex items-center justify-center">
+      <section ref={cardRef} className="w-full max-w-md rounded-4xl bg-white p-8 shadow-[0_30px_90px_rgba(76,48,24,0.16)] border border-[#f3e6d3]">
+        <p className="text-center text-xs font-black tracking-[0.25em] text-[#b57a2d] uppercase">JAWLA</p>
+        <h1 className="mt-2 text-center text-3xl font-black text-[#3f2b1a]">{mode === 'login' ? 'Welcome Back' : 'Create Account'}</h1>
 
-        <div className="mt-7 grid grid-cols-2 rounded-xl bg-[#f8f1e6] p-1">
+        <div className="mt-7 grid grid-cols-2 rounded-2xl bg-[#f8f1e6] p-1.5 shadow-inner">
           {['login', 'signup'].map((tab) => (
-            <button key={tab} type="button" onClick={() => { setMode(tab); setMessage('') }} className={`rounded-lg py-2 font-semibold transition ${mode === tab ? 'bg-white text-[#7a5540] shadow-sm' : 'text-[#806c56]'}`}>
-              {tab === 'login' ? 'Login' : 'Sign up'}
+            <button key={tab} type="button" onClick={() => handleTabChange(tab)} className={`rounded-xl py-2.5 font-bold text-sm transition-all duration-300 cursor-pointer ${mode === tab ? 'bg-white text-[#7a5540] shadow-md' : 'text-[#806c56] hover:text-[#3f2b1a]'}`}>
+              {tab === 'login' ? 'Login' : 'Sign Up'}
             </button>
           ))}
         </div>
 
-        <form className="mt-7 space-y-5" onSubmit={submit}>
-          {mode === 'signup' && (
-            <label className="block">
-              <span className="mb-2 block font-medium text-[#4e3b28]">Full name</span>
-              <span className="relative block"><UserRound className="absolute left-3 top-3.5 h-5 w-5 text-[#a88762]" /><input name="name" value={form.name} onChange={updateField} className='w-full rounded-xl border border-stone-300 bg-white px-4 py-3 pl-11 outline-none transition focus:border-[#b57a2d]' placeholder="Your name" /></span>
-            </label>
-          )}
-
-          <label className="block">
-            <span className="mb-2 block font-medium text-[#4e3b28]">Email</span>
-            <span className="relative block"><Mail className="absolute left-3 top-3.5 h-5 w-5 text-[#a88762]" /><input name="email" type="email" value={form.email} onChange={updateField} className='w-full rounded-xl border border-stone-300 bg-white px-4 py-3 pl-11 outline-none transition focus:border-[#b57a2d]' placeholder="name@example.com" /></span>
-          </label>
-
-          <label className="block">
-            <span className="mb-2 block font-medium text-[#4e3b28]">Password</span>
-            <span className="relative block"><LockKeyhole className="absolute left-3 top-3.5 h-5 w-5 text-[#a88762]" /><input name="password" type="password" value={form.password} onChange={updateField} className='w-full rounded-xl border border-stone-300 bg-white px-4 py-3 pl-11 outline-none transition focus:border-[#b57a2d]' placeholder="At least 8 characters" minLength="8" /></span>
-          </label>
-
-          {mode === 'signup' && (
-            <>
-              <label className="block">
-                <span className="mb-2 block font-medium text-[#4e3b28]">Confirm password</span>
-                <span className="relative block"><LockKeyhole className="absolute left-3 top-3.5 h-5 w-5 text-[#a88762]" /><input name="confirmPassword" type="password" value={form.confirmPassword} onChange={updateField} className='w-full rounded-xl border border-stone-300 bg-white px-4 py-3 pl-11 outline-none transition focus:border-[#b57a2d]' placeholder="Re-enter your password" minLength="8" /></span>
-              </label>
-              <label className="block">
-                <span className="mb-2 block font-medium text-[#4e3b28]">Account type</span>
-                <select name="role" value={form.role} onChange={updateField} className="w-full rounded-xl border border-stone-300 bg-white px-4 py-3 outline-none focus:border-[#b57a2d]">
-                  <option value="Tourist">Tourist</option>
-                  <option value="Tour Guide">Tour Guide</option>
-                </select>
-              </label>
-            </>
-          )}
-          
-          {mode === 'signup' && form.role === 'Tour Guide' && (
-          <>
-              <label className="block">
-                <span className="mb-2 block font-medium text-[#4e3b28]">Phone / WhatsApp</span>
-                <span className="relative block">
-                  <LockKeyhole className="absolute left-3 top-3.5 h-5 w-5 text-[#a88762]" />
-                  <input name="phone" type="tel" value={form.phone} onChange={updateField} className='w-full rounded-xl border border-stone-300 bg-white px-4 py-3 pl-11 outline-none transition focus:border-[#b57a2d]' placeholder="e.g. 01012345678" />
-                </span>
-              </label>
-            </>
-          )}
-
-          {message && <p className="rounded-xl bg-red-50 p-3 text-sm text-red-700">{message}</p>}
-          <button disabled={isSubmitting} className="w-full rounded-xl bg-[#7a5540] py-3 font-bold text-white transition hover:bg-[#5c4033] disabled:cursor-not-allowed disabled:opacity-60">
-            {isSubmitting ? 'Please wait…' : mode === 'login' ? 'Login' : 'Create account'}
+        <form ref={formRef} className="mt-7 space-y-5" onSubmit={submit}>
+          <AuthFormFields mode={mode} form={form} onChange={updateField} />
+          {message && <p className="rounded-2xl bg-red-50 p-3.5 text-xs font-bold text-red-700 border border-red-200">{message}</p>}
+          <button disabled={isSubmitting} className="w-full rounded-2xl bg-[#7a5540] py-3.5 font-bold text-white shadow-lg transition-all duration-300 hover:bg-[#5c4033] cursor-pointer">
+            {isSubmitting ? 'Please wait…' : mode === 'login' ? 'Login' : 'Create Account'}
           </button>
         </form>
 
-        <p className="mt-6 text-center text-sm text-[#6d5c4a]">Demo admin: <strong>admin@jawla.com</strong> / <strong>admin123</strong></p>
+        <p className="mt-6 text-center text-xs font-medium text-[#6d5c4a]">Demo admin: <strong>admin@jawla.com</strong> / <strong>admin123</strong></p>
       </section>
     </main>
-  )
+  );
 }
 
-export default AuthPage
+export default AuthPage;

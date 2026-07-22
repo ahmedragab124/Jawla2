@@ -1,110 +1,138 @@
-import { useEffect, useState } from 'react'
-import axios from 'axios'
-import { Link } from 'react-router-dom'
-import AIPlannerForm from '../components/AIPlannerForm'
-import LoadingState from '../components/LoadingState'
-import Timeline from '../components/Timeline'
-import TripSummary from '../components/TripSummary'
-import { generateTrip } from '../services/gemini'
-import { saveAITrip } from '../services/aiTripsStorage'
-import { useAuth } from '../../auth/context/AuthContext'
-import '../styles/AIPlanner.css'
+import { useEffect, useState, useRef } from 'react';
+import AIPlannerHero from '../components/AIPlannerHero';
+import AIPlannerForm from '../components/AIPlannerForm';
+import LoadingState from '../components/LoadingState';
+import Timeline from '../components/Timeline';
+import TripSummary from '../components/TripSummary';
+import { generateTrip } from '../services/gemini';
+import { saveAITrip } from '../services/aiTripsStorage';
+import { useAuth } from '../../auth/context/AuthContext';
+import { supabase } from '../../../supabase';
+import useSEO from '../../../hooks/useSEO';
+import gsap from 'gsap';
+import '../styles/AIPlanner.css';
 
+// AIPlannerPage Component
+// Main page allowing users to select destination & interests to generate a day-by-day itinerary via Gemini AI.
 function AIPlannerPage() {
-  const { user } = useAuth()
-  const [destinations, setDestinations] = useState([])
-  const [destinationId, setDestinationId] = useState('')
-  const [days, setDays] = useState(3)
-  const [selectedInterests, setSelectedInterests] = useState([])
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
-  const [trip, setTrip] = useState(null)
-  const [destination, setDestination] = useState(null)
+  const { user } = useAuth();
+  const [destinations, setDestinations] = useState([]);
+  const [destinationId, setDestinationId] = useState('');
+  const [days, setDays] = useState(3);
+  const [selectedInterests, setSelectedInterests] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [trip, setTrip] = useState(null);
+  const [destination, setDestination] = useState(null);
+  
+  const formCardRef = useRef(null);
 
+  useSEO({
+    title: 'AI Itinerary Trip Planner',
+    description: 'Use Gemini AI to design a personalized daily travel itinerary for cities across Egypt. Pick interests, count days, and download your schedule.'
+  });
+
+  // Fetches available destinations list from Supabase
   useEffect(() => {
-    axios.get(`http://localhost:3000/destinations`)
-      .then(({ data }) => setDestinations(data))
-      .catch(() => setError('Could not load destinations. Make sure json-server is running on port 3000.'))
-  }, [])
-
-  function toggleInterest(interest) {
-    setSelectedInterests(current => (
-      current.includes(interest) ? current.filter(item => item !== interest) : [...current, interest]
-    ))
-  }
-
-  async function handleGenerate(event) {
-    event.preventDefault()
-    if (!destinationId) {
-      setError('Please select a destination.')
-      return
+    async function loadDestinations() {
+      try {
+        const { data, error } = await supabase.from('destinations').select('*');
+        if (error) throw error;
+        setDestinations(data || []);
+      } catch (err) {
+        console.error(err);
+        setError('Could not load destinations.');
+      }
     }
 
-    setLoading(true)
-    setError('')
-    setTrip(null)
+    loadDestinations();
+  }, []);
+
+  // Animates the form card entry using GSAP on mount
+  useEffect(() => {
+    if (formCardRef.current) {
+      gsap.fromTo(
+        formCardRef.current,
+        { opacity: 0, y: 60, scale: 0.96 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.9, ease: 'back.out(1.2)', delay: 0.1 }
+      );
+    }
+  }, []);
+
+  // Toggles interest selections
+  const toggleInterest = (interest) => {
+    setSelectedInterests((current) =>
+      current.includes(interest) ? current.filter((item) => item !== interest) : [...current, interest]
+    );
+  };
+
+  // Triggers Gemini API itinerary generation & saves result locally
+  const handleGenerate = async (event) => {
+    event.preventDefault();
+    if (!destinationId) return setError('Please select a destination.');
+
+    setLoading(true);
+    setError('');
+    setTrip(null);
 
     try {
-      const [destinationResponse, attractionsResponse] = await Promise.all([
-        axios.get(`http://localhost:3000/destinations/${destinationId}`),
-        axios.get(`http://localhost:3000/attractions`, { params: { destinationId } }),
-      ])
-      const attractions = attractionsResponse.data
+      const { data: destinationData, error: destinationError } = await supabase
+        .from('destinations')
+        .select('*')
+        .eq('id', destinationId)
+        .single();
 
-      if (!attractions.length) throw new Error(`No attractions found for ${destinationResponse.data.name}.`)
+      if (destinationError) throw destinationError;
+
+      const { data: attractions, error: attractionsError } = await supabase
+        .from('attractions')
+        .select('*')
+        .eq('destinationId', destinationId);
+
+      if (attractionsError) throw attractionsError;
+      if (!attractions.length) throw new Error(`No attractions found for ${destinationData.name}.`);
 
       const generatedTrip = await generateTrip({
-        destinationName: destinationResponse.data.name,
+        destinationName: destinationData.name,
         days,
         interests: selectedInterests,
         attractions,
-      })
+      });
 
-      setDestination({ ...destinationResponse.data, attractions })
-      setTrip(generatedTrip)
-      saveAITrip({
-        user,
-        destination: destinationResponse.data,
-        days,
-        interests: selectedInterests,
-        trip: generatedTrip,
-        attractions,
-      })
+      setDestination({ ...destinationData, attractions });
+      setTrip(generatedTrip);
+
+      saveAITrip({ user, destination: destinationData, days, interests: selectedInterests, trip: generatedTrip, attractions });
     } catch (requestError) {
-      const status = requestError.response?.status
-      const apiMessage = requestError.response?.data?.error?.message
-
-      if (status === 401 || status === 403) setError('Invalid Gemini API key. Please check VITE_GEMINI_API_KEY.')
-      else if (status === 429) setError('Gemini quota or rate limit was reached. Wait a minute and try again, or check your project billing and quota in Google AI Studio.')
-      else if (status) setError(`API Error ${status}: ${apiMessage || 'Please try again.'}`)
-      else if (requestError instanceof SyntaxError) setError('AI returned invalid JSON. Please try again.')
-      else setError(requestError.message || 'Something went wrong. Please try again.')
+      console.error(requestError);
+      setError(requestError.message || 'Something went wrong. Please try again.');
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
-  function findAttraction(id) {
-    return destination?.attractions?.find(attraction => attraction.id === id) ?? null
-  }
+  // Resolves attraction details by ID
+  const findAttraction = (id) => destination?.attractions?.find((a) => a.id === id) ?? null;
 
   return (
     <main className="min-h-screen bg-[#fffaf0]">
-      <section className="ai-hero">
-        <nav className="flex items-center justify-center gap-1 text-sm mb-5 text-white/60">
-          <Link to="/" className="hover:text-white transition">Home</Link><span>/</span><span className="text-white/90">AI Planner</span>
-        </nav>
-        <h1 className="ai-hero-title">Your Personal Egypt Itinerary</h1>
-        <p className="ai-hero-subtitle">Choose your destination and interests — AI builds your daily schedule.</p>
-      </section>
+      <AIPlannerHero />
 
       <div className="ai-section">
-        <AIPlannerForm
-          destinations={destinations} destinationId={destinationId} days={days} selectedInterests={selectedInterests}
-          error={error} loading={loading}
-          onDestinationChange={value => { setDestinationId(value); setError('') }}
-          onDaysChange={setDays} onToggleInterest={toggleInterest} onSubmit={handleGenerate}
-        />
+        <div ref={formCardRef}>
+          <AIPlannerForm
+            destinations={destinations}
+            destinationId={destinationId}
+            days={days}
+            selectedInterests={selectedInterests}
+            error={error}
+            loading={loading}
+            onDestinationChange={(val) => { setDestinationId(val); setError(''); }}
+            onDaysChange={setDays}
+            onToggleInterest={toggleInterest}
+            onSubmit={handleGenerate}
+          />
+        </div>
         {loading && <LoadingState />}
         {!loading && !error && !trip && (
           <div className="text-center py-16">
@@ -117,15 +145,15 @@ function AIPlannerPage() {
             <div className="text-center mb-8">
               <h2 className="text-2xl font-extrabold text-[#3f2b1a]">{days}-Day Itinerary — {destination.name}</h2>
               <div className="mx-auto mt-3 h-1 w-16 rounded-full bg-[#b57a2d]" />
-              <button onClick={() => window.print()} className="mt-4 inline-flex items-center gap-2 px-5 py-2 rounded-full border-2 border-[#b57a2d] text-[#b57a2d] font-semibold text-sm hover:bg-[#b57a2d] hover:text-white transition no-print">Print / Save as PDF</button>
+              <button onClick={() => window.print()} className="mt-4 inline-flex items-center gap-2 px-5 py-2 rounded-full border-2 border-[#b57a2d] text-[#b57a2d] font-semibold text-sm hover:bg-[#b57a2d] hover:text-white transition no-print cursor-pointer">Print / Save as PDF</button>
             </div>
             <Timeline trip={trip} findAttraction={findAttraction} />
-            <TripSummary destination={destination} days={days} trip={trip} selectedInterests={selectedInterests} onPlanAnotherTrip={() => { setTrip(null); setDestination(null) }} />
+            <TripSummary destination={destination} days={days} trip={trip} selectedInterests={selectedInterests} onPlanAnotherTrip={() => { setTrip(null); setDestination(null); }} />
           </div>
         )}
       </div>
     </main>
-  )
+  );
 }
 
-export default AIPlannerPage
+export default AIPlannerPage;

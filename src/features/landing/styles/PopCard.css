@@ -1,51 +1,62 @@
 /* Shared carousel styles for the landing page */
 .carousel-list {
   scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .carousel-list::-webkit-scrollbar {
   display: none;
 }
 
-.carousel-list {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
 .carousel-button {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 10;
-  width: 44px;
-  height: 44px;
+  z-index: 30;
+  width: 48px;
+  height: 48px;
   border-radius: 9999px;
-  background: rgba(165, 122, 69, 0.95);
-  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: #ffffff;
+  border: 1.5px solid #e6d8c5;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #475467;
-  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  color: #3f2b1a;
+  box-shadow: 0 10px 25px rgba(76, 48, 24, 0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
 }
 
 .carousel-button:hover {
-  transform: translateY(-50%) scale(1.03);
-  background: #f8fafc;
-  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
+  background: #b57a2d;
+  color: #ffffff;
+  border-color: #b57a2d;
+  transform: translateY(-50%) scale(1.12);
+  box-shadow: 0 15px 35px rgba(181, 122, 45, 0.35);
+}
+
+.carousel-button:active {
+  transform: translateY(-50%) scale(0.95);
 }
 
 .carousel-button.left-2 {
-  left: 0.5rem;
+  left: -0.75rem;
 }
 
 .carousel-button.right-2 {
-  right: 0.5rem;
+  right: -0.75rem;
 }
 
 @media (min-width: 768px) {
   .carousel-button {
     width: 52px;
     height: 52px;
+  }
+  .carousel-button.left-2 {
+    left: -1.25rem;
+  }
+  .carousel-button.right-2 {
+    right: -1.25rem;
   }
 }

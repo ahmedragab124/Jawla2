@@ -1,109 +1,109 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import gsap from 'gsap';
 import '../../../styles/Navbar.css';
 import AuthNavAction from '../../../features/auth/components/AuthNavAction';
+import NavMobileMenu from './NavMobileMenu';
 
+// Navbar Component
 function Navbar() {
   const [isOpen, setOpen] = useState(false);
+  const navRef = useRef(null);
+  const logoRef = useRef(null);
+  const linksRef = useRef(null);
+  const actionsRef = useRef(null);
+
+  // Initializes GSAP timelines for entrance and scroll backdrop blur listener
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline();
+      tl.fromTo(navRef.current, { y: -80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' });
+
+      if (logoRef.current) {
+        tl.fromTo(logoRef.current, { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(1.7)' }, '-=0.4');
+      }
+      if (linksRef.current) {
+        tl.fromTo(linksRef.current.children, { y: -15, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, stagger: 0.08, ease: 'power2.out' }, '-=0.3');
+      }
+      if (actionsRef.current) {
+        tl.fromTo(actionsRef.current, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.4, ease: 'power2.out' }, '-=0.2');
+      }
+
+      const handleScroll = () => {
+        if (window.scrollY > 50) {
+          gsap.to(navRef.current, {
+            backgroundColor: 'rgba(39, 27, 18, 0.92)',
+            boxShadow: '0 10px 30px rgba(0,0,0,0.25)',
+            backdropFilter: 'blur(16px)',
+            paddingTop: '0.75rem',
+            paddingBottom: '0.75rem',
+            duration: 0.3,
+          });
+        } else {
+          gsap.to(navRef.current, {
+            backgroundColor: 'rgba(39, 27, 18, 0)',
+            boxShadow: 'none',
+            backdropFilter: 'blur(0px)',
+            paddingTop: '1rem',
+            paddingBottom: '1rem',
+            duration: 0.3,
+          });
+        }
+      };
+
+      window.addEventListener('scroll', handleScroll);
+      return () => window.removeEventListener('scroll', handleScroll);
+    });
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <>
-      <nav className="relative px-6 py-4 nnv text-white">
-        <div className="flex items-center justify-between max-w-7xl mx-auto">
-          
-          <Link to="/" className="flex items-center gap-2.5 group">
-            <img src="/favicon.svg" alt="Jawla Logo" className="h-9 w-9 object-contain" />
-            <span className="text-2xl font-bold text-white group-hover:text-amber-200 transition cursor-pointer">
-              Jawla
-            </span>
+    <nav ref={navRef} className="sticky top-0 z-50 transition-all duration-300 px-6 py-4 nnv text-white">
+      <div className="flex items-center justify-between max-w-7xl mx-auto">
+        <Link ref={logoRef} to="/" className="flex items-center gap-2.5 group">
+          <img src="/favicon.svg" alt="Jawla Logo" className="h-9 w-9 object-contain group-hover:rotate-12 transition-transform duration-300" />
+          <span className="text-2xl font-black text-white group-hover:text-amber-300 transition duration-300 cursor-pointer tracking-wide">
+            Jawla
+          </span>
+        </Link>
+
+        <div ref={linksRef} className="hidden md:flex gap-8 items-center">
+          <Link to="/destinations" className="text-white font-medium hover:text-amber-300 transition duration-200 cursor-pointer py-1">
+            Destinations
           </Link>
-
-        
-          <div className="hidden md:flex gap-8 items-center">
-            <Link to="/destinations" className="text-white font-medium hover:text-amber-200 transition cursor-pointer hover:border-b-2 hover:border-amber-200">
-              Destinations
-            </Link>
-            <Link to="/attractions" className="text-white font-medium hover:text-amber-200 transition cursor-pointer hover:border-b-2 hover:border-amber-200">
-              Attractions
-            </Link>
-            <Link to="/ai-planner" className="text-white font-medium hover:text-amber-200 transition cursor-pointer hover:border-b-2 hover:border-amber-200">
-              AI Planner
-            </Link>
-            <Link to="/about" className="text-white font-medium hover:text-amber-200 transition cursor-pointer hover:border-b-2 hover:border-amber-200">
-              About
-            </Link>
-            <Link to="/booking" className="text-white font-medium hover:text-amber-200 transition cursor-pointer hover:border-b-2 hover:border-amber-200">
-              Book a Guide
-            </Link>
-           
-          </div>
-
-        
-          <div className="hidden md:flex items-center gap-6">
-            <Link to="/booking" className="bg-[#b57a2d] text-white px-6 py-2 rounded-full hover:bg-[#9b6525] transition font-medium cursor-pointer">
-              Book Now
-            </Link>
-            <AuthNavAction />
-          </div>
-
-        
-          <div className="md:hidden flex items-center gap-4">
-            <button
-              onClick={() => setOpen(!isOpen)}
-              className="text-white hover:text-amber-200"
-            >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
+          <Link to="/attractions" className="text-white font-medium hover:text-amber-300 transition duration-200 cursor-pointer py-1">
+            Attractions
+          </Link>
+          <Link to="/ai-planner" className="text-white font-medium hover:text-amber-300 transition duration-200 cursor-pointer py-1">
+            AI Planner
+          </Link>
+          <Link to="/about" className="text-white font-medium hover:text-amber-300 transition duration-200 cursor-pointer py-1">
+            About
+          </Link>
+          <Link to="/booking" className="text-white font-medium hover:text-amber-300 transition duration-200 cursor-pointer py-1">
+            Book a Guide
+          </Link>
         </div>
 
-        {isOpen && (
-          <div className="md:hidden absolute inset-x-0 top-full bg-[#271b12]/95 border-t border-amber-100/15 backdrop-blur-lg">
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              <Link
-                to="/destinations"
-                className="block px-3 py-2 rounded-md text-white hover:bg-white/10 hover:text-amber-200 font-medium"
-              >
-                Destinations
-              </Link>
-              <Link
-                to="/attractions"
-                className="block px-3 py-2 rounded-md text-white hover:bg-white/10 hover:text-amber-200 font-medium"
-              >
-                Attractions
-              </Link>
-              <Link
-                to="/ai-planner"
-                className="block px-3 py-2 rounded-md text-white hover:bg-white/10 hover:text-amber-200 font-medium"
-              >
-                AI Planner
-              </Link>
-              <Link
-                to="/booking"
-                className="block px-3 py-2 rounded-md text-white hover:bg-white/10 hover:text-amber-200 font-medium"
-              >
-                Book a Guide
-              </Link>
-              <Link
-                to="/about"
-                className="block px-3 py-2 rounded-md text-white hover:bg-white/10 hover:text-amber-200 font-medium"
-              >
-                About
-              </Link>
-             
-              <div className="px-3 py-2 space-y-2">
-                <Link to="/booking" className="block w-full bg-[#b57a2d] text-white px-4 py-2 rounded text-center hover:bg-[#a66c28] transition font-medium">
-                  Book Now
-                </Link>
-                <AuthNavAction mobile />
-              </div>
-            </div>
-          </div>
-        )}
-      </nav>
-    </>
-  )
+        <div ref={actionsRef} className="hidden md:flex items-center gap-6">
+          <Link to="/booking" className="bg-[#b57a2d] text-white px-6 py-2.5 rounded-full hover:bg-[#9b6525] hover:scale-105 transition duration-300 font-semibold cursor-pointer shadow-lg">
+            Book Now
+          </Link>
+          <AuthNavAction />
+        </div>
+
+        <div className="md:hidden flex items-center gap-4">
+          <button onClick={() => setOpen(!isOpen)} className="text-white hover:text-amber-300 focus:outline-none cursor-pointer">
+            {isOpen ? <X size={26} /> : <Menu size={26} />}
+          </button>
+        </div>
+      </div>
+
+      {isOpen && <NavMobileMenu onClose={() => setOpen(false)} />}
+    </nav>
+  );
 }
 
-export default Navbar
+export default Navbar;

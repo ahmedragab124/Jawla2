@@ -5,6 +5,7 @@ import Background from '../features/destinations/components/Background'
 import HeroContent from '../features/destinations/components/HeroContent'
 import ExperienceSection from '../features/destinations/components/ExperienceSection'
 import GuideSection from '../features/destinations/components/GuideSection'
+import { supabase } from '../supabase'
 
 
 function DestinationPage() {
@@ -12,15 +13,25 @@ function DestinationPage() {
   const params = useParams();
   // console.log(destination);
 
-  React.useEffect(() => {
-    axios.get(`http://localhost:3000/destinations/${params.id}`)
-      .then((response) => {
-        setDestination(response.data)
-      })
-      .catch((error) => {
-        console.error('Failed to load destinations:', error)
-      })
-  }, [params.id])
+
+React.useEffect(() => {
+  const loadDestination = async () => {
+    const { data, error } = await supabase
+      .from('destinations')
+      .select('*')
+      .eq('id', params.id)
+      .single();
+
+    if (error) {
+      console.error('Failed to load destination:', error);
+      return;
+    }
+
+    setDestination(data);
+  };
+
+  loadDestination();
+}, [params.id]);
 
     // console.log(destination);
 
