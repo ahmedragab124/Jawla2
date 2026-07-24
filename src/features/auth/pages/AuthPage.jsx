@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { homeForRole } from '../services/authStorage';
-import { useAuth } from '../context/AuthContext';
+import { useAuth, homeForRole } from '../context/AuthContext';
 import { supabase } from '../../../supabase';
 import AuthFormFields from '../components/AuthFormFields';
 import gsap from 'gsap';

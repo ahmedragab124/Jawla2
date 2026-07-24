@@ -1,6 +1,5 @@
 import { Navigate } from 'react-router-dom'
-import { homeForRole } from '../services/authStorage'
-import { useAuth } from '../context/AuthContext'
+import { useAuth, homeForRole } from '../context/AuthContext'
 
 function RequireRole({ allowedRoles, children }) {
   const { user } = useAuth()

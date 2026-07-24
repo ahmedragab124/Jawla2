@@ -50,13 +50,16 @@ function BookingForm() {
     if (formData.date < today) return alert('Please select today or a future date.');
 
     setLoading(true);
+
     const bookingPayload = {
       ...formData,
-      touristId: user.id || 'unknown',
+      guideId: formData.guideId || null,   // '' → null to avoid FK constraint error
+      people: formData.people ? Number(formData.people) : null,
+      touristId: user.id,
       touristName: user.name,
       touristEmail: user.email,
       status: 'Pending',
-      createdAt: new Date().toISOString(),
+      // Note: createdAt removed — Supabase auto-generates created_at
     };
 
     try {
@@ -64,9 +67,9 @@ function BookingForm() {
       if (error) throw error;
       setSuccessMessage('✅ Your booking request has been submitted successfully!');
       setFormData({ fullName: user.name || '', phone: '', email: user.email || '', people: '', date: '', tourType: 'Historical Tour', requests: '', guideId: '' });
-    } catch (error) {
-      console.error(error);
-      alert('Something went wrong!');
+    } catch (err) {
+      console.error('❌ Booking error:', err);
+      alert(`Error: ${err?.message || 'Something went wrong. Please try again.'}`);
     } finally {
       setLoading(false);
     }

@@ -5,7 +5,6 @@ function BookingStatusStepper({ status }) {
   const steps = [
     { key: 'Pending', label: 'Request Sent', desc: 'Awaiting guide confirmation' },
     { key: 'Approved', label: 'Confirmed', desc: 'Guide accepted your trip' },
-    { key: 'Rejected', label: 'Declined/Cancelled', desc: 'Trip cannot proceed' },
   ];
 
   let activeIndex = 0;

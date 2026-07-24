@@ -91,10 +91,7 @@ function GuideBookingCard({
       )}
 
       {isAccepting && (
-        <form
-          onSubmit={(e) => onAcceptSubmit(e, booking.id)}
-          className="mt-2 pt-4 border-t border-stone-100 bg-[#fffaf0]/50 p-4 rounded-2xl border border-amber-100 flex flex-col gap-3"
-        >
+        <div className="mt-2 pt-4 border-t border-stone-100 bg-[#fffaf0]/50 p-4 rounded-2xl border border-amber-100 flex flex-col gap-3">
           <label className="text-xs font-bold text-[#3f2b1a] flex items-center gap-1.5">
             <FileText size={14} /> Welcome message for tourist (Optional):
           </label>
@@ -114,13 +111,14 @@ function GuideBookingCard({
               Cancel
             </button>
             <button
-              type="submit"
+              type="button"
+              onClick={() => onAcceptSubmit(booking.id)}
               className="px-4 py-1.5 rounded-lg text-xs font-semibold text-white bg-green-600 hover:bg-green-700 cursor-pointer"
             >
               Confirm & Accept
             </button>
           </div>
-        </form>
+        </div>
       )}
     </div>
   );

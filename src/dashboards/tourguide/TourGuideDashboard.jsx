@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Clock } from 'lucide-react';
-import { supabase } from '../../../supabase';
-import TourGuideProfileCard from '../components/TourGuideProfileCard';
-import GuideBookingCard from '../components/GuideBookingCard';
+import { supabase } from '../../supabase';
+import TourGuideProfileCard from './components/TourGuideProfileCard';
+import GuideBookingCard from './components/GuideBookingCard';
 
 // TourGuideDashboard Component
 function TourGuideDashboard({ user }) {
@@ -54,15 +54,32 @@ function TourGuideDashboard({ user }) {
   };
 
   // Confirms accepting a booking with an optional welcome note for the tourist
-  const handleAcceptSubmit = async (e, bookingId) => {
-    e.preventDefault();
-    const { error } = await supabase
-      .from('bookings')
-      .update({ status: 'Approved', guideNote: guideNote.trim() || null })
-      .eq('id', bookingId);
+  const handleAcceptSubmit = async (bookingId) => {
+    const trimmedNote = guideNote.trim();
+    const updatePayload = { status: 'Approved' };
 
-    if (error) return alert('Something went wrong.');
-    setBookings((prev) => prev.map((b) => (b.id === bookingId ? { ...b, status: 'Approved', guideNote } : b)));
+    if (trimmedNote) {
+      updatePayload.guideNote = trimmedNote;
+    }
+
+    const { error } = await supabase.from('bookings').update(updatePayload).eq('id', bookingId);
+
+    if (error) {
+      console.error('Accept booking error:', error, { bookingId, updatePayload });
+      return alert(`Could not accept booking: ${error.message || 'Please try again.'}`);
+    }
+
+    setBookings((prev) =>
+      prev.map((b) =>
+        b.id === bookingId
+          ? {
+              ...b,
+              status: 'Approved',
+              ...(trimmedNote ? { guideNote: trimmedNote } : {}),
+            }
+          : b
+      )
+    );
     setAcceptingBookingId(null);
     setGuideNote('');
   };

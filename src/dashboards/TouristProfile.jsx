@@ -1,12 +1,12 @@
-import { Navigate } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
-import TouristDashboard from './TouristDashboard'
-import TourGuideDashboard from './TourGuideDashboard'
+import { Navigate } from 'react-router-dom';
+import { useAuth } from '../features/auth/context/AuthContext';
+import TouristDashboard from './tourist/TouristDashboard';
+import TourGuideDashboard from './tourguide/TourGuideDashboard';
 
 function TouristProfile() {
-  const { user, updateUser } = useAuth()
+  const { user, updateUser } = useAuth();
 
-  if (!user) return <Navigate to="/auth" replace />
+  if (!user) return <Navigate to="/auth" replace />;
 
   return (
     <main className="min-h-screen bg-[#fffaf0] px-4 py-12 md:px-8 md:py-16">
@@ -18,7 +18,7 @@ function TouristProfile() {
         )}
       </div>
     </main>
-  )
+  );
 }
 
-export default TouristProfile
+export default TouristProfile;

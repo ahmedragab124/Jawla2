@@ -1,6 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { homeForRole } from '../services/authStorage'
-import { useAuth } from '../context/AuthContext'
+import { useAuth, homeForRole } from '../context/AuthContext'
 
 function AuthNavAction({ mobile = false }) {
   const navigate = useNavigate()

@@ -9,13 +9,15 @@ import Navbar from '../shared/components/layout/Navbar';
 import Footer from '../shared/components/layout/Footer';
 import { CircleArrowUp } from 'lucide-react';
 import AuthPage from '../features/auth/pages/AuthPage';
-import AdminDashboard from '../features/auth/pages/AdminDashboard';
-import TouristProfile from '../features/auth/pages/TouristProfile';
+import AdminDashboard from '../dashboards/admin/AdminDashboard';
+import TouristProfile from '../dashboards/TouristProfile';
 import RequireRole from '../features/auth/components/RequireRole';
 import AttractionsPage from '../features/attractions/pages/AttractionsPage';
 import AttractionDetailsPage from '../features/attractions/pages/AttractionDetailsPage';
 import AboutPage from '../features/about/pages/AboutPage';
 import AIPlannerPage from '../features/ai-planner/pages/AIPlannerPage';
+import MainLayout from '../layout/MainLayout';
+import AdminLayout from '../layout/AdminLayout';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -33,8 +35,9 @@ function App() {
   return (
     <>
       <ScrollToTop />
-      <Navbar />
-      <Routes>
+        <Routes>
+
+      <Route element={<MainLayout />}>
         <Route path="/" element={<LandingPage />} />
         <Route path="/destinations" element={<DestinationsPage />} />
         <Route path="/destination/:id" element={<DestinationPage />} />
@@ -43,12 +46,32 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/ai-planner" element={<AIPlannerPage />} />
         <Route path="/auth" element={<AuthPage />} />
-        <Route path="/admin/dashboard" element={<RequireRole allowedRoles={['Admin']}><AdminDashboard /></RequireRole>} />
-        <Route path="/profile" element={<RequireRole allowedRoles={['Tourist', 'Tour Guide']}><TouristProfile /></RequireRole>} />
+        <Route
+          path="/profile"
+          element={
+            <RequireRole allowedRoles={['Tourist', 'Tour Guide']}>
+              <TouristProfile />
+            </RequireRole>
+          }
+        />
         <Route path="/booking" element={<BookingPage />} />
         <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-      <Footer />
+      </Route>
+
+      <Route
+        element={
+          <RequireRole allowedRoles={['Admin']}>
+            <AdminLayout />
+          </RequireRole>
+        }
+      >
+        <Route path="/admin/dashboard" element={<AdminDashboard tab="overview" />} />
+        <Route path="/admin/dashboard/guides" element={<AdminDashboard tab="guides" />} />
+        <Route path="/admin/dashboard/tourists" element={<AdminDashboard tab="tourists" />} />
+        <Route path="/admin/dashboard/bookings" element={<AdminDashboard tab="bookings" />} />
+      </Route>
+
+    </Routes>
 
       <button
         onClick={handlegototop}

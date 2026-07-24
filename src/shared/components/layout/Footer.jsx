@@ -30,9 +30,7 @@ function Footer() {
     return () => ctx.revert();
   }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+ 
 
   return (
     <footer ref={footerRef} className="bg-gradient-to-b from-[#fffaf0] via-[#f7ebd9] to-[#ebd9c5] pt-20 pb-12 border-t border-[#f0dfcc]">
@@ -97,12 +95,7 @@ function Footer() {
 
       <div className="mx-auto mt-12 flex max-w-6xl items-center justify-between border-t border-[#e5d3be] pt-8 px-6 text-sm text-[#7a644d] sm:px-8">
         <p>© 2026 Jawla. All rights reserved.</p>
-        <button
-          onClick={scrollToTop}
-          className="flex items-center gap-2 text-xs font-bold text-[#3f2b1a] hover:text-[#b57a2d] transition-colors cursor-pointer bg-white/80 backdrop-blur-md px-4 py-2 rounded-full border border-amber-900/10 shadow-xs hover:scale-105"
-        >
-          Back to top <ArrowUp size={14} />
-        </button>
+   
       </div>
     </footer>
   );

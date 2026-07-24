@@ -43,3 +43,8 @@ export function useAuth() {
   }
   return context
 }
+
+export function homeForRole(role) {
+  return role === 'Admin' ? '/admin/dashboard' : '/profile'
+}
+

@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import TouristProfileSidebar from '../components/TouristProfileSidebar';
-import AITripsList from '../components/AITripsList';
-import BookingCard from '../components/BookingCard';
-import { getAITrips, deleteAITrip } from '../../ai-planner/services/aiTripsStorage';
-import { supabase } from '../../../supabase';
+import TouristProfileSidebar from './components/TouristProfileSidebar';
+import AITripsList from './components/AITripsList';
+import BookingCard from './components/BookingCard';
+import { getAITrips, deleteAITrip } from '../../features/ai-planner/services/aiTripsStorage';
+import { supabase } from '../../supabase';
 
 // TouristDashboard Component
 // Main dashboard view for tourist users displaying profile sidebar, AI trip history, and bookings.
