@@ -86,7 +86,7 @@ function AttractionDetailsPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-[#fffaf0] flex items-center justify-center">
+      <main className="min-h-screen bg-[#fffaf0] flex items-center justify-center pt-28">
         <div className="h-12 w-12 animate-spin rounded-full border-4 border-[#b57a2d] border-t-transparent" />
       </main>
     );
@@ -95,7 +95,7 @@ function AttractionDetailsPage() {
   return (
     <main
       ref={containerRef}
-      className="min-h-screen bg-gradient-to-b from-[#fffaf0] via-[#f7ebe0] to-[#fffaf0] px-5 py-10 md:py-16"
+      className="min-h-screen bg-gradient-to-b from-[#fffaf0] via-[#f7ebe0] to-[#fffaf0] px-5 pt-28 pb-16"
     >
       <article className="mx-auto max-w-6xl overflow-hidden rounded-[36px] bg-white shadow-2xl border border-[#f3e6d3]">
         <div className="grid lg:grid-cols-2">

@@ -63,7 +63,7 @@ function DestinationsPage() {
   return (
     <main
       ref={containerRef}
-      className="min-h-screen bg-gradient-to-b from-[#fffaf0] via-[#f9efdf] to-[#fffaf0] px-6 py-20"
+      className="min-h-screen bg-gradient-to-b from-[#fffaf0] via-[#f9efdf] to-[#fffaf0] px-6 pt-28 pb-20"
     >
       <div className="dest-page-container max-w-7xl mx-auto">
         {/* Header section with navigation buttons above the carousel */}

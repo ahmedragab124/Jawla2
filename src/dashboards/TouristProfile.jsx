@@ -9,7 +9,7 @@ function TouristProfile() {
   if (!user) return <Navigate to="/auth" replace />;
 
   return (
-    <main className="min-h-screen bg-[#fffaf0] px-4 py-12 md:px-8 md:py-16">
+    <main className="min-h-screen bg-[#fffaf0] px-4 pt-24 pb-12 md:px-8 md:pb-16">
       <div className="mx-auto max-w-7xl animate-fadeUp">
         {user.role === 'Tour Guide' ? (
           <TourGuideDashboard user={user} />

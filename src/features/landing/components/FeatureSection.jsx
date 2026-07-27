@@ -96,23 +96,23 @@ function FeatureSection() {
   return (
     <section
       ref={sectionRef}
-      className="fesecte-section bg-gradient-to-b from-[#fffaf0] via-[#fff3e6] to-[#f7e7d7] py-24 overflow-hidden"
+      className="fesecte-section bg-gradient-to-b from-[#fffaf0] via-[#fff3e6] to-[#f7e7d7] py-28 overflow-hidden"
     >
       <div ref={titleRef} className="mx-auto max-w-4xl px-4 text-center">
         <span className="text-xs font-black tracking-[0.25em] text-[#b57a2d] uppercase">
           Tailored Heritage Trails
         </span>
-        <h2 className="mt-2 text-4xl md:text-5xl font-black text-[#3f2b1a]">
+        <h2 className="mt-3 text-4xl md:text-5xl font-black text-[#3f2b1a]">
           Our Key Features
         </h2>
-        <div className="mx-auto mt-4 h-1.5 w-24 rounded-full bg-[#b57a2d]" />
-        <p className="mt-6 text-base md:text-lg leading-8 text-[#5b4423] max-w-2xl mx-auto">
+        <div className="mx-auto mt-5 h-1.5 w-24 rounded-full bg-[#b57a2d]" />
+        <p className="mt-7 text-base md:text-lg leading-8 text-[#5b4423] max-w-2xl mx-auto">
           Discover what makes our travel service special with heritage-focused
           routes and expert guides, delivered with authentic local insight.
         </p>
       </div>
 
-      <div className="relative mt-12 px-4 max-w-6xl mx-auto">
+      <div className="relative mt-16 px-4 max-w-6xl mx-auto">
         <div
           ref={carouselRef}
           className="flex gap-6 overflow-x-auto pb-8 pt-2 scroll-smooth snap-x snap-mandatory"

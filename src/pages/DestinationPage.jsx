@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import axios from "axios";
 import Background from "../features/destinations/components/Background";
 import HeroContent from "../features/destinations/components/HeroContent";
 import ExperienceSection from "../features/destinations/components/ExperienceSection";

@@ -12,6 +12,7 @@ function BookingForm() {
   const [guides, setGuides] = useState([]);
   const [guidesLoading, setGuidesLoading] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
   const [formData, setFormData] = useState({
     fullName: user?.name || "",
     phone: "",
@@ -41,6 +42,8 @@ function BookingForm() {
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    // Clear success message when user edits the form
+    if (successMessage) setSuccessMessage("");
   };
 
   const handleSubmit = async (e) => {
@@ -65,13 +68,12 @@ function BookingForm() {
 
     const bookingPayload = {
       ...formData,
-      guideId: formData.guideId || null, // '' → null to avoid FK constraint error
+      guideId: formData.guideId || null,
       people: formData.people ? Number(formData.people) : null,
       touristId: user.id,
       touristName: user.name,
       touristEmail: user.email,
       status: "Pending",
-      // Note: createdAt removed — Supabase auto-generates created_at
     };
 
     try {
@@ -79,6 +81,7 @@ function BookingForm() {
         .from("bookings")
         .insert([bookingPayload]);
       if (error) throw error;
+      setSuccessMessage("Your booking request has been submitted successfully!");
       toast.success("Booking request submitted successfully!");
       setFormData({
         fullName: user.name || "",

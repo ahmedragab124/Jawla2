@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { ChevronDown } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HeroSearchForm from "./HeroSearchForm";
@@ -13,6 +14,7 @@ function HeroSection() {
   const searchRef = useRef(null);
   const orb1Ref = useRef(null);
   const orb2Ref = useRef(null);
+  const scrollHintRef = useRef(null);
 
   const titleWords = [
     { text: "Discover", isGradient: false },
@@ -31,7 +33,7 @@ function HeroSection() {
         },
       );
 
-      // 2. حركة الـ Orbs الهادئة
+      // Orb floating animation
       if (orb1Ref.current && orb2Ref.current) {
         gsap.to(orb1Ref.current, {
           y: -20,
@@ -85,6 +87,29 @@ function HeroSection() {
           "-=0.6",
         );
 
+      // Scroll hint bounce animation
+      if (scrollHintRef.current) {
+        gsap.to(scrollHintRef.current, {
+          y: 10,
+          repeat: -1,
+          yoyo: true,
+          duration: 1.2,
+          ease: "sine.inOut",
+        });
+
+        // Fade out scroll hint when scrolling
+        gsap.to(scrollHintRef.current, {
+          opacity: 0,
+          scrollTrigger: {
+            trigger: heroRef.current,
+            start: "top top",
+            end: "20% top",
+            scrub: true,
+          },
+        });
+      }
+
+      // Hero parallax on scroll
       gsap.to(".hero-content", {
         y: 60,
         opacity: 0.3,
@@ -136,6 +161,19 @@ function HeroSection() {
       </div>
 
       <HeroSearchForm formRef={searchRef} />
+
+      {/* Scroll Hint Indicator */}
+      <div
+        ref={scrollHintRef}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2"
+      >
+        <span className="text-xs font-medium text-white/60 tracking-widest uppercase">
+          Scroll
+        </span>
+        <div className="flex h-10 w-6 items-start justify-center rounded-full border-2 border-white/30 p-1.5">
+          <ChevronDown size={12} className="text-white/70" />
+        </div>
+      </div>
     </section>
   );
 }

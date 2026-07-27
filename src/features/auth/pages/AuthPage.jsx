@@ -137,7 +137,7 @@ function AuthPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[#fffaf0] via-[#f7ebe0] to-[#fffaf0] px-5 py-20 flex items-center justify-center">
+    <main className="min-h-screen bg-gradient-to-b from-[#fffaf0] via-[#f7ebe0] to-[#fffaf0] px-5 pt-28 pb-20 flex items-center justify-center">
       <section
         ref={cardRef}
         className="w-full max-w-md rounded-4xl bg-white p-8 shadow-[0_30px_90px_rgba(76,48,24,0.16)] border border-[#f3e6d3]"

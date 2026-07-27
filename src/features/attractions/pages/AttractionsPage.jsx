@@ -86,7 +86,7 @@ function AttractionsPage() {
   return (
     <main
       ref={containerRef}
-      className="min-h-screen bg-gradient-to-b from-[#fffaf0] via-[#f7ebe0] to-[#fffaf0] px-5 py-20"
+      className="min-h-screen bg-gradient-to-b from-[#fffaf0] via-[#f7ebe0] to-[#fffaf0] px-5 pt-28 pb-20"
     >
       <section className="mx-auto max-w-6xl">
         <div className="text-center mb-10">

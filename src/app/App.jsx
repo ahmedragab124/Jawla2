@@ -7,7 +7,7 @@ import BookingPage from "../features/booking/pages/BookingPage";
 import NotFoundPage from "../pages/NotFoundPage";
 import DestinationPage from "../pages/DestinationPage";
 import DestinationsPage from "../pages/DestinationsPage";
-import { CircleArrowUp } from "lucide-react";
+import ScrollToTopButton from "./ScrollToTopButton";
 import AuthPage from "../features/auth/pages/AuthPage";
 import AdminDashboard from "../dashboards/admin/AdminDashboard";
 import TouristProfile from "../dashboards/TouristProfile";
@@ -28,9 +28,6 @@ function ScrollToTop() {
 }
 
 function App() {
-  const handlegototop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
 
   return (
     <>
@@ -116,13 +113,7 @@ function App() {
         </Route>
       </Routes>
 
-      <button
-        onClick={handlegototop}
-        className="fixed right-6 bottom-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#3f2b1a] text-white shadow-2xl shadow-black/30 transition-all duration-300 hover:bg-[#b57a2d] hover:scale-110 active:scale-95 cursor-pointer border-2 border-white/20"
-        aria-label="Scroll to top"
-      >
-        <CircleArrowUp size={28} />
-      </button>
+      <ScrollToTopButton />
       <ToastContainer
         position="top-right"
         autoClose={4000}

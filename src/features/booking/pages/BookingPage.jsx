@@ -39,7 +39,7 @@ function BookingPage() {
     >
       <div className="absolute inset-0 bg-gradient-to-r from-[#271b12]/85 via-[#3b2a1c]/60 to-[#271b12]/40 backdrop-blur-[2px]" />
 
-      <div className="relative z-10 mx-auto flex flex-col lg:flex-row min-h-screen max-w-7xl items-center justify-center lg:justify-between gap-12 lg:gap-16 px-6 py-24 lg:py-10 lg:px-10">
+      <div className="relative z-10 mx-auto flex flex-col lg:flex-row min-h-screen max-w-7xl items-center justify-center lg:justify-between gap-12 lg:gap-16 px-6 pt-24 pb-24 lg:py-10 lg:px-10">
         <div ref={leftContentRef} className="max-w-lg text-center lg:text-left">
           <p className="mb-3 text-xs font-black uppercase tracking-[4px] text-[#F4D58D]">
             Your Journey Starts Here • Find Your Perfect Guide

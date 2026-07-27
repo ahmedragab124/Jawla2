@@ -9,6 +9,10 @@ function BookingsTable({ bookings, tourGuides, onDelete }) {
     return guide ? guide.name : "Unknown Guide";
   };
 
+  // Fallback: reads touristName first, then falls back to fullName (old bookings)
+  const getTouristName = (booking) => booking.touristName || booking.fullName || "Unknown";
+  const getTouristEmail = (booking) => booking.touristEmail || booking.email || "";
+
   return (
     <section className="mt-10 overflow-hidden rounded-3xl bg-white shadow-[0_15px_40px_rgba(76,48,24,0.06)] border border-stone-100">
       <div className="border-b border-stone-100 p-6">
@@ -33,8 +37,8 @@ function BookingsTable({ bookings, tourGuides, onDelete }) {
                 className="border-t border-stone-100 hover:bg-stone-50/50"
               >
                 <td className="p-4">
-                  <p className="font-bold text-[#3f2b1a]">{booking.fullName}</p>
-                  <p className="text-xs text-stone-400">{booking.email}</p>
+                  <p className="font-bold text-[#3f2b1a]">{getTouristName(booking)}</p>
+                  <p className="text-xs text-stone-400">{getTouristEmail(booking)}</p>
                 </td>
                 <td className="p-4 font-semibold text-[#3f2b1a]">
                   {booking.tourType}

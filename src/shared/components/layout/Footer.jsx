@@ -34,26 +34,26 @@ function Footer() {
   return (
     <footer
       ref={footerRef}
-      className="border-t border-[#ecdfc9] bg-[#fdf7ee] py-8"
+      className="bg-[#271b12] py-10"
     >
       <div className="mx-auto max-w-6xl px-6 sm:px-8">
 
         {/* Main row */}
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
 
           {/* Brand */}
           <div className="flex items-center gap-2.5">
-            <img src="/favicon.svg" alt="Jawla Logo" className="h-8 w-8 object-contain" />
-            <span className="text-xl font-black text-[#3f2b1a]">Jawla</span>
+            <img src="/favicon.svg" alt="Jawla Logo" className="h-9 w-9 object-contain" />
+            <span className="text-xl font-black text-white">Jawla</span>
           </div>
 
           {/* Nav links */}
-          <nav className="flex flex-wrap gap-x-6 gap-y-2">
+          <nav className="flex flex-wrap gap-x-7 gap-y-2">
             {NAV_LINKS.map(({ label, to }) => (
               <Link
                 key={to}
                 to={to}
-                className="text-sm font-medium text-[#695744] transition-colors hover:text-[#b57a2d]"
+                className="text-sm font-medium text-white/70 transition-colors hover:text-amber-400"
               >
                 {label}
               </Link>
@@ -65,7 +65,7 @@ function Footer() {
             {[Globe, Share2, Mail].map((Icon, i) => (
               <button
                 key={i}
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-[#f3e3ce] text-[#3f2b1a] transition hover:bg-[#b57a2d] hover:text-white hover:scale-110 cursor-pointer"
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white/80 transition hover:bg-[#b57a2d] hover:text-white hover:scale-110 cursor-pointer"
               >
                 <Icon size={16} />
               </button>
@@ -74,7 +74,7 @@ function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-6 border-t border-[#ecdfc9] pt-4 text-center text-xs text-[#9a7d63]">
+        <div className="mt-8 border-t border-white/10 pt-5 text-center text-xs text-white/40">
           © 2026 Jawla. All rights reserved.
         </div>
 

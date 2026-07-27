@@ -1,7 +1,17 @@
-import { Compass, CheckCircle2, Mail, MapPin } from 'lucide-react';
+import { Compass, CheckCircle2, Clock, Mail, MapPin, XCircle } from 'lucide-react';
 
 // TourGuideProfileCard Component
-function TourGuideProfileCard({ user }) {
+function TourGuideProfileCard({ user, guide }) {
+  // Determine badge appearance based on guide status
+  const badgeConfig = {
+    Approved: { label: 'Approved Guide', bg: 'bg-green-50', text: 'text-green-700', icon: CheckCircle2 },
+    'Pending approval': { label: 'Pending Approval', bg: 'bg-amber-50', text: 'text-amber-700', icon: Clock },
+    Rejected: { label: 'Rejected', bg: 'bg-red-50', text: 'text-red-700', icon: XCircle },
+  };
+
+  const status = guide?.status || 'Pending approval';
+  const { label, bg, text, icon: Icon } = badgeConfig[status] || badgeConfig['Pending approval'];
+
   return (
     <section className="rounded-3xl bg-white p-6 shadow-[0_15px_40px_rgba(76,48,24,0.08)] border border-stone-100/50 sticky top-24">
       <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#e6eedc] text-[#4d5c3d]">
@@ -10,9 +20,9 @@ function TourGuideProfileCard({ user }) {
       <p className="mt-5 text-xs font-bold tracking-[0.25em] text-[#b57a2d] uppercase">{user.role} Dashboard</p>
       <h2 className="mt-2 text-3xl font-black text-[#3f2b1a]">{user.name}</h2>
 
-      <div className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-green-50 px-3 py-1 text-xs font-bold text-green-700">
-        <CheckCircle2 size={12} />
-        Approved Guide
+      <div className={`mt-3 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold ${bg} ${text}`}>
+        <Icon size={12} />
+        {label}
       </div>
 
       <p className="mt-4 text-sm text-[#6d5c4a] leading-relaxed">
@@ -26,7 +36,7 @@ function TourGuideProfileCard({ user }) {
         </div>
         <div className="flex items-center gap-3">
           <MapPin className="text-[#b57a2d]" size={18} />
-          <span>Certified Egyptologist</span>
+          <span>{guide?.name || 'Tour Guide'}</span>
         </div>
       </div>
     </section>

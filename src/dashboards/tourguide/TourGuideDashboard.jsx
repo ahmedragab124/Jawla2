@@ -132,7 +132,7 @@ function TourGuideDashboard({ user }) {
   return (
     <div className="grid gap-8 lg:grid-cols-3">
       <div className="lg:col-span-1">
-        <TourGuideProfileCard user={user} />
+        <TourGuideProfileCard user={user} guide={guide} />
       </div>
 
       <div className="lg:col-span-2">
