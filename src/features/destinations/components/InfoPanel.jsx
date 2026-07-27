@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import "../styles/InfoPanel.css";
 import { FaSun } from "react-icons/fa";
 import { MdLocationCity } from "react-icons/md";
@@ -13,7 +14,9 @@ function InfoPanel({ destination }) {
       .then((data) => {
         setTemperature(data.current.temperature_2m);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        toast.error("Could not load weather data");
+      });
   }, [destination.latitude, destination.longitude]);
   return (
     <div className="info-panel">
@@ -24,7 +27,7 @@ function InfoPanel({ destination }) {
           </div>
           <div className="info-text">
             <h6>Government</h6>
-            <p>{destination.capital}</p>
+            <p>{destination.name}</p>
           </div>
         </div>
 
@@ -43,7 +46,7 @@ function InfoPanel({ destination }) {
 
         <div className="info-item">
           <div className="icon-box">
-          <PiScrollFill />
+            <PiScrollFill />
           </div>
           <div className="info-text">
             <h6>History</h6>

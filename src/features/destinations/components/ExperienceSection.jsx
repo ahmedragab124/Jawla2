@@ -1,28 +1,22 @@
-import { useState, useEffect, useRef } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import ExperienceCard from './ExperienceCard';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import '../styles/ExperienceSection.css';
+import { useState, useEffect, useRef } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import ExperienceCard from "./ExperienceCard";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import "../styles/ExperienceSection.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-/**
- * ExperienceSection Component
- * Displays filtered tourist experiences in a horizontal interactive carousel with GSAP ScrollTrigger animations.
- * 
- * @param {Object} props
- * @param {Object} props.destination - Destination data including experiences list
- */
 function ExperienceSection({ destination }) {
   const places = destination.experiences || [];
-  const categories = ['All', ...new Set(places.map((place) => place.category))];
+  const categories = ["All", ...new Set(places.map((place) => place.category))];
 
-  const [filter, setFilter] = useState('All');
+  const [filter, setFilter] = useState("All");
   const sectionRef = useRef(null);
   const carouselRef = useRef(null);
 
-  const filteredPlaces = filter === 'All' ? places : places.filter((p) => p.category === filter);
+  const filteredPlaces =
+    filter === "All" ? places : places.filter((p) => p.category === filter);
 
   /**
    * Triggers GSAP staggered entrance animations when filtered list changes
@@ -31,11 +25,18 @@ function ExperienceSection({ destination }) {
     if (filteredPlaces.length === 0) return;
     const ctx = gsap.context(() => {
       if (carouselRef.current) {
-        const cards = carouselRef.current.querySelectorAll('.experience-card');
+        const cards = carouselRef.current.querySelectorAll(".experience-card");
         gsap.fromTo(
           cards,
           { opacity: 0, y: 40, scale: 0.94 },
-          { opacity: 1, y: 0, scale: 1, duration: 0.5, stagger: 0.08, ease: 'power3.out' }
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.5,
+            stagger: 0.08,
+            ease: "power3.out",
+          },
         );
       }
     }, sectionRef);
@@ -50,17 +51,26 @@ function ExperienceSection({ destination }) {
     if (!carouselRef.current) return;
     carouselRef.current.scrollBy({
       left: direction * 340,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   };
 
   return (
-    <section ref={sectionRef} className="experience-section bg-gradient-to-b from-[#fffaf0] via-[#fff3e6] to-[#f7e7d7] py-20 overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="experience-section bg-gradient-to-b from-[#fffaf0] via-[#fff3e6] to-[#f7e7d7] py-20 overflow-hidden"
+    >
       <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
         <div className="text-left max-w-xl">
-          <span className="text-xs font-black tracking-[0.25em] text-[#b57a2d] uppercase">{destination.exploreLabel}</span>
-          <h2 className="mt-2 text-3xl md:text-5xl font-black text-[#3f2b1a] tracking-tight">{destination.experienceTitle}</h2>
-          <p className="mt-4 text-sm md:text-base leading-7 text-[#695540] font-medium">{destination.experienceDescription}</p>
+          <span className="text-xs font-black tracking-[0.25em] text-[#b57a2d] uppercase">
+            {destination.name} Experiences
+          </span>
+          <h2 className="mt-2 text-3xl md:text-5xl font-black text-[#3f2b1a] tracking-tight">
+            Choose Your {destination.name} Experience
+          </h2>
+          <p className="mt-4 text-sm md:text-base leading-7 text-[#695540] font-medium">
+            Choose Your {destination.name} Experience
+          </p>
         </div>
 
         {/* Top-right Navigation Arrows */}
@@ -90,8 +100,8 @@ function ExperienceSection({ destination }) {
             onClick={() => setFilter(category)}
             className={`rounded-full px-5 py-2 text-xs font-black transition-all cursor-pointer ${
               filter === category
-                ? 'bg-[#b57a2d] text-white shadow-md'
-                : 'bg-white/70 hover:bg-[#b57a2d] hover:text-white border border-[#e6d8c5]/60 text-[#695540]'
+                ? "bg-[#b57a2d] text-white shadow-md"
+                : "bg-white/70 hover:bg-[#b57a2d] hover:text-white border border-[#e6d8c5]/60 text-[#695540]"
             }`}
           >
             {category}
@@ -104,7 +114,7 @@ function ExperienceSection({ destination }) {
         <div
           ref={carouselRef}
           className="flex gap-6 overflow-x-auto pb-6 pt-2 scroll-smooth snap-x snap-mandatory"
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           {filteredPlaces.map((place) => (
             <ExperienceCard key={place.id} place={place} />

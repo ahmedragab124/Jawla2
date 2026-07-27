@@ -1,4 +1,4 @@
-import { Calendar, Users, Mail, Check, X, FileText } from 'lucide-react';
+import { Calendar, Users, Mail, Check, X, FileText } from "lucide-react";
 
 // GuideBookingCard Component
 function GuideBookingCard({
@@ -18,17 +18,19 @@ function GuideBookingCard({
           <span className="rounded-full bg-[#B8860B]/10 px-3 py-1 text-xs font-bold text-[#B8860B]">
             {booking.tourType}
           </span>
-          <h4 className="mt-2 text-xl font-bold text-[#3f2b1a]">{booking.touristName}</h4>
+          <h4 className="mt-2 text-xl font-bold text-[#3f2b1a]">
+            {booking.touristName}
+          </h4>
           <p className="text-xs text-stone-400">{booking.touristEmail}</p>
         </div>
 
         <span
           className={`rounded-full px-3 py-1 text-xs font-bold ${
-            booking.status === 'Approved'
-              ? 'bg-green-100 text-green-800'
-              : booking.status === 'Rejected'
-              ? 'bg-red-100 text-red-800'
-              : 'bg-amber-100 text-amber-800'
+            booking.status === "Approved"
+              ? "bg-green-100 text-green-800"
+              : booking.status === "Rejected"
+                ? "bg-red-100 text-red-800"
+                : "bg-amber-100 text-amber-800"
           }`}
         >
           {booking.status}
@@ -39,41 +41,57 @@ function GuideBookingCard({
         <div className="flex items-center gap-2">
           <Calendar className="text-stone-400 shrink-0" size={16} />
           <div>
-            <span className="block text-[10px] text-stone-400 uppercase font-semibold">Date</span>
+            <span className="block text-[10px] text-stone-400 uppercase font-semibold">
+              Date
+            </span>
             <span className="font-semibold text-stone-700">{booking.date}</span>
           </div>
         </div>
         <div className="flex items-center gap-2">
           <Users className="text-stone-400 shrink-0" size={16} />
           <div>
-            <span className="block text-[10px] text-stone-400 uppercase font-semibold">Guests Count</span>
-            <span className="font-semibold text-stone-700">{booking.people || 1} Person(s)</span>
+            <span className="block text-[10px] text-stone-400 uppercase font-semibold">
+              Guests Count
+            </span>
+            <span className="font-semibold text-stone-700">
+              {booking.people || 1} Person(s)
+            </span>
           </div>
         </div>
         <div className="flex items-center gap-2">
           <Mail className="text-stone-400 shrink-0" size={16} />
           <div>
-            <span className="block text-[10px] text-stone-400 uppercase font-semibold">Contact Phone</span>
-            <span className="font-semibold text-stone-700">{booking.phone}</span>
+            <span className="block text-[10px] text-stone-400 uppercase font-semibold">
+              Contact Phone
+            </span>
+            <span className="font-semibold text-stone-700">
+              {booking.phone}
+            </span>
           </div>
         </div>
       </div>
 
       {booking.requests && (
         <div className="bg-stone-50/70 p-3 rounded-2xl text-xs text-[#594735] border border-stone-100">
-          <span className="font-bold text-[#3f2b1a] block mb-1">Tourist Special Requests:</span>
+          <span className="font-bold text-[#3f2b1a] block mb-1">
+            Tourist Special Requests:
+          </span>
           <p className="italic text-stone-600">"{booking.requests}"</p>
         </div>
       )}
 
       {booking.guideNote && (
         <div className="bg-green-50/70 p-3 rounded-2xl text-xs text-green-900 border border-green-100/50">
-          <span className="font-bold text-green-800 block mb-1">Your message to tourist:</span>
-          <p className="italic text-green-900/90 font-medium">"{booking.guideNote}"</p>
+          <span className="font-bold text-green-800 block mb-1">
+            Your message to tourist:
+          </span>
+          <p className="italic text-green-900/90 font-medium">
+            "{booking.guideNote}"
+          </p>
         </div>
       )}
 
-      {booking.status === 'Pending' && !isAccepting && (
+      {booking.status === "Pending" && !isAccepting && (
         <div className="mt-2 pt-4 border-t border-stone-100 flex gap-3 justify-end">
           <button
             onClick={() => onDecline(booking.id)}

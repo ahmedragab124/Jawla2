@@ -1,18 +1,21 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { supabase } from '../../../supabase';
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { supabase } from "../../../supabase";
 
 // HeroSearchForm Component
 function HeroSearchForm({ formRef }) {
   const navigate = useNavigate();
   const [destinations, setDestinations] = useState([]);
-  const [selectedDestination, setSelectedDestination] = useState('');
+  const [selectedDestination, setSelectedDestination] = useState("");
 
   // Fetches destination dropdown list from Supabase
   useEffect(() => {
     const loadDestinations = async () => {
-      const { data, error } = await supabase.from('destinations').select('id, name');
-      if (error) console.error('Failed to load destinations:', error);
+      const { data, error } = await supabase
+        .from("destinations")
+        .select("id, name");
+      if (error) toast.error("Failed to load destinations");
       else setDestinations(data || []);
     };
 
@@ -30,11 +33,15 @@ function HeroSearchForm({ formRef }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (selectedDestination) navigate(`/destination/${selectedDestination}`);
-    else navigate('/destinations');
+    else navigate("/destinations");
   };
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit} className="search-bar relative z-10">
+    <form
+      ref={formRef}
+      onSubmit={handleSubmit}
+      className="search-bar relative z-10"
+    >
       <h2 className="search-title">Search for Destinations</h2>
 
       <select
@@ -54,8 +61,19 @@ function HeroSearchForm({ formRef }) {
 
       <button type="submit" className="search-button cursor-pointer">
         Explore
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="size-6">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={2}
+          stroke="currentColor"
+          className="size-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
+          />
         </svg>
       </button>
     </form>

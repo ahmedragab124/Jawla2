@@ -1,12 +1,11 @@
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import HeroSearchForm from './HeroSearchForm';
-import '../styles/HeroSection.css';
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import HeroSearchForm from "./HeroSearchForm";
+import "../styles/HeroSection.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// HeroSection Component
 function HeroSection() {
   const heroRef = useRef(null);
   const wordsRef = useRef([]);
@@ -16,38 +15,84 @@ function HeroSection() {
   const orb2Ref = useRef(null);
 
   const titleWords = [
-    { text: 'Discover', isGradient: false },
-    { text: 'Egypt', isGradient: false },
-    { text: 'With', isGradient: false },
-    { text: 'Another', isGradient: true },
-    { text: 'Eyes', isGradient: true },
+    { text: "Discover", isGradient: false },
+    { text: "Egypt", isGradient: false },
+    { text: "With", isGradient: false },
+    { text: "Another", isGradient: true },
+    { text: "Eyes", isGradient: true },
   ];
 
-  // Initializes GSAP animations for glowing background orbs, title words, and scroll parallax
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: 'back.out(1.7)' } });
+      gsap.set(
+        [orb1Ref.current, orb2Ref.current, wordsRef.current, searchRef.current],
+        {
+          force3D: true,
+        },
+      );
 
+      // 2. حركة الـ Orbs الهادئة
       if (orb1Ref.current && orb2Ref.current) {
-        gsap.to(orb1Ref.current, { y: -40, x: 20, scale: 1.15, repeat: -1, yoyo: true, duration: 4, ease: 'sine.inOut' });
-        gsap.to(orb2Ref.current, { y: 40, x: -20, scale: 0.9, repeat: -1, yoyo: true, duration: 5, ease: 'sine.inOut' });
+        gsap.to(orb1Ref.current, {
+          y: -20,
+          x: 10,
+          scale: 1.05,
+          repeat: -1,
+          yoyo: true,
+          duration: 6,
+          ease: "sine.inOut",
+        });
+        gsap.to(orb2Ref.current, {
+          y: 20,
+          x: -10,
+          scale: 0.95,
+          repeat: -1,
+          yoyo: true,
+          duration: 7,
+          ease: "sine.inOut",
+        });
       }
+
+      const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
 
       tl.fromTo(
         wordsRef.current,
-        { opacity: 0, y: 70, rotateX: -45, scale: 0.8 },
-        { opacity: 1, y: 0, rotateX: 0, scale: 1, duration: 0.9, stagger: 0.12, delay: 0.2 }
+        {
+          opacity: 0,
+          y: 35,
+          scale: 0.95,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 1.4,
+          stagger: 0.22,
+          delay: 0.2,
+          ease: "power1.out",
+        },
       )
-        .fromTo(textRef.current, { opacity: 0, y: 35 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.4')
-        .fromTo(searchRef.current, { opacity: 0, y: 50, scale: 0.92 }, { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: 'back.out(1.4)' }, '-=0.4');
+        .fromTo(
+          textRef.current,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 1.0 },
+          "-=0.8",
+        )
+        .fromTo(
+          searchRef.current,
+          { opacity: 0, y: 30 },
+          { opacity: 1, y: 0, duration: 1.0 },
+          "-=0.6",
+        );
 
-      gsap.to(heroRef.current, {
-        backgroundPositionY: '30%',
-        ease: 'none',
+      gsap.to(".hero-content", {
+        y: 60,
+        opacity: 0.3,
+        ease: "none",
         scrollTrigger: {
           trigger: heroRef.current,
-          start: 'top top',
-          end: 'bottom top',
+          start: "top top",
+          end: "bottom top",
           scrub: true,
         },
       });
@@ -57,20 +102,26 @@ function HeroSection() {
   }, []);
 
   return (
-    <section ref={heroRef} className="hero-section relative">
-      <div ref={orb1Ref} className="absolute top-1/4 left-1/6 w-72 h-72 rounded-full bg-amber-500/20 blur-3xl pointer-events-none z-0" />
-      <div ref={orb2Ref} className="absolute bottom-1/4 right-1/6 w-96 h-96 rounded-full bg-[#0ea5e9]/15 blur-3xl pointer-events-none z-0" />
+    <section ref={heroRef} className="hero-section relative overflow-hidden">
+      <div
+        ref={orb1Ref}
+        className="absolute top-1/4 left-1/6 w-64 h-64 rounded-full bg-amber-500/20 blur-2xl pointer-events-none z-0 will-change-transform"
+      />
+      <div
+        ref={orb2Ref}
+        className="absolute bottom-1/4 right-1/6 w-80 h-80 rounded-full bg-[#0ea5e9]/15 blur-2xl pointer-events-none z-0 will-change-transform"
+      />
 
-      <div className="hero-content relative z-10">
-        <h1 className="hero-title flex flex-wrap justify-center gap-x-3.5 gap-y-1 perspective-800">
+      <div className="hero-content relative z-10 will-change-transform">
+        <h1 className="hero-title flex flex-wrap justify-center gap-x-3.5 gap-y-1">
           {titleWords.map((item, idx) => (
             <span
               key={idx}
               ref={(el) => (wordsRef.current[idx] = el)}
-              className={`inline-block origin-bottom ${
+              className={`inline-block ${
                 item.isGradient
-                  ? 'bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-500 bg-[length:200%_auto] bg-clip-text text-transparent drop-shadow-lg'
-                  : 'text-white'
+                  ? "bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-500 bg-clip-text text-transparent drop-shadow-md"
+                  : "text-white"
               }`}
             >
               {item.text}
@@ -79,7 +130,8 @@ function HeroSection() {
         </h1>
 
         <p ref={textRef} className="hero-text mt-4">
-          Explore archaeological sites, heritage trails and historical journeys across the land of pharaohs.
+          Explore archaeological sites, heritage trails and historical journeys
+          across the land of pharaohs.
         </p>
       </div>
 

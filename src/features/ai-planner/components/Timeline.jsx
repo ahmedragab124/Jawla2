@@ -1,16 +1,21 @@
-import { useEffect, useRef } from 'react';
-import TripCard from './TripCard';
-import gsap from 'gsap';
+import { useEffect, useRef } from "react";
+import TripCard from "./TripCard";
+import gsap from "gsap";
 
 function Timeline({ trip, findAttraction }) {
   const containerRef = useRef(null);
-  const dayKeys = Object.keys(trip).filter((key) => key.startsWith('day')).sort();
+  // Sorts the trip days to ensure they are displayed in order
+  const dayKeys = Object.keys(trip)
+    .filter((key) => key.startsWith("day"))
+    .sort();
 
   useEffect(() => {
     if (!containerRef.current) return;
 
     const ctx = gsap.context(() => {
-      const daySections = containerRef.current.querySelectorAll('.timeline-day-section');
+      const daySections = containerRef.current.querySelectorAll(
+        ".timeline-day-section",
+      );
       gsap.fromTo(
         daySections,
         { opacity: 0, y: 45 },
@@ -19,8 +24,8 @@ function Timeline({ trip, findAttraction }) {
           y: 0,
           duration: 0.7,
           stagger: 0.15,
-          ease: 'power3.out',
-        }
+          ease: "power3.out",
+        },
       );
     }, containerRef);
 
@@ -44,7 +49,10 @@ function Timeline({ trip, findAttraction }) {
             {trip[dayKey].map((item, index) => (
               <div key={index} className="relative">
                 <div className="ai-timeline-dot absolute -left-[31px] top-6 h-4 w-4 rounded-full bg-[#b57a2d] border-4 border-white shadow-md" />
-                <TripCard attraction={findAttraction(item.attractionId)} time={item.time} />
+                <TripCard
+                  attraction={findAttraction(item.attractionId)}
+                  time={item.time}
+                />
               </div>
             ))}
           </div>

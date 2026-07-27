@@ -1,6 +1,65 @@
-import { Home, Compass, MapPin, CalendarDays, LogOut, X } from 'lucide-react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { useAuth } from '../features/auth/context/AuthContext';
+import {
+  Home,
+  Compass,
+  MapPin,
+  CalendarDays,
+  LogOut,
+  X,
+  MapPinCheckInside,
+  ChevronDown,
+  ChevronRight,
+} from "lucide-react";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
+import { useAuth } from "../features/auth/context/AuthContext";
+import { useState } from "react";
+
+// Collapsible section for destinations / attractions sub-links
+function NavGroup({ icon: Icon, label, children, basePath }) {
+  const { pathname } = useLocation();
+  const isActive = pathname.startsWith(basePath);
+  const [open, setOpen] = useState(isActive);
+
+  return (
+    <div>
+      <button
+        onClick={() => setOpen((o) => !o)}
+        className={`flex w-full items-center gap-3 rounded-3xl px-4 py-3 text-left font-semibold transition-all duration-200 cursor-pointer ${
+          isActive
+            ? "bg-[#f7e1c4] text-[#3f2b1a]"
+            : "text-[#695744] hover:bg-[#fff7ea] hover:text-[#3f2b1a]"
+        }`}
+      >
+        <Icon className="h-5 w-5 shrink-0" />
+        <span className="flex-1">{label}</span>
+        {open ? <ChevronDown size={15} /> : <ChevronRight size={15} />}
+      </button>
+
+      {open && (
+        <div className="ml-8 mt-1 space-y-1 border-l-2 border-[#f0dfc7] pl-3">
+          {children}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function SubLink({ to, label, onClose }) {
+  return (
+    <NavLink
+      to={to}
+      onClick={onClose}
+      className={({ isActive }) =>
+        `block rounded-2xl px-3 py-2 text-sm font-medium transition-all duration-150 cursor-pointer ${
+          isActive
+            ? "bg-[#f7e1c4] text-[#3f2b1a] font-semibold"
+            : "text-[#695744] hover:bg-[#fff7ea] hover:text-[#3f2b1a]"
+        }`
+      }
+    >
+      ➜ {label}
+    </NavLink>
+  );
+}
 
 function Slider({ onClose }) {
   const { logout } = useAuth();
@@ -8,15 +67,15 @@ function Slider({ onClose }) {
 
   const handleLogout = () => {
     logout();
-    navigate('/');
+    navigate("/");
     if (onClose) onClose();
   };
 
-  const navItems = [
-    { to: '/admin/dashboard', label: 'Overview', icon: Home, end: true },
-    { to: '/admin/dashboard/guides', label: 'Tour guides', icon: Compass },
-    { to: '/admin/dashboard/tourists', label: 'Tourists', icon: MapPin },
-    { to: '/admin/dashboard/bookings', label: 'Bookings', icon: CalendarDays },
+  const topNavItems = [
+    { to: "/admin/dashboard", label: "Overview", icon: Home, end: true },
+    { to: "/admin/dashboard/guides", label: "Tour Guides", icon: Compass },
+    { to: "/admin/dashboard/tourists", label: "Tourists", icon: MapPin },
+    { to: "/admin/dashboard/bookings", label: "Bookings", icon: CalendarDays },
   ];
 
   return (
@@ -24,7 +83,9 @@ function Slider({ onClose }) {
       {/* Header */}
       <div className="flex items-center justify-between px-6 py-8">
         <div>
-          <h2 className="text-[#3f2b1a] font-black text-2xl leading-tight">Admin Panel</h2>
+          <h2 className="text-[#3f2b1a] font-black text-2xl leading-tight">
+            Admin Panel
+          </h2>
           <p className="mt-2 text-sm text-[#695744] leading-relaxed">
             Manage your tours, guides, and tourists with ease.
           </p>
@@ -46,8 +107,9 @@ function Slider({ onClose }) {
       </div>
 
       {/* Navigation */}
-      <nav className="px-3 pb-6 space-y-1.5 flex-1">
-        {navItems.map((item) => {
+      <nav className="px-3 pb-6 space-y-1.5 flex-1 overflow-y-auto">
+        {/* Top flat links */}
+        {topNavItems.map((item) => {
           const Icon = item.icon;
           return (
             <NavLink
@@ -58,8 +120,8 @@ function Slider({ onClose }) {
               className={({ isActive }) =>
                 `flex items-center gap-3 w-full rounded-3xl px-4 py-3 text-left font-semibold transition-all duration-200 cursor-pointer ${
                   isActive
-                    ? 'bg-[#f7e1c4] text-[#3f2b1a] shadow-xs'
-                    : 'text-[#695744] hover:bg-[#fff7ea] hover:text-[#3f2b1a]'
+                    ? "bg-[#f7e1c4] text-[#3f2b1a] shadow-xs"
+                    : "text-[#695744] hover:bg-[#fff7ea] hover:text-[#3f2b1a]"
                 }`
               }
             >
@@ -68,6 +130,29 @@ function Slider({ onClose }) {
             </NavLink>
           );
         })}
+
+        {/* Separator */}
+        <div className="my-2 border-t border-[#f3e6d3]" />
+
+        {/* 📍 Destinations group */}
+        <NavGroup
+          icon={MapPin}
+          label="Destinations"
+          basePath="/admin/dashboard/destinations"
+        >
+          <SubLink to="/admin/dashboard/destinations/view" label="View" onClose={onClose} />
+          <SubLink to="/admin/dashboard/destinations/add" label="Add" onClose={onClose} />
+        </NavGroup>
+
+        {/* 🏛 Attractions group */}
+        <NavGroup
+          icon={MapPinCheckInside}
+          label="Attractions"
+          basePath="/admin/dashboard/attractions"
+        >
+          <SubLink to="/admin/dashboard/attractions/view" label="View" onClose={onClose} />
+          <SubLink to="/admin/dashboard/attractions/add" label="Add" onClose={onClose} />
+        </NavGroup>
       </nav>
 
       {/* Footer / Logout */}

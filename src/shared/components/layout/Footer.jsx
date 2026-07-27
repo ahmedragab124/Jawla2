@@ -1,10 +1,18 @@
 import { useEffect, useRef } from 'react';
-import { Globe, Share2, Mail, ArrowUp } from 'lucide-react';
+import { Globe, Share2, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
+
+const NAV_LINKS = [
+  { label: 'Destinations', to: '/destinations' },
+  { label: 'Attractions',  to: '/attractions'  },
+  { label: 'AI Planner',   to: '/ai-planner'   },
+  { label: 'About',        to: '/about'        },
+  { label: 'Book a Guide', to: '/booking'      },
+];
 
 function Footer() {
   const footerRef = useRef(null);
@@ -13,89 +21,63 @@ function Footer() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         footerRef.current,
-        { opacity: 0, y: 50 },
+        { opacity: 0, y: 30 },
         {
-          opacity: 1,
-          y: 0,
-          duration: 0.9,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: footerRef.current,
-            start: 'top 90%',
-          },
+          opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+          scrollTrigger: { trigger: footerRef.current, start: 'top 95%' },
         }
       );
     }, footerRef);
-
     return () => ctx.revert();
   }, []);
 
- 
-
   return (
-    <footer ref={footerRef} className="bg-gradient-to-b from-[#fffaf0] via-[#f7ebd9] to-[#ebd9c5] pt-20 pb-12 border-t border-[#f0dfcc]">
-      <div className="mx-auto flex max-w-6xl flex-col gap-10 px-6 sm:px-8 lg:flex-row lg:items-start lg:justify-between">
-        <div className="max-w-lg space-y-5">
-          <div>
-            <div className="flex items-center gap-2.5">
-              <img src="/favicon.svg" alt="Jawla Logo" className="h-9 w-9 object-contain" />
-              <h3 className="text-3xl font-black text-[#3f2b1a]">Jawla</h3>
-            </div>
-            <p className="mt-4 max-w-md text-sm leading-7 text-[#695540]">
-              Defining the next generation of Egyptian tourism through heritage, luxury, and AI-assisted personalized travel experiences.
-            </p>
+    <footer
+      ref={footerRef}
+      className="border-t border-[#ecdfc9] bg-[#fdf7ee] py-8"
+    >
+      <div className="mx-auto max-w-6xl px-6 sm:px-8">
+
+        {/* Main row */}
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+
+          {/* Brand */}
+          <div className="flex items-center gap-2.5">
+            <img src="/favicon.svg" alt="Jawla Logo" className="h-8 w-8 object-contain" />
+            <span className="text-xl font-black text-[#3f2b1a]">Jawla</span>
           </div>
 
-          <div className="flex items-center gap-3 pt-2">
-            <button className="flex h-11 w-11 items-center justify-center rounded-full bg-[#f3e3ce] text-[#3f2b1a] transition hover:bg-[#b57a2d] hover:text-white hover:scale-110 shadow-xs cursor-pointer">
-              <Globe size={18} />
-            </button>
-            <button className="flex h-11 w-11 items-center justify-center rounded-full bg-[#f3e3ce] text-[#3f2b1a] transition hover:bg-[#b57a2d] hover:text-white hover:scale-110 shadow-xs cursor-pointer">
-              <Share2 size={18} />
-            </button>
-            <button className="flex h-11 w-11 items-center justify-center rounded-full bg-[#f3e3ce] text-[#3f2b1a] transition hover:bg-[#b57a2d] hover:text-white hover:scale-110 shadow-xs cursor-pointer">
-              <Mail size={18} />
-            </button>
-          </div>
-        </div>
+          {/* Nav links */}
+          <nav className="flex flex-wrap gap-x-6 gap-y-2">
+            {NAV_LINKS.map(({ label, to }) => (
+              <Link
+                key={to}
+                to={to}
+                className="text-sm font-medium text-[#695744] transition-colors hover:text-[#b57a2d]"
+              >
+                {label}
+              </Link>
+            ))}
+          </nav>
 
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-2">
-          <div>
-            <h4 className="text-lg font-bold text-[#3f2b1a]">Navigation</h4>
-            <ul className="mt-4 space-y-2.5 text-sm font-medium text-[#695540]">
-              <li>
-                <Link to="/attractions" className="hover:text-[#b57a2d] transition-colors">
-                  Attractions
-                </Link>
-              </li>
-              <li>
-                <Link to="/destinations" className="hover:text-[#b57a2d] transition-colors">
-                  Destinations
-                </Link>
-              </li>
-              <li>
-                <Link to="/ai-planner" className="hover:text-[#b57a2d] transition-colors">
-                  AI Planner
-                </Link>
-              </li>
-              <li>
-                <Link to="/about" className="hover:text-[#b57a2d] transition-colors">
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link to="/booking" className="hover:text-[#b57a2d] transition-colors">
-                  Book a Guide
-                </Link>
-              </li>
-            </ul>
+          {/* Social icons */}
+          <div className="flex items-center gap-2">
+            {[Globe, Share2, Mail].map((Icon, i) => (
+              <button
+                key={i}
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-[#f3e3ce] text-[#3f2b1a] transition hover:bg-[#b57a2d] hover:text-white hover:scale-110 cursor-pointer"
+              >
+                <Icon size={16} />
+              </button>
+            ))}
           </div>
         </div>
-      </div>
 
-      <div className="mx-auto mt-12 flex max-w-6xl items-center justify-between border-t border-[#e5d3be] pt-8 px-6 text-sm text-[#7a644d] sm:px-8">
-        <p>© 2026 Jawla. All rights reserved.</p>
-   
+        {/* Bottom bar */}
+        <div className="mt-6 border-t border-[#ecdfc9] pt-4 text-center text-xs text-[#9a7d63]">
+          © 2026 Jawla. All rights reserved.
+        </div>
+
       </div>
     </footer>
   );

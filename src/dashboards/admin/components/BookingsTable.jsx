@@ -1,12 +1,12 @@
-import { Trash2 } from 'lucide-react';
+import { Trash2 } from "lucide-react";
 
 // BookingsTable Component
 function BookingsTable({ bookings, tourGuides, onDelete }) {
   // Resolves guide name by guideId
   const getGuideName = (guideId) => {
-    if (!guideId) return 'General Request';
+    if (!guideId) return "General Request";
     const guide = tourGuides.find((g) => g.id === guideId);
-    return guide ? guide.name : 'Unknown Guide';
+    return guide ? guide.name : "Unknown Guide";
   };
 
   return (
@@ -28,22 +28,31 @@ function BookingsTable({ bookings, tourGuides, onDelete }) {
           </thead>
           <tbody>
             {bookings.map((booking) => (
-              <tr key={booking.id} className="border-t border-stone-100 hover:bg-stone-50/50">
+              <tr
+                key={booking.id}
+                className="border-t border-stone-100 hover:bg-stone-50/50"
+              >
                 <td className="p-4">
                   <p className="font-bold text-[#3f2b1a]">{booking.fullName}</p>
                   <p className="text-xs text-stone-400">{booking.email}</p>
                 </td>
-                <td className="p-4 font-semibold text-[#3f2b1a]">{booking.tourType}</td>
-                <td className="p-4 text-[#695744] font-medium">{booking.date}</td>
-                <td className="p-4 text-[#695744] font-medium">{getGuideName(booking.guideId)}</td>
+                <td className="p-4 font-semibold text-[#3f2b1a]">
+                  {booking.tourType}
+                </td>
+                <td className="p-4 text-[#695744] font-medium">
+                  {booking.date}
+                </td>
+                <td className="p-4 text-[#695744] font-medium">
+                  {getGuideName(booking.guideId)}
+                </td>
                 <td className="p-4">
                   <span
                     className={`rounded-full px-3 py-1 text-xs font-bold ${
-                      booking.status === 'Approved'
-                        ? 'bg-green-100 text-green-800'
-                        : booking.status === 'Rejected'
-                        ? 'bg-red-100 text-red-800'
-                        : 'bg-amber-100 text-amber-800'
+                      booking.status === "Approved"
+                        ? "bg-green-100 text-green-800"
+                        : booking.status === "Rejected"
+                          ? "bg-red-100 text-red-800"
+                          : "bg-amber-100 text-amber-800"
                     }`}
                   >
                     {booking.status}
@@ -62,7 +71,10 @@ function BookingsTable({ bookings, tourGuides, onDelete }) {
             ))}
             {bookings.length === 0 && (
               <tr>
-                <td colSpan="6" className="p-6 text-center text-stone-400 font-medium bg-stone-50/50">
+                <td
+                  colSpan="6"
+                  className="p-6 text-center text-stone-400 font-medium bg-stone-50/50"
+                >
                   No bookings available in the system.
                 </td>
               </tr>

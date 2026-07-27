@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
-import { Clock } from 'lucide-react';
-import { supabase } from '../../supabase';
-import TourGuideProfileCard from './components/TourGuideProfileCard';
-import GuideBookingCard from './components/GuideBookingCard';
+import { useState, useEffect } from "react";
+import { Clock } from "lucide-react";
+import { toast } from "react-toastify";
+import { supabase } from "../../supabase";
+import TourGuideProfileCard from "./components/TourGuideProfileCard";
+import GuideBookingCard from "./components/GuideBookingCard";
 
 // TourGuideDashboard Component
 function TourGuideDashboard({ user }) {
@@ -10,33 +11,34 @@ function TourGuideDashboard({ user }) {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [acceptingBookingId, setAcceptingBookingId] = useState(null);
-  const [guideNote, setGuideNote] = useState('');
+  const [guideNote, setGuideNote] = useState("");
 
   // Loads guide profile details and assigned bookings from Supabase
   useEffect(() => {
     const loadGuideDashboard = async () => {
       try {
         const { data: guides, error: guideError } = await supabase
-          .from('tourGuides')
-          .select('*')
-          .eq('email', user.email);
+          .from("tourGuides")
+          .select("*")
+          .eq("email", user.email);
 
         if (guideError) throw guideError;
-        if (!guides || guides.length === 0) throw new Error('Guide record not found.');
+        if (!guides || guides.length === 0)
+          throw new Error("Guide record not found.");
 
         const guideData = guides[0];
         setGuide(guideData);
 
         const { data: bookingsData, error: bookingsError } = await supabase
-          .from('bookings')
-          .select('*')
-          .eq('guideId', guideData.id);
+          .from("bookings")
+          .select("*")
+          .eq("guideId", guideData.id);
 
         if (bookingsError) throw bookingsError;
 
         setBookings(bookingsData || []);
       } catch (err) {
-        console.error('Failed to load guide dashboard:', err);
+        toast.error("Failed to load guide dashboard");
       } finally {
         setLoading(false);
       }
@@ -47,41 +49,56 @@ function TourGuideDashboard({ user }) {
 
   // Declines a pending booking request
   const handleDecline = async (bookingId) => {
-    if (!window.confirm('Are you sure you want to decline this booking request?')) return;
-    const { error } = await supabase.from('bookings').update({ status: 'Rejected' }).eq('id', bookingId);
-    if (error) return alert('Something went wrong.');
-    setBookings((prev) => prev.map((b) => (b.id === bookingId ? { ...b, status: 'Rejected' } : b)));
+    if (
+      !window.confirm("Are you sure you want to decline this booking request?")
+    )
+      return;
+    const { error } = await supabase
+      .from("bookings")
+      .update({ status: "Rejected" })
+      .eq("id", bookingId);
+    if (error) return toast.error("Failed to decline booking");
+    toast.success("Booking declined");
+    setBookings((prev) =>
+      prev.map((b) => (b.id === bookingId ? { ...b, status: "Rejected" } : b)),
+    );
   };
 
   // Confirms accepting a booking with an optional welcome note for the tourist
   const handleAcceptSubmit = async (bookingId) => {
     const trimmedNote = guideNote.trim();
-    const updatePayload = { status: 'Approved' };
+    const updatePayload = { status: "Approved" };
 
     if (trimmedNote) {
       updatePayload.guideNote = trimmedNote;
     }
 
-    const { error } = await supabase.from('bookings').update(updatePayload).eq('id', bookingId);
+    const { error } = await supabase
+      .from("bookings")
+      .update(updatePayload)
+      .eq("id", bookingId);
 
     if (error) {
-      console.error('Accept booking error:', error, { bookingId, updatePayload });
-      return alert(`Could not accept booking: ${error.message || 'Please try again.'}`);
+      toast.error(
+        `Failed to accept booking: ${error.message || "Please try again."}`,
+      );
+      return;
     }
+    toast.success("Booking accepted");
 
     setBookings((prev) =>
       prev.map((b) =>
         b.id === bookingId
           ? {
               ...b,
-              status: 'Approved',
+              status: "Approved",
               ...(trimmedNote ? { guideNote: trimmedNote } : {}),
             }
-          : b
-      )
+          : b,
+      ),
     );
     setAcceptingBookingId(null);
-    setGuideNote('');
+    setGuideNote("");
   };
 
   if (loading) {
@@ -93,16 +110,19 @@ function TourGuideDashboard({ user }) {
   }
 
   // Pending verification screen
-  if (guide && guide.status === 'Pending approval') {
+  if (guide && guide.status === "Pending approval") {
     return (
       <main className="min-h-screen bg-[#fffaf0] px-5 py-16 flex items-center justify-center">
         <section className="mx-auto max-w-xl rounded-4xl bg-white p-8 shadow-[0_24px_80px_rgba(76,48,24,0.1)] border border-stone-100 text-center flex flex-col items-center">
           <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-amber-50 text-amber-600 animate-pulse">
             <Clock size={32} />
           </div>
-          <h2 className="mt-6 text-2xl font-bold text-[#3f2b1a]">Application Under Review</h2>
+          <h2 className="mt-6 text-2xl font-bold text-[#3f2b1a]">
+            Application Under Review
+          </h2>
           <p className="mt-3 text-stone-600 leading-relaxed max-w-sm">
-            Hi <strong>{guide.name}</strong>, your Tour Guide registration is currently under review by our admin team.
+            Hi <strong>{guide.name}</strong>, your Tour Guide registration is
+            currently under review by our admin team.
           </p>
         </section>
       </main>
@@ -116,11 +136,15 @@ function TourGuideDashboard({ user }) {
       </div>
 
       <div className="lg:col-span-2">
-        <h3 className="text-2xl font-extrabold text-[#3f2b1a] mb-6">Assigned Bookings ({bookings.length})</h3>
+        <h3 className="text-2xl font-extrabold text-[#3f2b1a] mb-6">
+          Assigned Bookings ({bookings.length})
+        </h3>
 
         {bookings.length === 0 ? (
           <div className="rounded-3xl bg-white p-10 text-center shadow-[0_15px_40px_rgba(76,48,24,0.08)] border border-stone-100/50">
-            <p className="text-lg font-semibold text-stone-400">No trips assigned to you yet.</p>
+            <p className="text-lg font-semibold text-stone-400">
+              No trips assigned to you yet.
+            </p>
           </div>
         ) : (
           <div className="space-y-6">
@@ -132,8 +156,14 @@ function TourGuideDashboard({ user }) {
                 guideNote={guideNote}
                 setGuideNote={setGuideNote}
                 onDecline={handleDecline}
-                onStartAccept={(id) => { setAcceptingBookingId(id); setGuideNote(''); }}
-                onCancelAccept={() => { setAcceptingBookingId(null); setGuideNote(''); }}
+                onStartAccept={(id) => {
+                  setAcceptingBookingId(id);
+                  setGuideNote("");
+                }}
+                onCancelAccept={() => {
+                  setAcceptingBookingId(null);
+                  setGuideNote("");
+                }}
                 onAcceptSubmit={handleAcceptSubmit}
               />
             ))}
