@@ -162,29 +162,57 @@ function AIPlannerPage() {
         </div>
         {loading && <LoadingState />}
         {!loading && !trip && (
-          <div className="text-center py-16">
-            <h2 className="text-xl font-bold text-[#3f2b1a] mb-2">
-              Your journey starts here
-            </h2>
-            <p className="text-[#5b4423] text-sm max-w-sm mx-auto">
-              Choose a destination, pick your interests, and let AI build your
-              itinerary.
-            </p>
+          <div className="mt-8 rounded-3xl border border-[#f1e7d9] bg-white p-8 shadow-xs text-center space-y-6 max-w-2xl mx-auto">
+            <div className="space-y-1">
+              <span className="text-xs font-black tracking-[0.2em] text-[#b57a2d] uppercase">How It Works</span>
+              <h3 className="text-2xl font-black text-[#3f2b1a]">3 Easy Steps to Your Custom Trip</h3>
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-3 pt-2">
+              <div className="rounded-2xl bg-[#fff9f0] border border-[#f3e6d3] p-4 text-center space-y-2">
+                <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-[#3f2b1a] text-amber-400 font-bold text-sm shadow-xs">
+                  1
+                </div>
+                <h4 className="text-sm font-bold text-[#3f2b1a]">Select City</h4>
+                <p className="text-xs text-[#695744] font-medium leading-5">Choose any destination across Egypt.</p>
+              </div>
+
+              <div className="rounded-2xl bg-[#fff9f0] border border-[#f3e6d3] p-4 text-center space-y-2">
+                <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-[#3f2b1a] text-amber-400 font-bold text-sm shadow-xs">
+                  2
+                </div>
+                <h4 className="text-sm font-bold text-[#3f2b1a]">Days & Interests</h4>
+                <p className="text-xs text-[#695744] font-medium leading-5">Set duration and your travel style.</p>
+              </div>
+
+              <div className="rounded-2xl bg-[#fff9f0] border border-[#f3e6d3] p-4 text-center space-y-2">
+                <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-[#b57a2d] text-white font-bold text-sm shadow-md">
+                  3
+                </div>
+                <h4 className="text-sm font-bold text-[#3f2b1a]">Get Schedule</h4>
+                <p className="text-xs text-[#695744] font-medium leading-5">AI generates your daily itinerary.</p>
+              </div>
+            </div>
           </div>
         )}
         {!loading && trip && destination && (
-          <div className="mt-8">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl font-extrabold text-[#3f2b1a]">
+          <div className="mt-10">
+            <div className="text-center mb-10 space-y-3">
+              <span className="text-xs font-black tracking-[0.25em] text-[#b57a2d] uppercase">Your Customized Schedule</span>
+              <h2 className="text-3xl font-black text-[#3f2b1a]">
                 {days}-Day Itinerary — {destination.name}
               </h2>
-              <div className="mx-auto mt-3 h-1 w-16 rounded-full bg-[#b57a2d]" />
-              <button
-                onClick={() => window.print()}
-                className="mt-4 inline-flex items-center gap-2 px-5 py-2 rounded-full border-2 border-[#b57a2d] text-[#b57a2d] font-semibold text-sm hover:bg-[#b57a2d] hover:text-white transition no-print cursor-pointer"
-              >
-                Print / Save as PDF
-              </button>
+              <div className="mx-auto h-1 w-16 rounded-full bg-[#b57a2d]" />
+              
+              <div className="pt-2">
+                <button
+                  type="button"
+                  onClick={() => window.print()}
+                  className="inline-flex items-center gap-2 rounded-full border-2 border-[#b57a2d] bg-white px-6 py-2.5 text-xs font-bold text-[#b57a2d] shadow-sm transition hover:bg-[#b57a2d] hover:text-white cursor-pointer no-print"
+                >
+                  🖨️ Print / Download PDF
+                </button>
+              </div>
             </div>
             <Timeline trip={trip} findAttraction={findAttraction} />
             <TripSummary

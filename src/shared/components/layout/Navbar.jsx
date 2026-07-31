@@ -83,10 +83,10 @@ function Navbar() {
   }, [location.pathname]);
 
   return (
-    <div className="fixed top-4 left-1/2 -translate-x-1/2 z-999999 w-[calc(100%-2rem)] max-w-7xl px-1">
+    <div className=" fixed top-4 left-1/2 -translate-x-1/2 z-999999 w-[calc(100%-2rem)] max-w-7xl px-1">
       <nav
         ref={navRef}
-        className="rounded-2xl px-6 py-3 text-white backdrop-blur-xl transition-all duration-300"
+        className="rounded-full px-6 py-3 text-white backdrop-blur-xl transition-all duration-300"
       >
         <div className="flex items-center justify-between">
           <Link
@@ -99,7 +99,7 @@ function Navbar() {
               alt="Jawla Logo"
               className="h-8 w-8 object-contain group-hover:rotate-12 transition-transform duration-300"
             />
-            <span className="text-xl font-black text-white group-hover:text-amber-300 transition duration-300 cursor-pointer tracking-wide">
+            <span className="text-xl font-black text-white group-hover:text-amber-300  transition duration-300 cursor-pointer tracking-wide">
               Jawla
             </span>
           </Link>
@@ -107,31 +107,31 @@ function Navbar() {
           <div ref={linksRef} className="hidden md:flex gap-7 items-center">
             <Link
               to="/destinations"
-              className="text-white/90 font-medium hover:text-amber-300 transition duration-200 cursor-pointer text-sm py-1"
+              className="text-white/90 font-medium hover:text-amber-300 hover:border-b hover:border-amber-300 transition duration-200 cursor-pointer text-sm py-1"
             >
               Destinations
             </Link>
             <Link
               to="/attractions"
-              className="text-white/90 font-medium hover:text-amber-300 transition duration-200 cursor-pointer text-sm py-1"
+              className="text-white/90 font-medium hover:text-amber-300 hover:border-b hover:border-amber-300 transition duration-200 cursor-pointer text-sm py-1"
             >
               Attractions
             </Link>
             <Link
               to="/ai-planner"
-              className="text-white/90 font-medium hover:text-amber-300 transition duration-200 cursor-pointer text-sm py-1"
+              className="text-white/90 font-medium hover:text-amber-300 hover:border-b hover:border-amber-300  transition duration-200 cursor-pointer text-sm py-1"
             >
               AI Planner
             </Link>
             <Link
               to="/about"
-              className="text-white/90 font-medium hover:text-amber-300 transition duration-200 cursor-pointer text-sm py-1"
+              className="text-white/90 font-medium hover:text-amber-300 hover:border-b hover:border-amber-300  transition duration-200 cursor-pointer text-sm py-1"
             >
               About
             </Link>
             <Link
               to="/booking"
-              className="text-white/90 font-medium hover:text-amber-300 transition duration-200 cursor-pointer text-sm py-1"
+              className="text-white/90 font-medium hover:text-amber-300 hover:border-b hover:border-amber-300  transition duration-200 cursor-pointer text-sm py-1"
             >
               Book a Guide
             </Link>

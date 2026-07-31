@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { toast } from "react-toastify";
 import { supabase } from "../supabase";
+import { CardSkeleton } from "../shared/components/ui/Skeleton";
 import gsap from "gsap";
 import "../styles/DestinationsPage.css";
 
@@ -103,8 +104,8 @@ function DestinationsPage() {
         </div>
 
         {destinations.length === 0 ? (
-          <div className="flex justify-center items-center py-24">
-            <div className="h-10 w-10 animate-spin rounded-full border-4 border-[#b57a2d] border-t-transparent" />
+          <div className="mt-10">
+            <CardSkeleton count={3} />
           </div>
         ) : (
           <div className="dest-carousel-wrapper mt-10">

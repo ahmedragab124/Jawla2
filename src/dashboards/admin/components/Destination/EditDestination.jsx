@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Check, Plus, Trash2 } from "lucide-react";
 import { toast } from "react-toastify";
 import { supabase } from "../../../../supabase";
+import { FormSkeleton } from "../../../../shared/components/ui/Skeleton";
 
 const inputClass =
   "w-full border border-[#d9c9b0] rounded-2xl py-3 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-[#b57a2d] bg-white/70 transition";
@@ -141,8 +142,8 @@ function EditDestination() {
   // ── Loading ───────────────────────────────────────────────
   if (loading)
     return (
-      <div className="flex items-center justify-center py-20 min-h-[40vh]">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-[#b57a2d] border-t-transparent" />
+      <div className="max-w-2xl">
+        <FormSkeleton />
       </div>
     );
 

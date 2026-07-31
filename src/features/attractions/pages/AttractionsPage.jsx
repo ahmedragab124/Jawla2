@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { supabase } from "../../../supabase";
 import AttractionCategoryTabs from "../components/AttractionCategoryTabs";
 import useSEO from "../../../hooks/useSEO";
+import { CardSkeleton } from "../../../shared/components/ui/Skeleton";
 import gsap from "gsap";
 
 /**
@@ -13,6 +14,7 @@ import gsap from "gsap";
  */
 function AttractionsPage() {
   const [attractions, setAttractions] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const containerRef = useRef(null);
@@ -35,6 +37,8 @@ function AttractionsPage() {
         setAttractions(data || []);
       } catch (error) {
         toast.error("Failed to load attractions");
+      } finally {
+        setLoading(false);
       }
     }
 
@@ -109,7 +113,10 @@ function AttractionsPage() {
           onCategorySelect={setSelectedCategory}
         />
 
-        <div ref={gridRef} className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {loading ? (
+          <CardSkeleton count={6} />
+        ) : (
+          <div ref={gridRef} className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((a) => (
             <Link
               key={a.id}
@@ -152,8 +159,9 @@ function AttractionsPage() {
             </Link>
           ))}
         </div>
+        )}
 
-        {filtered.length === 0 && (
+        {!loading && filtered.length === 0 && (
           <div className="py-20 text-center text-stone-500">
             <p className="text-lg font-bold text-[#3f2b1a]">
               No attractions found

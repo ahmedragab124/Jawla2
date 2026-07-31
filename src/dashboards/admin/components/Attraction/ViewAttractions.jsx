@@ -3,6 +3,7 @@ import { Trash2, Pencil } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../../../supabase";
 import { toast } from "react-toastify";
+import { TableSkeleton } from "../../../../shared/components/ui/Skeleton";
 
 function ViewAttractions() {
   const [attractions, setAttractions] = useState([]);
@@ -34,8 +35,8 @@ function ViewAttractions() {
 
   if (loading)
     return (
-      <div className="flex items-center justify-center py-20 min-h-[40vh]">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-[#b57a2d] border-t-transparent" />
+      <div className="mx-auto max-w-6xl">
+        <TableSkeleton rows={5} />
       </div>
     );
 

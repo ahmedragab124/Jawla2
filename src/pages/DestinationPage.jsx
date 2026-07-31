@@ -5,12 +5,12 @@ import Background from "../features/destinations/components/Background";
 import HeroContent from "../features/destinations/components/HeroContent";
 import ExperienceSection from "../features/destinations/components/ExperienceSection";
 import GuideSection from "../features/destinations/components/GuideSection";
+import { DetailsPageSkeleton } from "../shared/components/ui/Skeleton";
 import { supabase } from "../supabase";
 
 function DestinationPage() {
   const [destination, setDestination] = useState(null);
   const params = useParams();
-  // console.log(destination);
 
   React.useEffect(() => {
     const loadDestination = async () => {
@@ -31,12 +31,12 @@ function DestinationPage() {
     loadDestination();
   }, [params.id]);
 
-  // console.log(destination);
-
   if (!destination?.heroImage) {
     return (
-      <main className="grid min-h-[70vh] place-items-center text-xl text-[#7a5540]">
-        Loading...
+      <main className="min-h-screen bg-[#fffaf0] px-5 pt-28 pb-16">
+        <div className="mx-auto max-w-6xl">
+          <DetailsPageSkeleton />
+        </div>
       </main>
     );
   }

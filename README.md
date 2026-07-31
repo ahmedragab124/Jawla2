@@ -1,133 +1,330 @@
-# 🇪🇬 Jawla (جولة) - Explore Egypt's Wonders & Heritage Trails
+<p align="center">
+  <img src="./public/favicon.svg" alt="Jawla Logo" width="120">
+</p>
 
-**Jawla (جولة)** is a modern, full-stack web application designed to revolutionize Egyptian tourism. Powered by **React 19**, **Vite**, **Supabase**, and **Google Gemini AI**, Jawla offers personalized AI-driven trip planning, certified Egyptologist tour guide bookings, interactive destination exploration with live weather updates, and comprehensive role-based dashboards.
+<h1 align="center">Jawla (جولة)</h1>
 
----
+<h3 align="center">
+Redefining Tourism in Egypt — AI Trip Planning & Unexplored Hidden Gems
+</h3>
 
-## 🌟 Key Features
+<p align="center">
+Hidden Gems • AI Trip Planner • Certified Tour Guides • Multi-Step Wizards • Responsive Luxury UI
+</p>
 
-### 🤖 1. AI Trip Planner (Powered by Google Gemini API)
-- **Customized Itineraries**: Generates day-by-day tailored travel schedules (1 to 7 days) based on tourist interests (Historical, Pyramids, Museums, Culinary, Shopping, Photography, etc.).
-- **Smart Constraints**: Ensures non-duplicate attraction visits, maximum 5 stops per day, and intelligent time slot allocations.
-- **Local Persistence**: Saves up to 30 generated itineraries locally per user (`aiTripsStorage.js`), allowing tourists to review past plans anytime.
+<div align="center">
 
-### 🏛️ 2. Destinations & Attractions Explorer
-- **Interactive Destination Guides**: Detailed pages for Egyptian cities (Cairo, Luxor, Aswan, Alexandria, etc.) with history summaries, heritage panels, and dynamic experience carousels.
-- **Live Weather Integration**: Connects with the **Open-Meteo API** to display real-time weather forecasts based on exact destination latitude/longitude coordinates.
-- **Filterable Attraction Gallery**: Search by name or filter by categories (Historical, Temples, Pyramids, Museums, Culture) with GSAP-powered animated category tabs.
+![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?logo=supabase&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?logo=tailwindcss&logoColor=white)
+![Google Gemini](https://img.shields.io/badge/Google_Gemini_AI-8E75B2?logo=google&logoColor=white)
 
-### 👨‍🏫 3. Certified Tour Guide Booking System
-- **Guide Directory & Selection**: Browse approved Egyptologist tour guides with specialty filters and experience stats.
-- **Seamless Booking Flow**: Submit booking requests with date selection, guest count, custom preferences, and guide selection.
-- **Real-Time Booking Status Stepper**: Visual progress tracker (**Pending** ➔ **Approved** / **Rejected**) for tourists.
-
-### 🔑 4. Role-Based Access Control & Dashboards
-
-The application supports three distinct user roles with protected routes (`RequireRole` component):
-
-| Role | Core Capabilities | Dashboard Route |
-| :--- | :--- | :--- |
-| **Tourist** | Manage profile, view saved AI itineraries, track booking status & access approved guide contact info (Phone / WhatsApp / Email). | `/profile` |
-| **Tour Guide** | Review pending booking requests, accept bookings with custom guide notes, decline requests, and monitor approval status. | `/profile` |
-| **Admin** | Full system overview & metrics, tourist list, tour guide registration approval/rejection, and CRUD managers for Destinations & Attractions. | `/admin/dashboard/*` |
+</div>
 
 ---
 
-## 🏗️ Architecture & Directory Workflow
+## 📑 Table of Contents
 
+- [About Jawla](#about-jawla)
+- [Core Features](#core-features)
+- [Tech Stack](#tech-stack)
+- [Architecture](#architecture)
+- [Project Structure](#project-structure)
+- [Screenshots](#screenshots)
+- [Database Schema & API Overview](#database-schema--api-overview)
+- [Getting Started](#getting-started)
+- [Future Roadmap](#future-roadmap)
+- [Meet the Team](#meet-the-team)
+
+---
+
+<a name="about-jawla"></a>
+
+## 📖 About Jawla
+
+**Jawla (جولة)** is an Egyptian tourism platform designed to transform how travelers experience Egypt.
+
+Most tourists visit Egypt once to see standard famous landmarks like the Pyramids, assuming they have seen the entire country. **Jawla** breaks this one-time visit cycle by revealing **unexplored hidden gems**, non-heritage local spots, and authentic cultural trails across all 27 Egyptian governorates.
+
+By combining **Google Gemini AI trip planning**, certified local Egyptologist tour guides, and modular multi-step management tools, Jawla turns single visits into lifelong journeys of discovery.
+
+---
+
+<a name="core-features"></a>
+
+## ✨ Core Features
+
+### 🤖 AI Trip Planner (Google Gemini)
+
+Generate customized daily itineraries based on:
+
+- Destination City
+- Number of Days (1-7 Days)
+- Travel Interests (History, Culture, Nature, Photography, Food, Shopping)
+- Day-by-day hourly schedule with print & PDF download capabilities.
+
+### 💎 Hidden Gems & Places Explorer
+
+Discover Egypt beyond standard tourist traps:
+
+- Historical Monuments & Pyramids
+- Museums & Cultural Landmarks
+- Non-Heritage Local Gems & Secret Neighborhood Spots
+- Beaches, Safaris, and Natural Preserves across all 27 governorates
+- Rich filtering by category, search query, and star ratings.
+
+### 🧭 Verified Tour Guide Marketplace
+
+Connect directly with certified Egyptologists:
+
+- Guide Verification & Approval Workflow
+- Acceptance & Recline Booking System
+- Custom Greeting Notes for Tourists
+- Experience & Specialty Badges
+
+### 👑 Admin Control Center & Modular Wizards
+
+Comprehensive system management:
+
+- **5-Step Destination Wizard** (Info, Media, Description/History, Location Coordinates, Dynamic JSONB Experiences).
+- **4-Step Attraction Wizard** (Identity, Media, Description, Details).
+- Interactive tables for Tourists, Tour Guides, and Bookings.
+
+### 🛡 Role-Based Access Control (RBAC) & Protected Routes
+
+Secured navigation with dedicated dashboards for:
+
+- **Tourist Profile**: View booked trips & saved AI itineraries.
+- **Tour Guide Dashboard**: Review incoming trip requests and status.
+- **Admin Dashboard**: System control center.
+
+### 🎨 Responsive Luxury UI & Skeleton Loading UX
+
+- Egyptian Warm Palette (Luxury Brown `#3f2b1a`, Gold `#b57a2d`, Soft Sand `#fdfaf6`).
+- GSAP ScrollTrigger entrance animations.
+- Shimmer Skeleton UI placeholders (`CardSkeleton`, `TableSkeleton`, `FormSkeleton`).
+- React Toastify notifications.
+- 100% mobile responsive touch-scrollable navigation.
+
+---
+
+<a name="tech-stack"></a>
+
+## 🚀 Tech Stack
+
+**Frontend**
+
+- React 18 (Vite)
+- Tailwind CSS v4
+- React Router v7
+- Lucide React Icons
+- GSAP (GreenSock Animation Platform & ScrollTrigger)
+- React Toastify
+
+**Backend & Database**
+
+- Supabase Client (PostgreSQL)
+- Supabase Authentication & Realtime Storage
+- Supabase JSONB Data Fields
+
+**AI Integration**
+
+- Google Gemini API (`@google/generative-ai` / `useAIPlanner`)
+
+---
+
+<a name="architecture"></a>
+
+## 🏗 Architecture
+
+```text
+                   ┌────────────────────────────┐
+                   │       React Frontend       │
+                   │    (Vite + Tailwind CSS)   │
+                   └──────────────┬─────────────┘
+                                  │
+                  ┌───────────────┴───────────────┐
+                  │                               │
+       Supabase API Client                 Google Gemini API
+                  │                               │
+       ┌──────────▼──────────┐          ┌─────────▼──────────┐
+       │ Supabase PostgreSQL │          │  AI Trip Generator │
+       │  (Auth, DB, Storage)│          └────────────────────┘
+       └─────────────────────┘
 ```
-src/
-├── app/
-│   └── App.jsx                 # Central router with MainLayout & AdminLayout sub-trees
-├── dashboards/
-│   ├── admin/                  # Admin Dashboard, GuideRegistrations, TouristsTable
-│   │   ├── components/Attraction/  # Addattraction (4-step wizard), EditAttraction, ViewAttractions
-│   │   └── components/Destination/ # AddDestination (5-step wizard), EditDestination, ViewDestinations
-│   ├── tourist/                # Tourist Dashboard, AITripsList, BookingCard, TouristProfileSidebar
-│   ├── tourguide/              # Tour Guide Dashboard, GuideBookingCard, TourGuideProfileCard
-│   └── TouristProfile.jsx      # Role-based profile wrapper router
-├── features/
-│   ├── about/                  # About page with brand metrics & values
-│   ├── ai-planner/             # AI Planner page, Gemini API service, prompt builder, storage
-│   ├── attractions/            # Attractions gallery page & details view
-│   ├── auth/                   # Authentication (AuthPage, AuthContext, RequireRole guard)
-│   ├── booking/                # Booking page, BookingForm, validation & toast feedback
-│   ├── destinations/           # Destination page components (InfoPanel, ExperienceSection, Weather)
-│   └── landing/                # HeroSection, PopularSection, FeatureSection, HeroSearchForm
-├── hooks/
-│   └── useSEO.js               # Dynamic document title & meta tag management
-├── layout/
-│   ├── MainLayout.jsx          # Public layout shell (Navbar + Outlet + Footer)
-│   └── AdminLayout.jsx         # Protected admin layout shell (Sidebar + Outlet)
-├── pages/                      # LandingPage, DestinationsPage, DestinationPage, NotFoundPage
-├── shared/
-│   ├── Slider.jsx              # Admin sidebar navigation
-│   └── components/layout/      # Navbar, Footer, NavMobileMenu
-├── index.css                   # Global styles & Tailwind CSS v4 setup
-├── main.jsx                    # Entry point wrapping AuthProvider, BrowserRouter & ToastContainer
-└── supabase.js                 # Supabase client instantiation
+
+---
+
+<a name="project-structure"></a>
+
+## 📂 Project Structure
+
+```text
+Jawla
+│
+├── public
+│   ├── favicon.svg
+│   └── assets
+│
+├── src
+│   ├── app
+│   │   ├── App.jsx
+│   │   └── ScrollToTopButton.jsx
+│   │
+│   ├── dashboards
+│   │   ├── admin
+│   │   │   ├── AdminDashboard.jsx
+│   │   │   ├── components (AdminStatsGrid, Tables)
+│   │   │   ├── Attraction (Addattraction, EditAttraction, ViewAttractions, attractionSteps)
+│   │   │   └── Destination (AddDestination, EditDestination, ViewDestinations, destinationSteps)
+│   │   │
+│   │   ├── tourguide
+│   │   │   ├── TourGuideDashboard.jsx
+│   │   │   └── components (GuideBookingCard, TourGuideProfileCard)
+│   │   │
+│   │   └── tourist
+│   │       ├── TouristDashboard.jsx
+│   │       └── components (AITripsList, BookingCard, TouristProfileEditForm)
+│   │
+│   ├── features
+│   │   ├── ai-planner (AIPlannerPage, gemini.js, geminiPrompt.js, aiTripsStorage.js)
+│   │   ├── attractions (AttractionsPage, AttractionDetailsPage, AttractionCategoryTabs)
+│   │   ├── auth (AuthContext, RequireRole, AuthPage, AuthFormFields)
+│   │   ├── booking (BookingPage, BookingForm, BookingFormFields)
+│   │   ├── destinations (HeroContent, InfoPanel, ExperienceSection, GuideSection)
+│   │   └── landing (HeroSection, HeroSearchForm, PopularSection, FeatureSection)
+│   │
+│   ├── hooks (useSEO.js)
+│   ├── layout (MainLayout.jsx, AdminLayout.jsx)
+│   ├── pages (LandingPage, DestinationsPage, DestinationPage, AboutPage, NotFoundPage)
+│   ├── shared (Navbar, Footer, Slider, Skeleton, PageLoader)
+│   └── supabase.js
+│
+├── .env.example
+├── package.json
+├── vite.config.js
+└── README.md
 ```
 
 ---
 
-## 🗄️ Database Schema (Supabase)
+<a name="screenshots"></a>
+## 📸 Showcase & Visuals
 
-The project connects to **Supabase** with 5 primary database tables:
+| Home Landing | AI Trip Planner |
+|---|---|
+| <img src="./public/screenshots/home.png" width="420"/> | <img src="./public/screenshots/ai_planner.png" width="420"/> |
 
-1. **`users`**: Stores user credentials (`id`, `name`, `email`, `role`, `phone`, `avatar`, `location`, `bio`).
-2. **`tourGuides`**: Stores guide profiles & approval status (`id`, `name`, `email`, `phone`, `status`: `'Pending approval' | 'Approved' | 'Rejected'`, `experienceYears`).
-3. **`destinations`**: Stores destination data (`id`, `name`, `capital`, `weatherLabel`, `heroImage`, `image`, `heroTitle`, `description`, `history`, `latitude`, `longitude`, `experienceDescription`, `experiences` (JSONB array)).
-4. **`attractions`**: Stores landmark records (`id`, `destinationId`, `name`, `category`, `description`, `image`, `duration`, `bestTime`, `star`).
-5. **`bookings`**: Tracks tourist guide reservations (`id`, `touristId`, `touristName`, `touristEmail`, `guideId`, `tourType`, `people`, `date`, `phone`, `requests`, `status`: `'Pending' | 'Approved' | 'Rejected'`, `guideNote`).
+| Attractions Explorer | About Jawla Vision |
+|---|---|
+| <img src="./public/screenshots/attractions.png" width="420"/> | <img src="./public/screenshots/about.png" width="420"/> |
+
+| Guide Booking Marketplace | Modern Login & Authentication |
+|---|---|
+| <img src="./public/screenshots/booking.png" width="420"/> | <img src="./public/screenshots/login.png" width="420"/> |
+
+### 📊 System Architecture & Data Flow
+
+| App Architecture | Public Routes Flow |
+|---|---|
+| <img src="./project_flowcharts/1_app_architecture.jpg" width="400"/> | <img src="./project_flowcharts/2_public_routes.jpg" width="400"/> |
+
+| Admin Dashboard Routes | Admin Wizards Flow |
+|---|---|
+| <img src="./project_flowcharts/3_admin_dashboard_routes.jpg" width="400"/> | <img src="./project_flowcharts/4_add_destination_wizard.jpg" width="400"/> |
 
 ---
 
-## 🛠️ Tech Stack
+<a name="database-schema--api-overview"></a>
 
-- **Framework**: React 19 & Vite 8
-- **Routing**: React Router DOM v7
-- **Database**: Supabase Client JS (`@supabase/supabase-js`)
-- **Styling**: Tailwind CSS v4
-- **Animations**: GSAP (GreenSock) & ScrollTrigger
-- **Icons**: Lucide React
-- **Notifications**: React-Toastify
-- **AI Model**: Google Gemini API (`@google/generative-ai` / REST integration)
-- **APIs**: Open-Meteo Forecast API
+## 📡 Database Schema & Supabase API Overview
+
+### Primary Supabase Tables
+
+#### 1. `destinations`
+
+Stores Egypt's governorates and heritage cities.
+
+```sql
+id (text PRIMARY KEY), name, weatherLabel, heroImage, image, heroTitle,
+description, history, latitude, longitude, experienceDescription,
+experiences (jsonb array of experience objects)
+```
+
+#### 2. `attractions`
+
+Stores specific landmarks and monuments.
+
+```sql
+id (uuid / text PRIMARY KEY), destinationId (foreign key), name, category,
+image, description, duration (integer), bestTime, star (numeric)
+```
+
+#### 3. `tourGuides`
+
+Stores registered and verified tour guides.
+
+```sql
+id (uuid PRIMARY KEY), email, name, status ('Pending approval' | 'Approved' | 'Rejected'),
+languages, bio, phone
+```
+
+#### 4. `bookings`
+
+Stores booking requests submitted by tourists.
+
+```sql
+id (uuid PRIMARY KEY), touristName, phone, guideId, destinationId,
+date, status ('Pending' | 'Approved' | 'Rejected'), guideNote
+```
+
+#### 5. `ai_trips`
+
+Stores itineraries generated by Google Gemini AI.
+
+```sql
+id (uuid PRIMARY KEY), userId, destination, days, interests, trip (jsonb), createdAt
+```
 
 ---
 
-## 🚀 Getting Started
+<a name="getting-started"></a>
 
-### 1. Prerequisites
-- **Node.js** (v18.0.0 or higher)
-- **npm** or **yarn**
+## 🛠 Getting Started
 
-### 2. Environment Variables Setup
-Create a `.env` file in the root directory:
+### Environment Variables
+
+Create a `.env` file in the root directory with the following variables:
 
 ```env
-VITE_SUPABASE_URL=https://your-supabase-project.supabase.co
-VITE_SUPABASE_ANON_KEY=your-supabase-anon-key
-VITE_GEMINI_API_KEY=your-google-gemini-api-key
+VITE_SUPABASE_URL=your_supabase_project_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+VITE_GEMINI_API_KEY=your_google_gemini_api_key
 ```
 
-### 3. Installation & Development
+### Installation & Execution
+
+**1. Clone the repository**
 
 ```bash
-# Clone repository
-git clone https://github.com/ahmedragab124/Jawla2.git
-cd Jawla3
+git clone https://github.com/your-username/Jawla.git
+cd Jawla
+```
 
-# Install dependencies
+**2. Install dependencies**
+
+```bash
 npm install
+```
 
-# Start local dev server
+**3. Run local development server**
+
+```bash
 npm run dev
 ```
 
-Open [http://localhost:5173](http://localhost:5173) in your browser.
-
-### 4. Build for Production
+**4. Build for production**
 
 ```bash
 npm run build
@@ -135,6 +332,39 @@ npm run build
 
 ---
 
-## 📝 License
+<a name="future-roadmap"></a>
 
-Distributed under the MIT License. Created with ❤️ for Egypt's Heritage.
+## 🚀 Future Roadmap
+
+- [ ] Tour Guide Live Availability Toggle Switch (Online / Offline)
+- [ ] Push Notifications System for Booking Status Updates
+- [ ] Interactive Map Integration (Mapbox / Leaflet)
+- [ ] Online Payment Gateway (Paymob / Stripe)
+- [ ] Multi-Language Context (Arabic / English Instant Switch)
+- [ ] Tourist Reviews & Star Ratings System for Guides
+
+---
+
+<a name="meet-the-team"></a>
+
+## 👥 Meet the Team
+
+- 👨‍💻 **Ahmed Ragab Marzouk**
+- 👩‍💻 **Heba Alrawy Ahmed**
+- 👩‍💻 **Emy Ayoub Atallah**
+- 👩‍💻 **Rodina Ahmed Gamal Eldin**
+- 👨‍💻 **Elsam Ali Mahrous**
+- 👩‍💻 **Carol Akmal Fakhry**
+
+---
+
+### ⭐ Support & Acknowledgments
+
+If you like **Jawla**, don't forget to give it a ⭐ on GitHub!
+
+---
+
+<p align="center">
+  <h2 align="center">🇪🇬 Rediscover Egypt Beyond Boundaries with Jawla</h2>
+  <p align="center">Built with ❤️ by Team Jawla (Ruwad React Track)</p>
+</p>

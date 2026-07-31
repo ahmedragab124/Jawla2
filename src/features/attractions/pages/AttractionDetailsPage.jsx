@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { supabase } from "../../../supabase";
 import AttractionInfoGrid from "../components/AttractionInfoGrid";
 import useSEO from "../../../hooks/useSEO";
+import { DetailsPageSkeleton } from "../../../shared/components/ui/Skeleton";
 import gsap from "gsap";
 
 /**
@@ -86,8 +87,10 @@ function AttractionDetailsPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-[#fffaf0] flex items-center justify-center pt-28">
-        <div className="h-12 w-12 animate-spin rounded-full border-4 border-[#b57a2d] border-t-transparent" />
+      <main className="min-h-screen bg-[#fffaf0] px-5 pt-28 pb-16">
+        <div className="mx-auto max-w-6xl">
+          <DetailsPageSkeleton />
+        </div>
       </main>
     );
   }

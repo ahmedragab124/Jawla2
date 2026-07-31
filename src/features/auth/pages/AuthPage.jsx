@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useAuth, homeForRole } from "../context/AuthContext";
 import { toast } from "react-toastify";
 import { supabase } from "../../../supabase";
 import AuthFormFields from "../components/AuthFormFields";
+import { Compass, Sparkles, ArrowRight, ShieldCheck } from "lucide-react";
 import gsap from "gsap";
 
-// AuthPage Component
 function AuthPage() {
   const [mode, setMode] = useState("login");
   const [form, setForm] = useState({
@@ -20,40 +20,41 @@ function AuthPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
   const { login } = useAuth();
+
   const cardRef = useRef(null);
   const formRef = useRef(null);
 
-  // Triggers initial card entry animation with GSAP
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         cardRef.current,
-        { opacity: 0, y: 50, scale: 0.95 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "power3.out" },
+        { opacity: 0, y: 40, scale: 0.96 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.9, ease: "power3.out" }
       );
     }, cardRef);
 
     return () => ctx.revert();
   }, []);
 
-  // Switches between Login and Sign Up tabs
   const handleTabChange = (newMode) => {
     setMode(newMode);
     if (formRef.current) {
       gsap.fromTo(
         formRef.current,
         { opacity: 0, y: 15 },
-        { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" },
+        { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }
       );
     }
   };
 
-  // Input change handler
   const updateField = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // Form submission handler for login and signup operations
+  const setRole = (roleName) => {
+    setForm((prev) => ({ ...prev, role: roleName }));
+  };
+
   const submit = async (e) => {
     e.preventDefault();
     if (!form.email || !form.password || (mode === "signup" && !form.name)) {
@@ -74,7 +75,7 @@ function AuthPage() {
 
       if (mode === "login") {
         const user = users.find(
-          (u) => u.email === form.email && u.password === form.password,
+          (u) => u.email === form.email && u.password === form.password
         );
         if (!user) {
           toast.error("Invalid email or password.");
@@ -82,6 +83,7 @@ function AuthPage() {
           return;
         }
         login(user);
+        toast.success(`Welcome back, ${user.name}!`);
         navigate(homeForRole(user.role));
         return;
       }
@@ -129,7 +131,7 @@ function AuthPage() {
       toast.success("Account created successfully!");
     } catch (error) {
       toast.error(
-        error.message || "Could not connect to Supabase. Please try again.",
+        error.message || "Could not connect to Supabase. Please try again."
       );
     } finally {
       setIsSubmitting(false);
@@ -137,49 +139,90 @@ function AuthPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[#fffaf0] via-[#f7ebe0] to-[#fffaf0] px-5 pt-28 pb-20 flex items-center justify-center">
+    <main className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#271b12] via-[#1a110a] to-[#120a05] px-4 pt-28 pb-20 flex items-center justify-center">
+      {/* Background ambient lighting */}
+      <div className="absolute top-1/4 left-1/4 h-96 w-96 rounded-full bg-[#b57a2d]/20 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 h-96 w-96 rounded-full bg-[#3f2b1a]/40 blur-3xl pointer-events-none" />
+
       <section
         ref={cardRef}
-        className="w-full max-w-md rounded-4xl bg-white p-8 shadow-[0_30px_90px_rgba(76,48,24,0.16)] border border-[#f3e6d3]"
+        className="relative z-10 w-full max-w-lg rounded-[36px] bg-white/95 backdrop-blur-2xl p-8 sm:p-10 shadow-[0_30px_100px_rgba(0,0,0,0.5)] border border-white/40 space-y-6"
       >
-        <p className="text-center text-xs font-black tracking-[0.25em] text-[#b57a2d] uppercase">
-          JAWLA
-        </p>
-        <h1 className="mt-2 text-center text-3xl font-black text-[#3f2b1a]">
-          {mode === "login" ? "Welcome Back" : "Create Account"}
-        </h1>
+        {/* Brand Header */}
+        <div className="text-center space-y-2">
+          <Link to="/" className="inline-flex items-center gap-2 group">
+            <img
+              src="/favicon.svg"
+              alt="Jawla Logo"
+              className="h-10 w-10 object-contain group-hover:rotate-12 transition-transform duration-300"
+            />
+            <span className="text-2xl font-black tracking-wide text-[#3f2b1a]">
+              Jawla
+            </span>
+          </Link>
 
-        <div className="mt-7 grid grid-cols-2 rounded-2xl bg-[#f8f1e6] p-1.5 shadow-inner">
-          {["login", "signup"].map((tab) => (
-            <button
-              key={tab}
-              type="button"
-              onClick={() => handleTabChange(tab)}
-              className={`rounded-xl py-2.5 font-bold text-sm transition-all duration-300 cursor-pointer ${mode === tab ? "bg-white text-[#7a5540] shadow-md" : "text-[#806c56] hover:text-[#3f2b1a]"}`}
-            >
-              {tab === "login" ? "Login" : "Sign Up"}
-            </button>
-          ))}
+          <h1 className="text-3xl font-black text-[#3f2b1a] tracking-tight">
+            {mode === "login" ? "Welcome Back" : "Start Your Journey"}
+          </h1>
+          <p className="text-xs text-[#695744] font-medium max-w-xs mx-auto">
+            {mode === "login"
+              ? "Log in to access your saved trips and guide bookings."
+              : "Create an account to explore Egypt's hidden wonders."}
+          </p>
         </div>
 
-        <form ref={formRef} className="mt-7 space-y-5" onSubmit={submit}>
-          <AuthFormFields mode={mode} form={form} onChange={updateField} />
+        {/* Tab Switcher */}
+        <div className="grid grid-cols-2 rounded-2xl bg-[#f4ebd9] p-1.5 shadow-inner">
+          <button
+            type="button"
+            onClick={() => handleTabChange("login")}
+            className={`rounded-xl py-2.5 text-xs font-black transition-all duration-300 cursor-pointer ${
+              mode === "login"
+                ? "bg-white text-[#3f2b1a] shadow-md scale-[1.02]"
+                : "text-[#806c56] hover:text-[#3f2b1a]"
+            }`}
+          >
+            Login
+          </button>
+          <button
+            type="button"
+            onClick={() => handleTabChange("signup")}
+            className={`rounded-xl py-2.5 text-xs font-black transition-all duration-300 cursor-pointer ${
+              mode === "signup"
+                ? "bg-white text-[#3f2b1a] shadow-md scale-[1.02]"
+                : "text-[#806c56] hover:text-[#3f2b1a]"
+            }`}
+          >
+            Sign Up
+          </button>
+        </div>
+
+        {/* Auth Form */}
+        <form ref={formRef} className="space-y-5 pt-1" onSubmit={submit}>
+          <AuthFormFields
+            mode={mode}
+            form={form}
+            onChange={updateField}
+            onSelectRole={setRole}
+          />
+
           <button
             disabled={isSubmitting}
-            className="w-full rounded-2xl bg-[#7a5540] py-3.5 font-bold text-white shadow-lg transition-all duration-300 hover:bg-[#5c4033] cursor-pointer"
+            className="group relative w-full overflow-hidden rounded-2xl bg-gradient-to-r from-[#b57a2d] to-[#9b6525] py-4 text-sm font-black text-white shadow-xl shadow-[#b57a2d]/30 transition-all duration-300 hover:scale-[1.01] active:scale-98 cursor-pointer disabled:opacity-50"
           >
-            {isSubmitting
-              ? "Please wait…"
-              : mode === "login"
-                ? "Login"
-                : "Create Account"}
+            <span className="relative z-10 flex items-center justify-center gap-2">
+              {isSubmitting
+                ? "Processing..."
+                : mode === "login"
+                ? "Log In to Jawla"
+                : "Create Free Account"}
+              <ArrowRight
+                size={16}
+                className="group-hover:translate-x-1 transition-transform"
+              />
+            </span>
           </button>
         </form>
-
-        <p className="mt-6 text-center text-xs font-medium text-[#6d5c4a]">
-          Demo admin: <strong>admin@jawla.com</strong> /{" "}
-          <strong>admin123</strong>
-        </p>
       </section>
     </main>
   );
