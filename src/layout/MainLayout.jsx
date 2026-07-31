@@ -5,12 +5,13 @@ import Footer from './../shared/components/layout/Footer';
 
 function MainLayout() {
   return (
-    <>
-    <Navbar />
-    <Outlet />
-    <Footer />
-    
-    </>
+    <div className="flex flex-col min-h-screen">
+      <Navbar />
+      <main className="flex-1">
+        <Outlet />
+      </main>
+      <Footer />
+    </div>
   )
 }
 

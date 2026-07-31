@@ -81,7 +81,9 @@ function BookingForm() {
         .from("bookings")
         .insert([bookingPayload]);
       if (error) throw error;
-      setSuccessMessage("Your booking request has been submitted successfully!");
+      setSuccessMessage(
+        "Your booking request has been submitted successfully!",
+      );
       toast.success("Booking request submitted successfully!");
       setFormData({
         fullName: user.name || "",

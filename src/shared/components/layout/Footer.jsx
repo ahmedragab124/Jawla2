@@ -24,12 +24,13 @@ function Footer() {
         { opacity: 0, y: 30 },
         {
           opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
-          scrollTrigger: { trigger: footerRef.current, start: 'top 95%' },
+          scrollTrigger: { trigger: footerRef.current, start: 'top bottom' },
         }
       );
     }, footerRef);
     return () => ctx.revert();
   }, []);
+
 
   return (
     <footer
