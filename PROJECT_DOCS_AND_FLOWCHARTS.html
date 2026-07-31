@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>دليل معمارية ومخططات مشروع جولة - Jawla Architecture & Flowcharts</title>
+  
+  <!-- Google Fonts: Outfit & Cairo -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Mermaid.js for rendering flowcharts dynamically -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  
+  <style>
+    :root {
+      --bg-primary: #fdfaf6;
+      --bg-card: #ffffff;
+      --border-color: #f1e7d9;
+      --brand-brown: #3f2b1a;
+      --brand-gold: #b57a2d;
+      --brand-gold-hover: #9b6525;
+      --text-main: #2c1e12;
+      --text-muted: #695744;
+      --accent-bg: #f7ebd9;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Cairo', 'Outfit', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      line-height: 1.7;
+      padding: 30px 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, #ffffff 0%, #f7ebd9 100%);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      margin-bottom: 40px;
+      box-shadow: 0 10px 30px rgba(63, 43, 26, 0.05);
+    }
+
+    header h1 {
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--brand-brown);
+      margin-bottom: 10px;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      background-color: var(--brand-brown);
+      color: #fff;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn:hover {
+      background-color: var(--brand-gold);
+      transform: translateY(-2px);
+    }
+
+    .section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 35px;
+      margin-bottom: 35px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--brand-brown);
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--accent-bg);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .mermaid-box {
+      background-color: #faf8f5;
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 25px;
+      margin: 20px 0;
+      overflow-x: auto;
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 0.95rem;
+    }
+
+    th, td {
+      padding: 14px 16px;
+      text-align: right;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    th {
+      background-color: var(--accent-bg);
+      color: var(--brand-brown);
+      font-weight: 800;
+    }
+
+    tr:hover {
+      background-color: #fdfaf6;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      background-color: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    .badge-prop {
+      background-color: #e3f2fd;
+      color: #1565c0;
+    }
+
+    .badge-route {
+      background-color: #fff3e0;
+      color: #e65100;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 0;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    @media print {
+      body { background-color: #fff; padding: 0; }
+      .section { border: 1px solid #ccc; box-shadow: none; page-break-inside: avoid; }
+      .nav-buttons { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <h1>🗺️ دليل وثائق ومعمارية مشروع جولة (Jawla)</h1>
+      <p>توضيح تفصيلي وشامل لكل ملف، بارامتر، وتدفق فلوشارت في النظام</p>
+      
+      <div class="nav-buttons">
+        <button onclick="window.print()" class="btn">🖨️ طباعة / حفظ كـ PDF</button>
+        <a href="#diagrams" class="btn">📊 المخططات (Flowcharts)</a>
+        <a href="#files" class="btn">📁 تفاصيل الملفات (Files Breakdown)</a>
+      </div>
+    </header>
+
+    <!-- Flowcharts Section -->
+    <div id="diagrams">
+      
+      <!-- Chart 1 -->
+      <div class="section">
+        <h2 class="section-title">1️⃣ مخطط الهيكلية العامة والتوجيه (App Routing Flowchart)</h2>
+        <p style="color: var(--text-muted);">يوضح هذا المخطط كيفية ربط الـ Routes والـ Layouts والصلاحيات بدءاً من <code>main.jsx</code> وحتى الصفحات النهائية.</p>
+        <div class="mermaid-box">
+          <pre class="mermaid">
+graph TD
+    Entry["main.jsx (Entry Point)"] --> Providers["BrowserRouter + AuthProvider + ToastContainer"]
+    Providers --> App["App.jsx (Router Hub)"]
+    
+    App --> ScrollTop["ScrollToTop (Automatic Scroll Reset)"]
+    App --> RouteSwitch{Route Matching}
+    
+    %% Main Layout Route Branch
+    RouteSwitch -->|"Layout: MainLayout"| MainLayout["MainLayout.jsx (Navbar + Outlet + Footer)"]
+    MainLayout --> Home["LandingPage.jsx (/)"]
+    MainLayout --> Dests["DestinationsPage.jsx (/destinations)"]
+    MainLayout --> DestSingle["DestinationPage.jsx (/destination/:id)"]
+    MainLayout --> Attrs["AttractionsPage.jsx (/attractions)"]
+    MainLayout --> AttrSingle["AttractionDetailsPage.jsx (/attractions/:id)"]
+    MainLayout --> AIPlan["AIPlannerPage.jsx (/ai-planner)"]
+    MainLayout --> About["AboutPage.jsx (/about)"]
+    MainLayout --> Auth["AuthPage.jsx (/auth)"]
+    MainLayout --> Booking["BookingPage.jsx (/booking)"]
+    MainLayout --> ProfileGuard["RequireRole (Tourist / Tour Guide)"] --> Profile["TouristProfile.jsx (/profile)"]
+    
+    %% Admin Layout Route Branch
+    RouteSwitch -->|"Layout: AdminLayout (Protected)"| AdminGuard["RequireRole (Admin)"]
+    AdminGuard --> AdminLayout["AdminLayout.jsx (Sidebar Slider + Outlet)"]
+    AdminLayout --> Overview["AdminDashboard tab='overview'"]
+    AdminLayout --> GuidesTab["AdminDashboard tab='guides'"]
+    AdminLayout --> TouristsTab["AdminDashboard tab='tourists'"]
+    AdminLayout --> BookingsTab["AdminDashboard tab='bookings'"]
+    AdminLayout --> AddAttr["Addattraction.jsx (/attractions/add)"]
+    AdminLayout --> ViewAttrs["ViewAttractions.jsx (/attractions/view)"]
+    AdminLayout --> EditAttr["EditAttraction.jsx (/attractions/edit/:id)"]
+    AdminLayout --> AddDest["AddDestination.jsx (/destinations/add)"]
+    AdminLayout --> ViewDests["ViewDestinations.jsx (/destinations/view)"]
+    AdminLayout --> EditDest["EditDestination.jsx (/destinations/edit/:id)"]
+    
+    %% Catch All Branch
+    RouteSwitch -->|"Wildcard (*)"| NotFound["NotFoundPage.jsx (404 Screen)"]
+          </pre>
+        </div>
+      </div>
+
+      <!-- Chart 2 -->
+      <div class="section">
+        <h2 class="section-title">2️⃣ مخطط إضافة وجهة سياحية (Add Destination Wizard Flow)</h2>
+        <p style="color: var(--text-muted);">خطوات الإضافة الـ 5 المقسمة إلى مكونات مستقلة وتأكيد البيانات وإرسالها لـ Supabase.</p>
+        <div class="mermaid-box">
+          <pre class="mermaid">
+flowchart LR
+    StartDest([بداية النموذج AddDestination]) --> Step1["Step 1: StepInfo (Name, Slug ID, Weather)"]
+    Step1 --> Val1{تأكيد البيانات المطلوبة؟}
+    Val1 -->|نقص بيانات| ToastErr1["toast.error()"]
+    Val1 -->|صحيح| Step2["Step 2: StepImages (Hero Image, Card Image, Title)"]
+    
+    Step2 --> Val2{تأكيد الصور؟}
+    Val2 -->|نقص| ToastErr2["toast.error()"]
+    Val2 -->|صحيح| Step3["Step 3: StepDetails (Description, History)"]
+    
+    Step3 --> Val3{تأكيد الوصف؟}
+    Val3 -->|نقص| ToastErr3["toast.error()"]
+    Val3 -->|صحيح| Step4["Step 4: StepLocation (Latitude, Longitude)"]
+    
+    Step4 --> Val4{تأكيد الإحداثيات؟}
+    Val4 -->|نقص| ToastErr4["toast.error()"]
+    Val4 -->|صحيح| Step5["Step 5: StepExperiences (Exp Description + Dynamic JSON List)"]
+    
+    Step5 --> Submit["حفظ النموذج insert()"]
+    Submit --> SupabaseDB[("Supabase DB: destinations table")]
+    SupabaseDB --> ToastSuccess["toast.success() + Reset Form"]
+          </pre>
+        </div>
+      </div>
+
+      <!-- Chart 3 -->
+      <div class="section">
+        <h2 class="section-title">3️⃣ مخطط إضافة معلم سياحي (Add Attraction Wizard Flow)</h2>
+        <div class="mermaid-box">
+          <pre class="mermaid">
+flowchart LR
+    StartAttr([بداية النموذج Addattraction]) --> Step1["Step 1: StepIdentity (ID, Name, Destination, Category)"]
+    Step1 --> Val1{اختيار الوجهة والاسم؟}
+    Val1 -->|خطأ| ToastErr1["toast.error()"]
+    Val1 -->|نجاح| Step2["Step 2: StepMedia (Image URL)"]
+    
+    Step2 --> Val2{إدخال رابط الصورة؟}
+    Val2 -->|خطأ| ToastErr2["toast.error()"]
+    Val2 -->|نجاح| Step3["Step 3: StepDescription (Description)"]
+    
+    Step3 --> Val3{إدخال الوصف؟}
+    Val3 -->|خطأ| ToastErr3["toast.error()"]
+    Val3 -->|نجاح| Step4["Step 4: StepDetails (Duration, Best Time, Star Rating)"]
+    
+    Step4 --> SaveDb["insert() into attractions table"]
+    SaveDb --> DB[("Supabase DB: attractions table")]
+    DB --> Success["toast.success() + Reset Form"]
+          </pre>
+        </div>
+      </div>
+
+      <!-- Chart 4 -->
+      <div class="section">
+        <h2 class="section-title">4️⃣ تسلسل الذكاء الاصطناعي وحجز المرشدين (AI & Booking Sequence)</h2>
+        <div class="mermaid-box">
+          <pre class="mermaid">
+sequenceDiagram
+    autonumber
+    actor Tourist as السائح
+    participant UI as AIPlannerPage.jsx
+    participant Hook as useAIPlanner.js
+    participant Gemini as Gemini API (gemini.js)
+    participant DB as Supabase (ai_trips)
+
+    Tourist->>UI: إدخال الوجهة، الأيام، الميزانية، والاهتمامات
+    UI->>Hook: generatePlan(formData)
+    Hook->>Gemini: إرسال الـ Prompt المنسق (geminiPrompt.js)
+    Gemini-->>Hook: إرجاع JSON البرنامج السياحي اليومي
+    Hook-->>UI: عرض الجدول والبرنامج السياحي
+    Tourist->>UI: النقر على "حفظ الرحلة"
+    UI->>Hook: savePlan(result)
+    Hook->>DB: INSERT into ai_trips table
+    DB-->>Hook: تم الحفظ بنجاح
+    Hook-->>UI: toast.success() + إضافة الرحلة للبروفايل
+          </pre>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Detailed File Table -->
+    <div id="files" class="section">
+      <h2 class="section-title">📁 تفاصيل وتصنيف ملفات المشروع (File-by-File Technical Table)</h2>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>مسار الملف (File Path)</th>
+            <th>النوع (Type)</th>
+            <th>البيانات الممررة (Props / Parameters)</th>
+            <th>الوظيفة والتدفق (Function & Workflow)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>src/main.jsx</code></td>
+            <td><span class="badge">Root Entry</span></td>
+            <td>—</td>
+            <td>تهيئة React Root وربط الـ Router، الـ AuthProvider والـ ToastContainer العالمية.</td>
+          </tr>
+          <tr>
+            <td><code>src/supabase.js</code></td>
+            <td><span class="badge">DB Client</span></td>
+            <td><code>VITE_SUPABASE_URL</code>, <code>VITE_SUPABASE_ANON_KEY</code></td>
+            <td>تصدير كائن الاتصال بـ Supabase للتعامل مع قاعدة البيانات والمصادقة.</td>
+          </tr>
+          <tr>
+            <td><code>src/app/App.jsx</code></td>
+            <td><span class="badge">Router Hub</span></td>
+            <td>—</td>
+            <td>إدارة شجرة التوجيه كاملة وتنسيق المسارات العامة والمسارات المحمية للأدمن.</td>
+          </tr>
+          <tr>
+            <td><code>src/layout/MainLayout.jsx</code></td>
+            <td><span class="badge">Layout</span></td>
+            <td><code>&lt;Outlet /&gt;</code></td>
+            <td>قالب واجهات الموقع العامة (Navbar في الأعلى + المحتوى + Footer في الأسفل).</td>
+          </tr>
+          <tr>
+            <td><code>src/layout/AdminLayout.jsx</code></td>
+            <td><span class="badge">Layout</span></td>
+            <td><code>&lt;Outlet /&gt;</code></td>
+            <td>قالب لوحة تحكم الأدمن (القائمة الجانبية Slider + المحتوى الرئيسي).</td>
+          </tr>
+          <tr>
+            <td><code>src/shared/Slider.jsx</code></td>
+            <td><span class="badge">Component</span></td>
+            <td><span class="badge-prop">onClose (optional)</span></td>
+            <td>القائمة الجانبية المتطورة للأدمن مع مجموعات قابلة للطي للوجهات والمعالم.</td>
+          </tr>
+          <tr>
+            <td><code>src/features/auth/context/AuthContext.jsx</code></td>
+            <td><span class="badge">Context</span></td>
+            <td>—</td>
+            <td>إدارة حالة تسجيل الدخول، المستخدم الحالي، والصلاحيات (Tourist, Guide, Admin).</td>
+          </tr>
+          <tr>
+            <td><code>src/features/auth/components/RequireRole.jsx</code></td>
+            <td><span class="badge">Guard</span></td>
+            <td><span class="badge-prop">children, allowedRoles</span></td>
+            <td>حماية المسارات وتأكيد يمتلك المستخدم الدور المسموح للزيارة.</td>
+          </tr>
+          <tr>
+            <td><code>src/dashboards/admin/components/Attraction/Addattraction.jsx</code></td>
+            <td><span class="badge">Orchestrator</span></td>
+            <td>—</td>
+            <td>منسق نموذج إضافة المعالم 4 خطوات، يدير الـ State والـ Validation والتنبيهات.</td>
+          </tr>
+          <tr>
+            <td><code>src/dashboards/admin/components/Destination/AddDestination.jsx</code></td>
+            <td><span class="badge">Orchestrator</span></td>
+            <td>—</td>
+            <td>منسق نموذج إضافة الوجهات 5 خطوات (بما فيها قائمة التجارب Dynamic JSONB).</td>
+          </tr>
+          <tr>
+            <td><code>src/features/ai-planner/hooks/useAIPlanner.js</code></td>
+            <td><span class="badge">Custom Hook</span></td>
+            <td><code>formData</code></td>
+            <td>إدارة الطلبات الموجهة لـ Google Gemini API وتخزين الرحلة المتولدة في Supabase.</td>
+          </tr>
+          <tr>
+            <td><code>src/pages/NotFoundPage.jsx</code></td>
+            <td><span class="badge">Page</span></td>
+            <td>—</td>
+            <td>صفحة 404 المصممة بهوية الموقع، تحتوي على بوصلة متحركة وأزرار عودة سريعة.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>© 2026 Jawla Tourism Platform. جميع الحقوق محفوظة.</p>
+    </footer>
+  </div>
+
+  <script>
+    // Initialize Mermaid.js
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'neutral',
+      fontFamily: 'Cairo, sans-serif'
+    });
+  </script>
+</body>
+</html>
