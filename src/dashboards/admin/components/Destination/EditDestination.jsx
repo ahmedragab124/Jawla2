@@ -23,6 +23,7 @@ function EditDestination() {
     history: "",
     latitude: "",
     longitude: "",
+    star: "",
     experiences: [], // [{ id, image, title, category, description }]
   });
 
@@ -51,6 +52,7 @@ function EditDestination() {
         history: data.history || "",
         latitude: data.latitude || "",
         longitude: data.longitude || "",
+        star: data.star || "",
         experiences: Array.isArray(data.experiences) ? data.experiences : [],
       });
       setLoading(false);
@@ -116,6 +118,7 @@ function EditDestination() {
         history: form.history.trim() || null,
         latitude: form.latitude ? Number(form.latitude) : null,
         longitude: form.longitude ? Number(form.longitude) : null,
+        star: form.star ? Number(form.star) : null,
         experiences: cleanedExperiences.length > 0 ? cleanedExperiences : null,
       };
 
@@ -256,7 +259,7 @@ function EditDestination() {
           </div>
 
           {/* Lat / Lng */}
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-3">
             <div>
               <label className={labelClass}>Latitude</label>
               <input
@@ -276,6 +279,20 @@ function EditDestination() {
                 onChange={handleChange}
                 type="number"
                 step="any"
+                className={inputClass}
+              />
+            </div>
+
+            <div>
+              <label className={labelClass}>Star Rating</label>
+              <input
+                name="star"
+                value={form.star}
+                onChange={handleChange}
+                type="number"
+                min={1}
+                max={5}
+                step={0.1}
                 className={inputClass}
               />
             </div>

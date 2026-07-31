@@ -24,6 +24,7 @@ const EMPTY_FORM = {
   history: "",
   latitude: "",
   longitude: "",
+  star: "",
   experiences: [], // [{ id, image, title, category, description }]
 };
 
@@ -43,6 +44,9 @@ function validate(step, form) {
   if (step === 4) {
     if (!form.latitude || !form.longitude)
       return "Latitude and Longitude are required for the weather widget.";
+    else if (!form.star || form.star < 1 || form.star > 5) {
+      return "Star rating must be between 1 and 5.";
+    }
   }
   return null;
 }
@@ -116,6 +120,7 @@ function AddDestination() {
           history: form.history.trim() || null,
           latitude: Number(form.latitude),
           longitude: Number(form.longitude),
+          star: Number(form.star),
           experiences:
             cleanedExperiences.length > 0 ? cleanedExperiences : null,
         },

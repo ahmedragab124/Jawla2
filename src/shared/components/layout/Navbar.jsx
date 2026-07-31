@@ -83,13 +83,17 @@ function Navbar() {
   }, [location.pathname]);
 
   return (
-    <div className="fixed top-4 left-1/2 -translate-x-1/2 z-[99999] w-[calc(100%-2rem)] max-w-7xl px-1">
+    <div className="fixed top-4 left-1/2 -translate-x-1/2 z-999999 w-[calc(100%-2rem)] max-w-7xl px-1">
       <nav
         ref={navRef}
         className="rounded-2xl px-6 py-3 text-white backdrop-blur-xl transition-all duration-300"
       >
         <div className="flex items-center justify-between">
-          <Link ref={logoRef} to="/" className="flex items-center gap-2.5 group">
+          <Link
+            ref={logoRef}
+            to="/"
+            className="flex items-center gap-2.5 group"
+          >
             <img
               src="/favicon.svg"
               alt="Jawla Logo"

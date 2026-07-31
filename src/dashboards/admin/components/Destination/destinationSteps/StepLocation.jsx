@@ -1,4 +1,5 @@
-const cls = "w-full border border-[#d9c9b0] rounded-2xl py-3 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-[#b57a2d] bg-white/70 transition";
+const cls =
+  "w-full border border-[#d9c9b0] rounded-2xl py-3 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-[#b57a2d] bg-white/70 transition";
 const lbl = "block text-sm font-semibold text-[#3f2b1a] mb-1.5";
 
 function StepLocation({ form, onChange }) {
@@ -11,18 +12,51 @@ function StepLocation({ form, onChange }) {
         </p>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-3">
         <div>
-          <label className={lbl}>Latitude <span className="text-red-400">*</span></label>
-          <input name="latitude" value={form.latitude} onChange={onChange} type="number" step="any" placeholder="30.0444" className={cls} />
+          <label className={lbl}>
+            Latitude <span className="text-red-400">*</span>
+          </label>
+          <input
+            name="latitude"
+            value={form.latitude}
+            onChange={onChange}
+            type="number"
+            step="any"
+            placeholder="30.0444"
+            className={cls}
+          />
         </div>
         <div>
-          <label className={lbl}>Longitude <span className="text-red-400">*</span></label>
-          <input name="longitude" value={form.longitude} onChange={onChange} type="number" step="any" placeholder="31.2357" className={cls} />
+          <label className={lbl}>
+            Longitude <span className="text-red-400">*</span>
+          </label>
+          <input
+            name="longitude"
+            value={form.longitude}
+            onChange={onChange}
+            type="number"
+            step="any"
+            placeholder="31.2357"
+            className={cls}
+          />
+        </div>
+        <div>
+          <label className={lbl}>Star Rating</label>
+          <input
+            name="star"
+            value={form.star}
+            onChange={onChange}
+            type="number"
+            min="1"
+            max="5"
+            step="0.1"
+            placeholder="5"
+            className={cls}
+          />
         </div>
       </div>
     </div>
   );
 }
-
 export default StepLocation;
