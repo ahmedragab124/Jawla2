@@ -210,28 +210,29 @@ Jawla
 ---
 
 <a name="screenshots"></a>
+
 ## 📸 Showcase & Visuals
 
-| Home Landing | AI Trip Planner |
-|---|---|
+| Home Landing                                           | AI Trip Planner                                              |
+| ------------------------------------------------------ | ------------------------------------------------------------ |
 | <img src="./public/screenshots/home.png" width="420"/> | <img src="./public/screenshots/ai_planner.png" width="420"/> |
 
-| Attractions Explorer | About Jawla Vision |
-|---|---|
+| Attractions Explorer                                          | About Jawla Vision                                      |
+| ------------------------------------------------------------- | ------------------------------------------------------- |
 | <img src="./public/screenshots/attractions.png" width="420"/> | <img src="./public/screenshots/about.png" width="420"/> |
 
-| Guide Booking Marketplace | Modern Login & Authentication |
-|---|---|
+| Guide Booking Marketplace                                 | Modern Login & Authentication                           |
+| --------------------------------------------------------- | ------------------------------------------------------- |
 | <img src="./public/screenshots/booking.png" width="420"/> | <img src="./public/screenshots/login.png" width="420"/> |
 
 ### 📊 System Architecture & Data Flow
 
-| App Architecture | Public Routes Flow |
-|---|---|
+| App Architecture                                                     | Public Routes Flow                                                |
+| -------------------------------------------------------------------- | ----------------------------------------------------------------- |
 | <img src="./project_flowcharts/1_app_architecture.jpg" width="400"/> | <img src="./project_flowcharts/2_public_routes.jpg" width="400"/> |
 
-| Admin Dashboard Routes | Admin Wizards Flow |
-|---|---|
+| Admin Dashboard Routes                                                     | Admin Wizards Flow                                                         |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
 | <img src="./project_flowcharts/3_admin_dashboard_routes.jpg" width="400"/> | <img src="./project_flowcharts/4_add_destination_wizard.jpg" width="400"/> |
 
 ---
@@ -366,5 +367,5 @@ If you like **Jawla**, don't forget to give it a ⭐ on GitHub!
 
 <p align="center">
   <h2 align="center">🇪🇬 Rediscover Egypt Beyond Boundaries with Jawla</h2>
-  <p align="center">Built with ❤️ by Team Jawla (Ruwad React Track)</p>
+  <p align="center">Built with ❤️ by Team Jawla (Depi React Team)</p>
 </p>
