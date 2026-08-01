@@ -16,25 +16,31 @@ const loginSchema = z.object({
   password: z.string().min(6, "Password must be at least 6 characters"),
 });
 
-const signupSchema = z.object({
-  name: z.string().min(3, "Name must be at least 3 characters"),
-  email: z.string().email("Invalid email address"),
-  password: z.string().min(8, "Password must be at least 8 characters"),
-  confirmPassword: z.string(),
-  phone: z.string().optional().or(z.literal("")),
-  role: z.enum(["Tourist", "Tour Guide"]),
-}).refine((data) => data.password === data.confirmPassword, {
-  message: "Passwords do not match",
-  path: ["confirmPassword"],
-}).refine((data) => {
-  if (data.role === "Tour Guide") {
-    return data.phone && /^\d{11}$/.test(data.phone);
-  }
-  return true;
-}, {
-  message: "11-digit phone number is required for Tour Guides",
-  path: ["phone"],
-});
+const signupSchema = z
+  .object({
+    name: z.string().min(3, "Name must be at least 3 characters"),
+    email: z.string().email("Invalid email address"),
+    password: z.string().min(8, "Password must be at least 8 characters"),
+    confirmPassword: z.string(),
+    phone: z.string().optional().or(z.literal("")),
+    role: z.enum(["Tourist", "Tour Guide"]),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  })
+  .refine(
+    (data) => {
+      if (data.role === "Tour Guide") {
+        return data.phone && /^\d{11}$/.test(data.phone);
+      }
+      return true;
+    },
+    {
+      message: "11-digit phone number is required for Tour Guides",
+      path: ["phone"],
+    },
+  );
 
 function AuthPage() {
   const [mode, setMode] = useState("login");
@@ -70,7 +76,7 @@ function AuthPage() {
       gsap.fromTo(
         cardRef.current,
         { opacity: 0, y: 40, scale: 0.96 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.9, ease: "power3.out" }
+        { opacity: 1, y: 0, scale: 1, duration: 0.9, ease: "power3.out" },
       );
     }, cardRef);
 
@@ -84,7 +90,7 @@ function AuthPage() {
       gsap.fromTo(
         formRef.current,
         { opacity: 0, y: 15 },
-        { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }
+        { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" },
       );
     }
   };
@@ -99,7 +105,7 @@ function AuthPage() {
 
       if (mode === "login") {
         const user = users.find(
-          (u) => u.email === data.email && u.password === data.password
+          (u) => u.email === data.email && u.password === data.password,
         );
         if (!user) {
           toast.error("Invalid email or password.");
@@ -119,7 +125,8 @@ function AuthPage() {
         return;
       }
 
-      const id = Date.now().toString(36) + Math.random().toString(36).substring(2, 7);
+      const id =
+        Date.now().toString(36) + Math.random().toString(36).substring(2, 7);
       const newUser = {
         id,
         name: data.name,
@@ -136,7 +143,8 @@ function AuthPage() {
       if (createError) throw createError;
 
       if (data.role === "Tour Guide") {
-        const guideId = Date.now().toString(36) + Math.random().toString(36).substring(2, 7);
+        const guideId =
+          Date.now().toString(36) + Math.random().toString(36).substring(2, 7);
         await supabase.from("tourGuides").insert({
           id: guideId,
           userId: createdUser.id,
@@ -153,14 +161,16 @@ function AuthPage() {
       navigate("/profile");
       toast.success("Account created successfully!");
     } catch (error) {
-      toast.error(error.message || "Could not connect to Supabase. Please try again.");
+      toast.error(
+        error.message || "Could not connect to Supabase. Please try again.",
+      );
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#271b12] via-[#1a110a] to-[#120a05] px-4 pt-28 pb-20 flex items-center justify-center">
+    <main className="relative min-h-screen overflow-hidden bg-linear-to-br from-[#271b12] via-[#1a110a] to-[#120a05] px-4 pt-28 pb-20 flex items-center justify-center">
       <div className="absolute top-1/4 left-1/4 h-96 w-96 rounded-full bg-[#b57a2d]/20 blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 h-96 w-96 rounded-full bg-[#3f2b1a]/40 blur-3xl pointer-events-none" />
 
@@ -215,7 +225,11 @@ function AuthPage() {
           </button>
         </div>
 
-        <form ref={formRef} className="space-y-5 pt-1" onSubmit={handleSubmit(onSubmit)}>
+        <form
+          ref={formRef}
+          className="space-y-5 pt-1"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <AuthFormFields
             mode={mode}
             register={register}
@@ -226,14 +240,14 @@ function AuthPage() {
 
           <button
             disabled={isSubmitting}
-            className="group relative w-full overflow-hidden rounded-2xl bg-gradient-to-r from-[#b57a2d] to-[#9b6525] py-4 text-sm font-black text-white shadow-xl shadow-[#b57a2d]/30 transition-all duration-300 hover:scale-[1.01] active:scale-98 cursor-pointer disabled:opacity-50"
+            className="group relative w-full overflow-hidden rounded-2xl bg-linear-to-r from-[#b57a2d] to-[#9b6525] py-4 text-sm font-black text-white shadow-xl shadow-[#b57a2d]/30 transition-all duration-300 hover:scale-[1.01] active:scale-98 cursor-pointer disabled:opacity-50"
           >
             <span className="relative z-10 flex items-center justify-center gap-2">
               {isSubmitting
                 ? "Processing..."
                 : mode === "login"
-                ? "Log In to Jawla"
-                : "Create Free Account"}
+                  ? "Log In to Jawla"
+                  : "Create Free Account"}
               <ArrowRight
                 size={16}
                 className="group-hover:translate-x-1 transition-transform"

@@ -1,5 +1,14 @@
 import { useEffect, useRef } from "react";
-import { Compass, Sparkles, MapPin, Repeat, ShieldCheck, Footprints, HeartHandshake, ArrowRight } from "lucide-react";
+import {
+  Compass,
+  Sparkles,
+  MapPin,
+  Repeat,
+  ShieldCheck,
+  Footprints,
+  HeartHandshake,
+  ArrowRight,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -60,7 +69,7 @@ function AboutPage() {
           y: 0,
           duration: 1,
           ease: "power3.out",
-        }
+        },
       );
 
       // Story section reveal
@@ -73,7 +82,7 @@ function AboutPage() {
           duration: 0.9,
           ease: "power3.out",
           scrollTrigger: { trigger: storyRef.current, start: "top 85%" },
-        }
+        },
       );
 
       // Pillars card stagger
@@ -89,7 +98,7 @@ function AboutPage() {
             stagger: 0.12,
             ease: "power3.out",
             scrollTrigger: { trigger: pillarsRef.current, start: "top 85%" },
-          }
+          },
         );
       }
 
@@ -106,7 +115,7 @@ function AboutPage() {
             stagger: 0.15,
             ease: "back.out(1.5)",
             scrollTrigger: { trigger: statsRef.current, start: "top 85%" },
-          }
+          },
         );
       }
 
@@ -120,7 +129,7 @@ function AboutPage() {
           duration: 0.8,
           ease: "power3.out",
           scrollTrigger: { trigger: ctaRef.current, start: "top 88%" },
-        }
+        },
       );
     });
 
@@ -128,12 +137,11 @@ function AboutPage() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[#fffaf0] via-[#f7ebd9] to-[#fffaf0]">
+    <main className="min-h-screen bg-linear-to-b from-[#fffaf0] via-[#f7ebd9] to-[#fffaf0]">
       {/* ── 1. Hero Banner ─────────────────────────────────── */}
       <section ref={heroRef} className="px-5 pt-28 pb-16">
         <div className="mx-auto max-w-6xl">
-          <div className="relative overflow-hidden rounded-[40px] bg-gradient-to-br from-[#3f2b1a] via-[#2c1d12] to-[#1a110a] px-8 py-16 text-white md:px-16 md:py-24 shadow-2xl border border-[#b57a2d]/30">
-            
+          <div className="relative overflow-hidden rounded-[40px] bg-linear-to-br from-[#3f2b1a] via-[#2c1d12] to-[#1a110a] px-8 py-16 text-white md:px-16 md:py-24 shadow-2xl border border-[#b57a2d]/30">
             {/* Background ambient glow */}
             <div className="absolute top-0 right-0 h-96 w-96 rounded-full bg-[#b57a2d]/15 blur-3xl pointer-events-none" />
 
@@ -141,13 +149,18 @@ function AboutPage() {
               <span className="inline-flex items-center gap-2 rounded-full bg-[#b57a2d]/20 border border-[#b57a2d]/40 px-4 py-1.5 text-xs font-black tracking-[0.25em] text-[#e4c58d] uppercase backdrop-blur-md">
                 <Compass size={14} className="text-[#b57a2d]" /> About Jawla
               </span>
-              
+
               <h1 className="text-4xl font-black leading-tight md:text-6xl tracking-tight text-white">
-                Egypt is Far More Than a <span className="text-amber-400">One-Time Visit</span>.
+                Egypt is Far More Than a{" "}
+                <span className="text-amber-400">One-Time Visit</span>.
               </h1>
-              
+
               <p className="text-base leading-8 text-[#f7e7d7] md:text-xl font-medium">
-                Most travelers visit Egypt once to see the famous pyramids, thinking they've seen it all. We built <strong>Jawla</strong> to show you the hidden magic — undiscovered gems, local neighborhood spots, and governorates that will make you return again and again.
+                Most travelers visit Egypt once to see the famous pyramids,
+                thinking they've seen it all. We built <strong>Jawla</strong> to
+                show you the hidden magic — undiscovered gems, local
+                neighborhood spots, and governorates that will make you return
+                again and again.
               </p>
 
               <div className="pt-4 flex flex-wrap gap-4 items-center">
@@ -176,17 +189,22 @@ function AboutPage() {
           <span className="text-xs font-black tracking-[0.25em] text-[#b57a2d] uppercase">
             Why We Founded Jawla
           </span>
-          
+
           <h2 className="text-3xl font-black text-[#3f2b1a] md:text-5xl leading-tight max-w-3xl mx-auto">
             Rediscover the Real Egypt Through Local Eyes
           </h2>
-          
+
           <p className="mx-auto max-w-3xl leading-8 text-[#695744] text-base md:text-lg font-medium">
-            When tourists visit Egypt, they often stick to well-known landmarks. Once those are checked off, many feel there is nothing left to explore.
+            When tourists visit Egypt, they often stick to well-known landmarks.
+            Once those are checked off, many feel there is nothing left to
+            explore.
           </p>
-          
+
           <div className="rounded-2xl bg-[#fff9f0] border border-[#f3e6d3] p-6 text-left max-w-3xl mx-auto font-medium text-[#4a3a2a] text-sm md:text-base leading-7">
-            💡 <strong>Our Belief:</strong> Egypt is an endless tapestry of stories. From small tucked-away cafes in historic Cairo to breathtaking coastal villages and undiscovered heritage sites in every governorate — there is always a new adventure waiting for you.
+            💡 <strong>Our Belief:</strong> Egypt is an endless tapestry of
+            stories. From small tucked-away cafes in historic Cairo to
+            breathtaking coastal villages and undiscovered heritage sites in
+            every governorate — there is always a new adventure waiting for you.
           </div>
         </div>
       </section>
@@ -248,7 +266,7 @@ function AboutPage() {
 
       {/* ── 5. Call to Action ───────────────────────────────── */}
       <section ref={ctaRef} className="px-5 pb-24 pt-8">
-        <div className="mx-auto max-w-6xl rounded-[36px] border border-[#f1e7d9] bg-gradient-to-r from-[#f7ebd9] via-[#fff9f0] to-[#f7ebd9] p-10 md:p-14 flex flex-col md:flex-row items-center justify-between gap-8 shadow-lg">
+        <div className="mx-auto max-w-6xl rounded-[36px] border border-[#f1e7d9] bg-linear-to-r from-[#f7ebd9] via-[#fff9f0] to-[#f7ebd9] p-10 md:p-14 flex flex-col md:flex-row items-center justify-between gap-8 shadow-lg">
           <div className="flex items-start gap-4">
             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#3f2b1a] text-amber-400">
               <MapPin size={26} />
@@ -258,11 +276,12 @@ function AboutPage() {
                 Ready to Experience Egypt Differently?
               </h2>
               <p className="text-sm text-[#695744] font-medium">
-                Choose your next destination, generate an AI itinerary, or book a local Egyptologist guide today.
+                Choose your next destination, generate an AI itinerary, or book
+                a local Egyptologist guide today.
               </p>
             </div>
           </div>
-          
+
           <div className="flex flex-wrap gap-3 shrink-0">
             <Link
               to="/booking"

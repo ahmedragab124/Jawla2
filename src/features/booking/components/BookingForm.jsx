@@ -16,15 +16,19 @@ const bookingSchema = z.object({
   email: z.string().email("Invalid email address"),
   people: z.preprocess(
     (val) => (val === "" ? undefined : Number(val)),
-    z.number({ invalid_type_error: "Number of people is required" })
-      .min(1, "At least 1 person is required")
+    z
+      .number({ invalid_type_error: "Number of people is required" })
+      .min(1, "At least 1 person is required"),
   ),
-  date: z.string().min(1, "Please select a date").refine((date) => {
-    const selectedDate = new Date(date);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    return selectedDate >= today;
-  }, "Date must be today or in the future"),
+  date: z
+    .string()
+    .min(1, "Please select a date")
+    .refine((date) => {
+      const selectedDate = new Date(date);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      return selectedDate >= today;
+    }, "Date must be today or in the future"),
   tourType: z.string().default("Historical Tour"),
   requests: z.string().optional(),
   guideId: z.string().min(1, "Please select a tour guide"),
@@ -89,12 +93,16 @@ function BookingForm() {
     };
 
     try {
-      const { error } = await supabase.from("bookings").insert([bookingPayload]);
+      const { error } = await supabase
+        .from("bookings")
+        .insert([bookingPayload]);
       if (error) throw error;
-      
-      setSuccessMessage("Your booking request has been submitted successfully!");
+
+      setSuccessMessage(
+        "Your booking request has been submitted successfully!",
+      );
       toast.success("Booking request submitted successfully!");
-      
+
       // Reset form to default values
       reset({
         fullName: user?.name || "",
@@ -150,7 +158,7 @@ function BookingForm() {
           className={`mt-5 w-full rounded-xl py-3 text-sm font-semibold text-white shadow-lg transition-all flex items-center justify-center gap-2 ${
             successMessage
               ? "bg-green-600"
-              : "bg-gradient-to-r from-[#C79A2D] to-[#8B5E3C] hover:shadow-xl"
+              : "bg-linear-to-r from-[#C79A2D] to-[#8B5E3C] hover:shadow-xl"
           }`}
         >
           {loading && <FaSpinner className="animate-spin" size={16} />}
@@ -158,8 +166,8 @@ function BookingForm() {
             {loading
               ? "Sending..."
               : successMessage
-              ? "Submitted ✓"
-              : "Submit Request →"}
+                ? "Submitted ✓"
+                : "Submit Request →"}
           </span>
         </button>
 

@@ -46,7 +46,7 @@ function BookingPage() {
         backgroundImage: `url(${hero})`,
       }}
     >
-      <div className="absolute inset-0 bg-gradient-to-r from-[#271b12]/85 via-[#3b2a1c]/60 to-[#271b12]/40 backdrop-blur-[2px]" />
+      <div className="absolute inset-0 bg-linear-to-r from-[#271b12]/85 via-[#3b2a1c]/60 to-[#271b12]/40 backdrop-blur-[2px]" />
 
       <div className="relative z-10 mx-auto flex flex-col lg:flex-row min-h-screen max-w-7xl items-center justify-center lg:justify-between gap-12 lg:gap-16 px-6 py-24 lg:pt-32 lg:pb-24 lg:px-10">
         <div ref={leftContentRef} className="max-w-lg text-center lg:text-left">

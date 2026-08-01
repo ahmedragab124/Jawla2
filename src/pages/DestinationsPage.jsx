@@ -64,7 +64,7 @@ function DestinationsPage() {
   return (
     <main
       ref={containerRef}
-      className="min-h-screen bg-gradient-to-b from-[#fffaf0] via-[#f9efdf] to-[#fffaf0] px-6 pt-28 pb-20"
+      className="min-h-screen bg-linear-to-b from-[#fffaf0] via-[#f9efdf] to-[#fffaf0] px-6 pt-28 pb-20"
     >
       <div className="dest-page-container max-w-7xl mx-auto">
         {/* Header section with navigation buttons above the carousel */}
@@ -117,18 +117,18 @@ function DestinationsPage() {
               {destinations.map((destination) => (
                 <div
                   key={destination.id}
-                  className="dest-card-wrapper snap-center shrink-0 w-[290px] sm:w-[340px]"
+                  className="dest-card-wrapper snap-center shrink-0 w-72.5 sm:w-85"
                 >
-                  <article className="dest-page-card h-[490px] rounded-3xl border border-[#f0e2d0] bg-white shadow-lg overflow-hidden flex flex-col justify-between transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl group">
+                  <article className="dest-page-card h-122.5 rounded-3xl border border-[#f0e2d0] bg-white shadow-lg overflow-hidden flex flex-col justify-between transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl group">
                     <div className="dest-page-img-wrapper h-60 relative overflow-hidden">
                       <img
                         src={destination.image}
                         alt={destination.name}
                         className="dest-page-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-50 group-hover:opacity-30 transition-opacity" />
+                      <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-50 group-hover:opacity-30 transition-opacity" />
                     </div>
-                    <div className="dest-page-body p-6 flex flex-col justify-between flex-grow">
+                    <div className="dest-page-body p-6 flex flex-col justify-between grow">
                       <div>
                         <h2 className="dest-page-title text-2xl font-black text-[#3f2b1a] group-hover:text-[#b57a2d] transition-colors">
                           {destination.name}

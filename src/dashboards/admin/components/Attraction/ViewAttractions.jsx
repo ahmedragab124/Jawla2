@@ -64,7 +64,7 @@ function ViewAttractions() {
 
       <section className="overflow-hidden rounded-3xl bg-white shadow-[0_15px_40px_rgba(76,48,24,0.06)] border border-stone-100">
         <div className="overflow-x-auto">
-          <table className="w-full min-w-[700px] text-left text-sm">
+          <table className="w-full min-w-175 text-left text-sm">
             <thead className="bg-[#f9f3e9] text-[#725a40]">
               <tr>
                 <th className="p-4">Name</th>

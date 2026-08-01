@@ -3,9 +3,7 @@ import React from "react";
 // Generic Skeleton Box with shimmer
 export function SkeletonBlock({ className = "" }) {
   return (
-    <div
-      className={`rounded-2xl bg-[#f4e9d7] animate-shimmer ${className}`}
-    />
+    <div className={`rounded-2xl bg-[#f4e9d7] animate-shimmer ${className}`} />
   );
 }
 
@@ -20,19 +18,19 @@ export function CardSkeleton({ count = 3 }) {
         >
           {/* Image placeholder */}
           <SkeletonBlock className="h-48 w-full rounded-2xl" />
-          
+
           {/* Title */}
           <SkeletonBlock className="h-6 w-3/4" />
-          
+
           {/* Subtitle / Category */}
           <SkeletonBlock className="h-4 w-1/2" />
-          
+
           {/* Description line 1 & 2 */}
           <div className="space-y-2 pt-2">
             <SkeletonBlock className="h-3 w-full" />
             <SkeletonBlock className="h-3 w-4/5" />
           </div>
-          
+
           {/* Footer button placeholder */}
           <div className="flex items-center justify-between pt-2">
             <SkeletonBlock className="h-5 w-20" />
@@ -53,7 +51,7 @@ export function TableSkeleton({ rows = 5 }) {
         <SkeletonBlock className="h-7 w-40" />
         <SkeletonBlock className="h-9 w-28 rounded-full" />
       </div>
-      
+
       {/* Table rows */}
       <div className="space-y-3">
         {Array.from({ length: rows }).map((_, i) => (
@@ -85,7 +83,7 @@ export function FormSkeleton() {
         <SkeletonBlock className="h-8 w-48" />
         <SkeletonBlock className="h-4 w-3/4" />
       </div>
-      
+
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-2">
           <SkeletonBlock className="h-4 w-24" />
@@ -96,7 +94,7 @@ export function FormSkeleton() {
           <SkeletonBlock className="h-12 w-full rounded-3xl" />
         </div>
       </div>
-      
+
       <div className="space-y-2">
         <SkeletonBlock className="h-4 w-32" />
         <SkeletonBlock className="h-28 w-full rounded-3xl" />
@@ -115,8 +113,8 @@ export function DetailsPageSkeleton() {
   return (
     <div className="space-y-8 animate-fadeUp">
       {/* Hero Header Skeleton */}
-      <SkeletonBlock className="h-[40vh] min-h-[300px] w-full rounded-4xl" />
-      
+      <SkeletonBlock className="h-[40vh] min-h-75 w-full rounded-4xl" />
+
       {/* Content Grid */}
       <div className="grid gap-8 lg:grid-cols-3">
         <div className="lg:col-span-2 space-y-6">
@@ -126,7 +124,7 @@ export function DetailsPageSkeleton() {
           <SkeletonBlock className="h-4 w-4/5" />
           <SkeletonBlock className="h-64 w-full rounded-3xl" />
         </div>
-        
+
         {/* Sidebar Info Card Skeleton */}
         <div className="space-y-4">
           <SkeletonBlock className="h-72 w-full rounded-3xl" />

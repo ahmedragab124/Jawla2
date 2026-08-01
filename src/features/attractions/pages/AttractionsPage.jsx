@@ -90,7 +90,7 @@ function AttractionsPage() {
   return (
     <main
       ref={containerRef}
-      className="min-h-screen bg-gradient-to-b from-[#fffaf0] via-[#f7ebe0] to-[#fffaf0] px-5 pt-28 pb-20"
+      className="min-h-screen bg-linear-to-b from-[#fffaf0] via-[#f7ebe0] to-[#fffaf0] px-5 pt-28 pb-20"
     >
       <section className="mx-auto max-w-6xl">
         <div className="text-center mb-10">
@@ -116,49 +116,52 @@ function AttractionsPage() {
         {loading ? (
           <CardSkeleton count={6} />
         ) : (
-          <div ref={gridRef} className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((a) => (
-            <Link
-              key={a.id}
-              to={`/attractions/${a.id}`}
-              className="attraction-grid-card overflow-hidden rounded-[28px] bg-white shadow-lg border border-[#f3e6d3] hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group flex flex-col justify-between"
-            >
-              <div className="relative h-64 overflow-hidden">
-                <img
-                  src={a.image || "/attractions/pyramids.png"}
-                  alt={a.name}
-                  className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-                  onError={(e) => {
-                    e.target.src = "/attractions/pyramids.png";
-                  }}
-                />
-                <span className="absolute top-4 right-4 flex items-center gap-1 rounded-full bg-white/90 backdrop-blur-md px-3 py-1 text-xs font-black text-[#a9681b] shadow-md">
-                  <Star
-                    size={14}
-                    fill="currentColor"
-                    className="text-amber-500"
-                  />{" "}
-                  {a.star}
-                </span>
-              </div>
-              <div className="p-6 flex flex-col justify-between flex-grow">
-                <div>
-                  <h2 className="text-2xl font-black text-[#3f2b1a] group-hover:text-[#b57a2d] transition-colors">
-                    {a.name}
-                  </h2>
-                  <p className="mt-3 text-xs leading-6 text-[#685743] line-clamp-3 font-medium">
-                    {a.description}
-                  </p>
-                </div>
-                <div className="mt-6 flex items-center justify-between pt-4 border-t border-stone-100">
-                  <span className="text-xs font-bold text-[#b57a2d]">
-                    Explore Attraction →
+          <div
+            ref={gridRef}
+            className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
+          >
+            {filtered.map((a) => (
+              <Link
+                key={a.id}
+                to={`/attractions/${a.id}`}
+                className="attraction-grid-card overflow-hidden rounded-[28px] bg-white shadow-lg border border-[#f3e6d3] hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group flex flex-col justify-between"
+              >
+                <div className="relative h-64 overflow-hidden">
+                  <img
+                    src={a.image || "/attractions/pyramids.png"}
+                    alt={a.name}
+                    className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                    onError={(e) => {
+                      e.target.src = "/attractions/pyramids.png";
+                    }}
+                  />
+                  <span className="absolute top-4 right-4 flex items-center gap-1 rounded-full bg-white/90 backdrop-blur-md px-3 py-1 text-xs font-black text-[#a9681b] shadow-md">
+                    <Star
+                      size={14}
+                      fill="currentColor"
+                      className="text-amber-500"
+                    />{" "}
+                    {a.star}
                   </span>
                 </div>
-              </div>
-            </Link>
-          ))}
-        </div>
+                <div className="p-6 flex flex-col justify-between grow">
+                  <div>
+                    <h2 className="text-2xl font-black text-[#3f2b1a] group-hover:text-[#b57a2d] transition-colors">
+                      {a.name}
+                    </h2>
+                    <p className="mt-3 text-xs leading-6 text-[#685743] line-clamp-3 font-medium">
+                      {a.description}
+                    </p>
+                  </div>
+                  <div className="mt-6 flex items-center justify-between pt-4 border-t border-stone-100">
+                    <span className="text-xs font-bold text-[#b57a2d]">
+                      Explore Attraction →
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
         )}
 
         {!loading && filtered.length === 0 && (
