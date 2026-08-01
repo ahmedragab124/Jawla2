@@ -4,25 +4,66 @@ import { useAuth, homeForRole } from "../context/AuthContext";
 import { toast } from "react-toastify";
 import { supabase } from "../../../supabase";
 import AuthFormFields from "../components/AuthFormFields";
-import { Compass, Sparkles, ArrowRight, ShieldCheck } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import gsap from "gsap";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+
+// 1. Define Validation Schemas
+const loginSchema = z.object({
+  email: z.string().email("Invalid email address"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+});
+
+const signupSchema = z.object({
+  name: z.string().min(3, "Name must be at least 3 characters"),
+  email: z.string().email("Invalid email address"),
+  password: z.string().min(8, "Password must be at least 8 characters"),
+  confirmPassword: z.string(),
+  phone: z.string().optional().or(z.literal("")),
+  role: z.enum(["Tourist", "Tour Guide"]),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Passwords do not match",
+  path: ["confirmPassword"],
+}).refine((data) => {
+  if (data.role === "Tour Guide") {
+    return data.phone && /^\d{11}$/.test(data.phone);
+  }
+  return true;
+}, {
+  message: "11-digit phone number is required for Tour Guides",
+  path: ["phone"],
+});
 
 function AuthPage() {
   const [mode, setMode] = useState("login");
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    phone: "",
-    role: "Tourist",
-  });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
   const { login } = useAuth();
 
   const cardRef = useRef(null);
   const formRef = useRef(null);
+
+  // 2. Initialize React Hook Form
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    watch,
+    setValue,
+  } = useForm({
+    resolver: zodResolver(mode === "login" ? loginSchema : signupSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      phone: "",
+      role: "Tourist",
+    },
+  });
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -38,6 +79,7 @@ function AuthPage() {
 
   const handleTabChange = (newMode) => {
     setMode(newMode);
+    reset(); // Clear form when switching modes
     if (formRef.current) {
       gsap.fromTo(
         formRef.current,
@@ -47,25 +89,7 @@ function AuthPage() {
     }
   };
 
-  const updateField = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const setRole = (roleName) => {
-    setForm((prev) => ({ ...prev, role: roleName }));
-  };
-
-  const submit = async (e) => {
-    e.preventDefault();
-    if (!form.email || !form.password || (mode === "signup" && !form.name)) {
-      toast.error("Please fill in all required fields.");
-      return;
-    }
-    if (mode === "signup" && form.password !== form.confirmPassword) {
-      toast.error("Passwords do not match.");
-      return;
-    }
-
+  const onSubmit = async (data) => {
     setIsSubmitting(true);
     try {
       const { data: users, error: usersError } = await supabase
@@ -75,7 +99,7 @@ function AuthPage() {
 
       if (mode === "login") {
         const user = users.find(
-          (u) => u.email === form.email && u.password === form.password
+          (u) => u.email === data.email && u.password === data.password
         );
         if (!user) {
           toast.error("Invalid email or password.");
@@ -88,20 +112,20 @@ function AuthPage() {
         return;
       }
 
-      if (users.some((u) => u.email === form.email)) {
+      // Signup Mode
+      if (users.some((u) => u.email === data.email)) {
         toast.error("This email is already registered.");
         setIsSubmitting(false);
         return;
       }
 
-      const id =
-        Date.now().toString(36) + Math.random().toString(36).substring(2, 7);
+      const id = Date.now().toString(36) + Math.random().toString(36).substring(2, 7);
       const newUser = {
         id,
-        name: form.name,
-        email: form.email,
-        password: form.password,
-        role: form.role,
+        name: data.name,
+        email: data.email,
+        password: data.password,
+        role: data.role,
       };
 
       const { data: createdUser, error: createError } = await supabase
@@ -111,17 +135,16 @@ function AuthPage() {
         .single();
       if (createError) throw createError;
 
-      if (form.role === "Tour Guide") {
-        const guideId =
-          Date.now().toString(36) + Math.random().toString(36).substring(2, 7);
+      if (data.role === "Tour Guide") {
+        const guideId = Date.now().toString(36) + Math.random().toString(36).substring(2, 7);
         await supabase.from("tourGuides").insert({
           id: guideId,
           userId: createdUser.id,
-          name: form.name,
-          email: form.email,
-          password: form.password,
-          phone: form.phone || "",
-          whatsapp: form.phone || "",
+          name: data.name,
+          email: data.email,
+          password: data.password,
+          phone: data.phone || "",
+          whatsapp: data.phone || "",
           status: "Pending approval",
         });
       }
@@ -130,9 +153,7 @@ function AuthPage() {
       navigate("/profile");
       toast.success("Account created successfully!");
     } catch (error) {
-      toast.error(
-        error.message || "Could not connect to Supabase. Please try again."
-      );
+      toast.error(error.message || "Could not connect to Supabase. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -140,7 +161,6 @@ function AuthPage() {
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#271b12] via-[#1a110a] to-[#120a05] px-4 pt-28 pb-20 flex items-center justify-center">
-      {/* Background ambient lighting */}
       <div className="absolute top-1/4 left-1/4 h-96 w-96 rounded-full bg-[#b57a2d]/20 blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 h-96 w-96 rounded-full bg-[#3f2b1a]/40 blur-3xl pointer-events-none" />
 
@@ -148,7 +168,6 @@ function AuthPage() {
         ref={cardRef}
         className="relative z-10 w-full max-w-lg rounded-[36px] bg-white/95 backdrop-blur-2xl p-8 sm:p-10 shadow-[0_30px_100px_rgba(0,0,0,0.5)] border border-white/40 space-y-6"
       >
-        {/* Brand Header */}
         <div className="text-center space-y-2">
           <Link to="/" className="inline-flex items-center gap-2 group">
             <img
@@ -171,7 +190,6 @@ function AuthPage() {
           </p>
         </div>
 
-        {/* Tab Switcher */}
         <div className="grid grid-cols-2 rounded-2xl bg-[#f4ebd9] p-1.5 shadow-inner">
           <button
             type="button"
@@ -197,13 +215,13 @@ function AuthPage() {
           </button>
         </div>
 
-        {/* Auth Form */}
-        <form ref={formRef} className="space-y-5 pt-1" onSubmit={submit}>
+        <form ref={formRef} className="space-y-5 pt-1" onSubmit={handleSubmit(onSubmit)}>
           <AuthFormFields
             mode={mode}
-            form={form}
-            onChange={updateField}
-            onSelectRole={setRole}
+            register={register}
+            errors={errors}
+            watch={watch}
+            setValue={setValue}
           />
 
           <button

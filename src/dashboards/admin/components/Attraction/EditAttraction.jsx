@@ -3,10 +3,25 @@ import { useParams, useNavigate } from "react-router-dom";
 import { supabase } from "../../../../supabase";
 import { toast } from "react-toastify";
 import { Check } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 
-const cls =
-  "w-full border border-[#d9c9b0] rounded-3xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[#b57a2d]";
+const cls = "w-full border rounded-3xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[#b57a2d]";
 const lbl = "block text-sm font-medium text-[#3f2b1a] mb-1";
+const errCls = "mt-1 text-[10px] text-red-500 font-medium ml-2";
+
+// 1. Define the Validation Schema
+const attractionSchema = z.object({
+  destinationId: z.string().min(1, "Please select a destination"),
+  name: z.string().min(3, "Name must be at least 3 characters"),
+  category: z.string().min(2, "Category is required"),
+  description: z.string().min(20, "Description should be at least 20 characters"),
+  image: z.string().url("Please enter a valid image URL"),
+  duration: z.preprocess((val) => (val === "" ? undefined : Number(val)), z.number().optional()),
+  bestTime: z.string().default("Anytime"),
+  star: z.preprocess((val) => Number(val), z.number().min(1).max(5)).default(5),
+});
 
 function EditAttraction() {
   const { id } = useParams();
@@ -15,15 +30,15 @@ function EditAttraction() {
   const [destinations, setDestinations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [form, setForm] = useState({
-    destinationId: "",
-    name: "",
-    category: "",
-    description: "",
-    duration: "",
-    bestTime: "Anytime",
-    star: 5,
-    image: "",
+
+  // 2. Initialize React Hook Form
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: zodResolver(attractionSchema),
   });
 
   useEffect(() => {
@@ -44,7 +59,9 @@ function EditAttraction() {
       }
 
       setDestinations(dests || []);
-      setForm({
+      
+      // 3. Reset form with fetched data
+      reset({
         destinationId: attraction.destinationId || "",
         name: attraction.name || "",
         category: attraction.category || "",
@@ -54,41 +71,26 @@ function EditAttraction() {
         star: attraction.star || 5,
         image: attraction.image || "",
       });
+      
       setLoading(false);
     };
     fetchData();
-  }, [id]);
+  }, [id, reset]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (
-      !form.destinationId ||
-      !form.name.trim() ||
-      !form.category.trim() ||
-      !form.description.trim() ||
-      !form.image.trim()
-    )
-      return toast.error("Please fill in all required fields.");
-
+  const onSubmit = async (data) => {
     setSaving(true);
 
     const { error } = await supabase
       .from("attractions")
       .update({
-        destinationId: form.destinationId,
-        name: form.name.trim(),
-        category: form.category.trim(),
-        description: form.description.trim(),
-        image: form.image.trim(),
-        duration: form.duration ? Number(form.duration) : null,
-        bestTime: form.bestTime,
-        star: Number(form.star),
+        destinationId: data.destinationId,
+        name: data.name.trim(),
+        category: data.category.trim(),
+        description: data.description.trim(),
+        image: data.image.trim(),
+        duration: data.duration ? Number(data.duration) : null,
+        bestTime: data.bestTime,
+        star: Number(data.star),
       })
       .eq("id", id);
 
@@ -109,41 +111,33 @@ function EditAttraction() {
 
   return (
     <div className="max-w-3xl rounded-4xl bg-white p-8 shadow-[0_25px_60px_rgba(0,0,0,0.08)] border border-[#f1e7d9]">
-      <h1 className="text-3xl font-bold text-[#3f2b1a] mb-4">
-        Edit Attraction
-      </h1>
-      <p className="text-sm text-[#695744] mb-6">
-        Update the details for this attraction.
-      </p>
+      <h1 className="text-3xl font-bold text-[#3f2b1a] mb-4">Edit Attraction</h1>
+      <p className="text-sm text-[#695744] mb-6">Update the details for this attraction.</p>
 
-      <form className="space-y-4" onSubmit={handleSubmit}>
+      <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <label className={lbl}>Attraction Name</label>
             <input
-              name="name"
-              value={form.name}
-              onChange={handleChange}
+              {...register("name")}
               type="text"
               placeholder="Example: Giza Pyramids"
-              className={cls}
+              className={`${cls} ${errors.name ? 'border-red-500' : 'border-[#d9c9b0]'}`}
             />
+            {errors.name && <p className={errCls}>{errors.name.message}</p>}
           </div>
           <div>
             <label className={lbl}>Destination</label>
             <select
-              name="destinationId"
-              value={form.destinationId}
-              onChange={handleChange}
-              className={cls}
+              {...register("destinationId")}
+              className={`${cls} ${errors.destinationId ? 'border-red-500' : 'border-[#d9c9b0]'}`}
             >
               <option value="">Select a destination</option>
               {destinations.map((d) => (
-                <option key={d.id} value={d.id}>
-                  {d.name}
-                </option>
+                <option key={d.id} value={d.id}>{d.name}</option>
               ))}
             </select>
+            {errors.destinationId && <p className={errCls}>{errors.destinationId.message}</p>}
           </div>
         </div>
 
@@ -151,45 +145,40 @@ function EditAttraction() {
           <div>
             <label className={lbl}>Category</label>
             <input
-              name="category"
-              value={form.category}
-              onChange={handleChange}
+              {...register("category")}
               type="text"
               placeholder="Historical / Museum / Outdoor"
-              className={cls}
+              className={`${cls} ${errors.category ? 'border-red-500' : 'border-[#d9c9b0]'}`}
             />
+            {errors.category && <p className={errCls}>{errors.category.message}</p>}
           </div>
           <div>
             <label className={lbl}>Image URL</label>
             <input
-              name="image"
-              value={form.image}
-              onChange={handleChange}
+              {...register("image")}
               placeholder="https://example.com/image.jpg"
-              className={cls}
+              className={`${cls} ${errors.image ? 'border-red-500' : 'border-[#d9c9b0]'}`}
             />
+            {errors.image && <p className={errCls}>{errors.image.message}</p>}
           </div>
         </div>
 
         <div>
           <label className={lbl}>Description</label>
           <textarea
-            name="description"
-            value={form.description}
-            onChange={handleChange}
+            {...register("description")}
             rows="4"
             placeholder="Write a short description."
-            className={cls}
+            className={`${cls} ${errors.description ? 'border-red-500' : 'border-[#d9c9b0]'}`}
           />
+          {errors.description && <p className={errCls}>{errors.description.message}</p>}
         </div>
 
         <div className="grid gap-4 sm:grid-cols-3">
           <div>
             <label className={lbl}>Duration (min)</label>
             <input
-              name="duration"
-              value={form.duration}
-              onChange={handleChange}
+              {...register("duration")}
               type="number"
               min="0"
               placeholder="90"
@@ -198,27 +187,16 @@ function EditAttraction() {
           </div>
           <div>
             <label className={lbl}>Best Time</label>
-            <select
-              name="bestTime"
-              value={form.bestTime}
-              onChange={handleChange}
-              className={cls}
-            >
-              {["Anytime", "Morning", "Afternoon", "Evening", "Night"].map(
-                (t) => (
-                  <option key={t} value={t}>
-                    {t}
-                  </option>
-                ),
-              )}
+            <select {...register("bestTime")} className={cls}>
+              {["Anytime", "Morning", "Afternoon", "Evening", "Night"].map((t) => (
+                <option key={t} value={t}>{t}</option>
+              ))}
             </select>
           </div>
           <div>
             <label className={lbl}>Star Rating</label>
             <input
-              name="star"
-              value={form.star}
-              onChange={handleChange}
+              {...register("star")}
               type="number"
               min="1"
               max="5"
@@ -234,16 +212,7 @@ function EditAttraction() {
             disabled={saving}
             className="inline-flex items-center gap-2 justify-center rounded-full bg-[#b57a2d] px-8 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-[#9b6525] disabled:opacity-60 cursor-pointer"
           >
-            {saving ? (
-              <>
-                <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />{" "}
-                Saving...
-              </>
-            ) : (
-              <>
-                <Check size={16} strokeWidth={3} /> Save Changes
-              </>
-            )}
+            {saving ? "Saving..." : <><Check size={16} strokeWidth={3} /> Save Changes</>}
           </button>
           <button
             type="button"

@@ -3,24 +3,46 @@ import { Mail, Phone, Globe2, Pencil } from "lucide-react";
 import { toast } from "react-toastify";
 import TouristProfileEditForm from "./TouristProfileEditForm";
 import { supabase } from "../../../supabase";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 
-// TouristProfileSidebar Component
+// 1. Define the Validation Schema
+const profileSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Invalid email address"),
+  phone: z.string().optional().or(z.literal("")),
+  location: z.string().optional().or(z.literal("")),
+  bio: z.string().max(180, "Bio must be less than 180 characters").optional().or(z.literal("")),
+  avatar: z.string().optional().or(z.literal("")),
+});
+
 function TouristProfileSidebar({ user, bookings, onUserUpdated }) {
   const [isEditing, setIsEditing] = useState(false);
   const [saving, setSaving] = useState(false);
-  const [form, setForm] = useState({
-    name: user.name || "",
-    email: user.email || "",
-    phone: user.phone || "",
-    location: user.location || "",
-    bio: user.bio || "",
-    avatar: user.avatar || "",
+
+  // 2. Initialize React Hook Form
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    setValue,
+    watch,
+  } = useForm({
+    resolver: zodResolver(profileSchema),
+    defaultValues: {
+      name: user.name || "",
+      email: user.email || "",
+      phone: user.phone || "",
+      location: user.location || "",
+      bio: user.bio || "",
+      avatar: user.avatar || "",
+    },
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-  };
+  const avatarValue = watch("avatar");
+  const nameValue = watch("name");
 
   const handlePhotoChange = (e) => {
     const file = e.target.files?.[0];
@@ -30,19 +52,13 @@ function TouristProfileSidebar({ user, bookings, onUserUpdated }) {
       return;
     }
     const reader = new FileReader();
-    reader.onload = () =>
-      setForm((prev) => ({ ...prev, avatar: reader.result }));
+    reader.onload = () => setValue("avatar", reader.result);
     reader.readAsDataURL(file);
   };
 
-  const handleSave = async (e) => {
-    e.preventDefault();
-    const name = form.name.trim();
-    const email = form.email.trim().toLowerCase();
-    if (!name || !email) {
-      toast.error("Name and email are required.");
-      return;
-    }
+  const onSubmit = async (data) => {
+    const name = data.name.trim();
+    const email = data.email.trim().toLowerCase();
 
     setSaving(true);
     try {
@@ -51,10 +67,10 @@ function TouristProfileSidebar({ user, bookings, onUserUpdated }) {
         .update({
           name,
           email,
-          phone: form.phone.trim(),
-          location: form.location.trim(),
-          bio: form.bio.trim(),
-          avatar: form.avatar,
+          phone: data.phone?.trim() || "",
+          location: data.location?.trim() || "",
+          bio: data.bio?.trim() || "",
+          avatar: data.avatar || "",
         })
         .eq("id", user.id)
         .select()
@@ -73,7 +89,7 @@ function TouristProfileSidebar({ user, bookings, onUserUpdated }) {
               touristName: name,
               touristEmail: email,
               email,
-              phone: form.phone.trim(),
+              phone: data.phone?.trim() || "",
             })
             .eq("id", b.id);
         }),
@@ -93,11 +109,7 @@ function TouristProfileSidebar({ user, bookings, onUserUpdated }) {
     <section className="rounded-3xl bg-white p-6 shadow-[0_15px_40px_rgba(76,48,24,0.08)] border border-stone-100/50 sticky top-24">
       <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-3xl bg-[#f9ecd8] text-2xl font-black text-[#7a5540] ring-4 ring-white shadow-lg">
         {user.avatar ? (
-          <img
-            src={user.avatar}
-            alt={user.name}
-            className="h-full w-full object-cover"
-          />
+          <img src={user.avatar} alt={user.name} className="h-full w-full object-cover" />
         ) : (
           user.name?.trim().charAt(0).toUpperCase() || "T"
         )}
@@ -105,17 +117,13 @@ function TouristProfileSidebar({ user, bookings, onUserUpdated }) {
 
       <div className="mt-5 flex items-start justify-between gap-3">
         <div>
-          <p className="text-xs font-bold tracking-[0.25em] text-[#b57a2d] uppercase">
-            {user.role} Account
-          </p>
-          <h2 className="mt-2 text-3xl font-black text-[#3f2b1a]">
-            {user.name}
-          </h2>
+          <p className="text-xs font-bold tracking-[0.25em] text-[#b57a2d] uppercase">{user.role} Account</p>
+          <h2 className="mt-2 text-3xl font-black text-[#3f2b1a]">{user.name}</h2>
         </div>
         {!isEditing && (
           <button
             onClick={() => {
-              setForm({
+              reset({
                 name: user.name || "",
                 email: user.email || "",
                 phone: user.phone || "",
@@ -134,14 +142,14 @@ function TouristProfileSidebar({ user, bookings, onUserUpdated }) {
 
       {isEditing ? (
         <TouristProfileEditForm
-          form={form}
+          register={register}
+          errors={errors}
+          avatarValue={avatarValue}
+          nameValue={nameValue}
           saving={saving}
-          onChange={handleChange}
           onPhotoChange={handlePhotoChange}
-          onSave={handleSave}
-          onCancel={() => {
-            setIsEditing(false);
-          }}
+          onSave={handleSubmit(onSubmit)}
+          onCancel={() => setIsEditing(false)}
         />
       ) : (
         <div className="mt-6 space-y-4 border-t border-stone-100 pt-6 text-sm text-[#594735]">
@@ -160,9 +168,7 @@ function TouristProfileSidebar({ user, bookings, onUserUpdated }) {
             <span>{user.location || "Tourist Member"}</span>
           </div>
           {user.bio && (
-            <p className="rounded-2xl bg-[#fffaf0] p-3 text-xs text-[#6d5c4a]">
-              {user.bio}
-            </p>
+            <p className="rounded-2xl bg-[#fffaf0] p-3 text-xs text-[#6d5c4a]">{user.bio}</p>
           )}
         </div>
       )}

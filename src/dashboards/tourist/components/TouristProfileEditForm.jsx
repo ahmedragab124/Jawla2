@@ -1,86 +1,71 @@
 import { ImagePlus, Save, X } from "lucide-react";
 
-// TouristProfileEditForm Component
 function TouristProfileEditForm({
-  form,
+  register,
+  errors,
+  avatarValue,
+  nameValue,
   saving,
-  onChange,
   onPhotoChange,
   onSave,
   onCancel,
 }) {
+  const errCls = "mt-1 text-[10px] text-red-500 font-medium";
+
   return (
-    <form
-      onSubmit={onSave}
-      className="mt-6 space-y-4 border-t border-stone-100 pt-6"
-    >
+    <form onSubmit={onSave} className="mt-6 space-y-4 border-t border-stone-100 pt-6">
       <div className="flex items-center gap-4">
         <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl bg-[#f9ecd8] font-black text-[#7a5540]">
-          {form.avatar ? (
-            <img
-              src={form.avatar}
-              alt="Profile preview"
-              className="h-full w-full object-cover"
-            />
+          {avatarValue ? (
+            <img src={avatarValue} alt="Profile preview" className="h-full w-full object-cover" />
           ) : (
-            form.name.trim().charAt(0).toUpperCase() || "T"
+            nameValue?.trim().charAt(0).toUpperCase() || "T"
           )}
         </div>
         <label className="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-[#e6d8c5] px-3 py-2 text-sm font-bold text-[#b57a2d] transition hover:bg-[#fff7ea]">
           <ImagePlus size={16} /> Upload photo
-          <input
-            type="file"
-            accept="image/*"
-            onChange={onPhotoChange}
-            className="sr-only"
-          />
+          <input type="file" accept="image/*" onChange={onPhotoChange} className="sr-only" />
         </label>
       </div>
 
-      <label className="block text-sm font-semibold text-[#594735]">
-        Full name
+      <div>
+        <label className="block text-sm font-semibold text-[#594735]">Full name</label>
         <input
-          name="name"
-          value={form.name}
-          onChange={onChange}
-          className="mt-1.5 w-full rounded-xl border border-[#e6d8c5] px-3 py-2.5 outline-none focus:border-[#b57a2d]"
+          {...register("name")}
+          className={`mt-1.5 w-full rounded-xl border ${errors.name ? 'border-red-500' : 'border-[#e6d8c5]'} px-3 py-2.5 outline-none focus:border-[#b57a2d]`}
         />
-      </label>
+        {errors.name && <p className={errCls}>{errors.name.message}</p>}
+      </div>
 
-      <label className="block text-sm font-semibold text-[#594735]">
-        Email address
+      <div>
+        <label className="block text-sm font-semibold text-[#594735]">Email address</label>
         <input
-          name="email"
           type="email"
-          value={form.email}
-          onChange={onChange}
-          className="mt-1.5 w-full rounded-xl border border-[#e6d8c5] px-3 py-2.5 outline-none focus:border-[#b57a2d]"
+          {...register("email")}
+          className={`mt-1.5 w-full rounded-xl border ${errors.email ? 'border-red-500' : 'border-[#e6d8c5]'} px-3 py-2.5 outline-none focus:border-[#b57a2d]`}
         />
-      </label>
+        {errors.email && <p className={errCls}>{errors.email.message}</p>}
+      </div>
 
-      <label className="block text-sm font-semibold text-[#594735]">
-        City / country
+      <div>
+        <label className="block text-sm font-semibold text-[#594735]">City / country</label>
         <input
-          name="location"
-          value={form.location}
-          onChange={onChange}
+          {...register("location")}
           placeholder="Cairo, Egypt"
           className="mt-1.5 w-full rounded-xl border border-[#e6d8c5] px-3 py-2.5 outline-none focus:border-[#b57a2d]"
         />
-      </label>
+      </div>
 
-      <label className="block text-sm font-semibold text-[#594735]">
-        About me
+      <div>
+        <label className="block text-sm font-semibold text-[#594735]">About me</label>
         <textarea
-          name="bio"
-          value={form.bio}
-          onChange={onChange}
-          maxLength={180}
+          {...register("bio")}
           rows={3}
           placeholder="Tell us a little about your travel style..."
-          className="mt-1.5 w-full resize-none rounded-xl border border-[#e6d8c5] px-3 py-2.5 outline-none focus:border-[#b57a2d]"
+          className={`mt-1.5 w-full resize-none rounded-xl border ${errors.bio ? 'border-red-500' : 'border-[#e6d8c5]'} px-3 py-2.5 outline-none focus:border-[#b57a2d]`}
         />
-      </label>
+        {errors.bio && <p className={errCls}>{errors.bio.message}</p>}
+      </div>
 
       <div className="flex gap-2">
         <button

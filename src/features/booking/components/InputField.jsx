@@ -3,10 +3,8 @@ function InputField({
   label,
   type = "text",
   placeholder,
-  name,
-  value,
-  onChange,
-  min,
+  error,
+  registration,
   ...props
 }) {
   return (
@@ -22,15 +20,18 @@ function InputField({
 
         <input
           type={type}
-          min={type === "number" ? "1" : min}
-          name={name}
-          value={value}
-          onChange={onChange}
           placeholder={placeholder}
-          className="w-full rounded-xl border border-[#D8C3A5] bg-white/20 py-2.5 sm:py-3 pl-10 sm:pl-12 pr-3 sm:pr-4 text-sm text-[#4A3728] outline-none transition-all duration-300 placeholder:text-xs focus:border-[#B8860B] focus:bg-white/30 disabled:opacity-70 disabled:cursor-not-allowed read-only:bg-stone-300/20 read-only:text-[#8B5E3C] read-only:border-[#D8C3A5]/50 read-only:cursor-not-allowed"
+          className={`w-full rounded-xl border ${error ? "border-red-500" : "border-[#D8C3A5]"} bg-white/20 py-2.5 sm:py-3 pl-10 sm:pl-12 pr-3 sm:pr-4 text-sm text-[#4A3728] outline-none transition-all duration-300 placeholder:text-xs focus:border-[#B8860B] focus:bg-white/30 disabled:opacity-70 disabled:cursor-not-allowed read-only:bg-stone-300/20 read-only:text-[#8B5E3C] read-only:border-[#D8C3A5]/50 read-only:cursor-not-allowed`}
+          {...registration} // هنا نربط الحقل بـ React Hook Form
           {...props}
         />
       </div>
+      {/* عرض رسالة الخطأ إن وجدت */}
+      {error && (
+        <p className="mt-1 text-[10px] text-red-500 font-medium">
+          {error.message}
+        </p>
+      )}
     </div>
   );
 }

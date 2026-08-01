@@ -2,9 +2,9 @@ function SelectField({
   icon,
   label,
   options,
-  name,
-  value,
-  onChange,
+  error,
+  registration,
+  ...props
 }) {
   return (
     <div>
@@ -18,10 +18,9 @@ function SelectField({
         </span>
 
         <select
-          name={name}
-          value={value}
-          onChange={onChange}
-          className="w-full cursor-pointer rounded-xl border border-[#D8C3A5] bg-white/20 py-2.5 sm:py-3 pl-10 sm:pl-12 pr-3 sm:pr-4 text-sm text-[#4A3728] backdrop-blur-md outline-none transition-all duration-300 focus:border-[#B8860B] focus:bg-white/30"
+          className={`w-full cursor-pointer rounded-xl border ${error ? 'border-red-500' : 'border-[#D8C3A5]'} bg-white/20 py-2.5 sm:py-3 pl-10 sm:pl-12 pr-3 sm:pr-4 text-sm text-[#4A3728] backdrop-blur-md outline-none transition-all duration-300 focus:border-[#B8860B] focus:bg-white/30`}
+          {...registration}
+          {...props}
         >
           {options.map((item) => {
             const val = typeof item === "object" ? item.value : item;
@@ -38,6 +37,7 @@ function SelectField({
           })}
         </select>
       </div>
+      {error && <p className="mt-1 text-[10px] text-red-500 font-medium">{error.message}</p>}
     </div>
   );
 }

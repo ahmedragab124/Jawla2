@@ -1,9 +1,12 @@
-import { LockKeyhole, Mail, UserRound, Phone, Eye, EyeOff, Compass, ShieldCheck } from "lucide-react";
+import { LockKeyhole, Mail, UserRound, Phone, Eye, EyeOff, Compass } from "lucide-react";
 import { useState } from "react";
 
-function AuthFormFields({ mode, form, onChange, onSelectRole }) {
+function AuthFormFields({ mode, register, errors, watch, setValue }) {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  
+  // Watch the role to conditionally show the phone field
+  const selectedRole = watch("role");
 
   return (
     <div className="space-y-4">
@@ -16,14 +19,12 @@ function AuthFormFields({ mode, form, onChange, onSelectRole }) {
           <div className="relative">
             <UserRound className="absolute left-4 top-3.5 h-5 w-5 text-[#b57a2d]" />
             <input
-              name="name"
-              value={form.name}
-              onChange={onChange}
-              required
-              className="w-full rounded-2xl border border-[#e6d8c5] bg-[#fffdfa] px-4 py-3 pl-12 text-sm font-medium text-[#3f2b1a] outline-none transition-all focus:border-[#b57a2d] focus:bg-white focus:ring-4 focus:ring-[#b57a2d]/10"
+              {...register("name")}
+              className={`w-full rounded-2xl border ${errors.name ? 'border-red-500' : 'border-[#e6d8c5]'} bg-[#fffdfa] px-4 py-3 pl-12 text-sm font-medium text-[#3f2b1a] outline-none transition-all focus:border-[#b57a2d] focus:bg-white focus:ring-4 focus:ring-[#b57a2d]/10`}
               placeholder="e.g. Ahmed Ragab"
             />
           </div>
+          {errors.name && <p className="mt-1 text-[10px] text-red-500 font-medium">{errors.name.message}</p>}
         </div>
       )}
 
@@ -35,15 +36,13 @@ function AuthFormFields({ mode, form, onChange, onSelectRole }) {
         <div className="relative">
           <Mail className="absolute left-4 top-3.5 h-5 w-5 text-[#b57a2d]" />
           <input
-            name="email"
             type="email"
-            value={form.email}
-            onChange={onChange}
-            required
-            className="w-full rounded-2xl border border-[#e6d8c5] bg-[#fffdfa] px-4 py-3 pl-12 text-sm font-medium text-[#3f2b1a] outline-none transition-all focus:border-[#b57a2d] focus:bg-white focus:ring-4 focus:ring-[#b57a2d]/10"
+            {...register("email")}
+            className={`w-full rounded-2xl border ${errors.email ? 'border-red-500' : 'border-[#e6d8c5]'} bg-[#fffdfa] px-4 py-3 pl-12 text-sm font-medium text-[#3f2b1a] outline-none transition-all focus:border-[#b57a2d] focus:bg-white focus:ring-4 focus:ring-[#b57a2d]/10`}
             placeholder="name@example.com"
           />
         </div>
+        {errors.email && <p className="mt-1 text-[10px] text-red-500 font-medium">{errors.email.message}</p>}
       </div>
 
       {/* Password */}
@@ -54,14 +53,10 @@ function AuthFormFields({ mode, form, onChange, onSelectRole }) {
         <div className="relative">
           <LockKeyhole className="absolute left-4 top-3.5 h-5 w-5 text-[#b57a2d]" />
           <input
-            name="password"
             type={showPassword ? "text" : "password"}
-            value={form.password}
-            onChange={onChange}
-            required
-            minLength={6}
-            className="w-full rounded-2xl border border-[#e6d8c5] bg-[#fffdfa] px-4 py-3 pl-12 pr-12 text-sm font-medium text-[#3f2b1a] outline-none transition-all focus:border-[#b57a2d] focus:bg-white focus:ring-4 focus:ring-[#b57a2d]/10"
-            placeholder="At least 6 characters"
+            {...register("password")}
+            className={`w-full rounded-2xl border ${errors.password ? 'border-red-500' : 'border-[#e6d8c5]'} bg-[#fffdfa] px-4 py-3 pl-12 pr-12 text-sm font-medium text-[#3f2b1a] outline-none transition-all focus:border-[#b57a2d] focus:bg-white focus:ring-4 focus:ring-[#b57a2d]/10`}
+            placeholder="At least 8 characters"
           />
           <button
             type="button"
@@ -71,6 +66,7 @@ function AuthFormFields({ mode, form, onChange, onSelectRole }) {
             {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
           </button>
         </div>
+        {errors.password && <p className="mt-1 text-[10px] text-red-500 font-medium">{errors.password.message}</p>}
       </div>
 
       {/* Sign Up extra fields */}
@@ -84,13 +80,9 @@ function AuthFormFields({ mode, form, onChange, onSelectRole }) {
             <div className="relative">
               <LockKeyhole className="absolute left-4 top-3.5 h-5 w-5 text-[#b57a2d]" />
               <input
-                name="confirmPassword"
                 type={showConfirmPassword ? "text" : "password"}
-                value={form.confirmPassword}
-                onChange={onChange}
-                required
-                minLength={6}
-                className="w-full rounded-2xl border border-[#e6d8c5] bg-[#fffdfa] px-4 py-3 pl-12 pr-12 text-sm font-medium text-[#3f2b1a] outline-none transition-all focus:border-[#b57a2d] focus:bg-white focus:ring-4 focus:ring-[#b57a2d]/10"
+                {...register("confirmPassword")}
+                className={`w-full rounded-2xl border ${errors.confirmPassword ? 'border-red-500' : 'border-[#e6d8c5]'} bg-[#fffdfa] px-4 py-3 pl-12 pr-12 text-sm font-medium text-[#3f2b1a] outline-none transition-all focus:border-[#b57a2d] focus:bg-white focus:ring-4 focus:ring-[#b57a2d]/10`}
                 placeholder="Re-enter password"
               />
               <button
@@ -101,6 +93,7 @@ function AuthFormFields({ mode, form, onChange, onSelectRole }) {
                 {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
             </div>
+            {errors.confirmPassword && <p className="mt-1 text-[10px] text-red-500 font-medium">{errors.confirmPassword.message}</p>}
           </div>
 
           {/* Account Type Role Cards */}
@@ -111,9 +104,9 @@ function AuthFormFields({ mode, form, onChange, onSelectRole }) {
             <div className="grid grid-cols-2 gap-3">
               <button
                 type="button"
-                onClick={() => onSelectRole("Tourist")}
+                onClick={() => setValue("role", "Tourist")}
                 className={`flex items-center justify-center gap-2 p-3.5 rounded-2xl border-2 font-bold text-xs transition-all cursor-pointer ${
-                  form.role === "Tourist"
+                  selectedRole === "Tourist"
                     ? "border-[#b57a2d] bg-[#fdf8f0] text-[#b57a2d] shadow-sm scale-[1.02]"
                     : "border-[#e6d8c5] bg-white text-[#695744] hover:bg-[#fff9f0]"
                 }`}
@@ -124,9 +117,9 @@ function AuthFormFields({ mode, form, onChange, onSelectRole }) {
 
               <button
                 type="button"
-                onClick={() => onSelectRole("Tour Guide")}
+                onClick={() => setValue("role", "Tour Guide")}
                 className={`flex items-center justify-center gap-2 p-3.5 rounded-2xl border-2 font-bold text-xs transition-all cursor-pointer ${
-                  form.role === "Tour Guide"
+                  selectedRole === "Tour Guide"
                     ? "border-[#b57a2d] bg-[#fdf8f0] text-[#b57a2d] shadow-sm scale-[1.02]"
                     : "border-[#e6d8c5] bg-white text-[#695744] hover:bg-[#fff9f0]"
                 }`}
@@ -135,10 +128,11 @@ function AuthFormFields({ mode, form, onChange, onSelectRole }) {
                 <span>Tour Guide</span>
               </button>
             </div>
+            <input type="hidden" {...register("role")} />
           </div>
 
           {/* Phone / WhatsApp (If Tour Guide) */}
-          {form.role === "Tour Guide" && (
+          {selectedRole === "Tour Guide" && (
             <div>
               <label className="block text-xs font-bold uppercase tracking-wider text-[#3f2b1a] mb-1.5">
                 Phone / WhatsApp Number
@@ -146,15 +140,13 @@ function AuthFormFields({ mode, form, onChange, onSelectRole }) {
               <div className="relative">
                 <Phone className="absolute left-4 top-3.5 h-5 w-5 text-[#b57a2d]" />
                 <input
-                  name="phone"
                   type="tel"
-                  value={form.phone}
-                  onChange={onChange}
-                  required
-                  className="w-full rounded-2xl border border-[#e6d8c5] bg-[#fffdfa] px-4 py-3 pl-12 text-sm font-medium text-[#3f2b1a] outline-none transition-all focus:border-[#b57a2d] focus:bg-white focus:ring-4 focus:ring-[#b57a2d]/10"
-                  placeholder="e.g. +20 101 234 5678"
+                  {...register("phone")}
+                  className={`w-full rounded-2xl border ${errors.phone ? 'border-red-500' : 'border-[#e6d8c5]'} bg-[#fffdfa] px-4 py-3 pl-12 text-sm font-medium text-[#3f2b1a] outline-none transition-all focus:border-[#b57a2d] focus:bg-white focus:ring-4 focus:ring-[#b57a2d]/10`}
+                  placeholder="e.g. 01012345678"
                 />
               </div>
+              {errors.phone && <p className="mt-1 text-[10px] text-red-500 font-medium">{errors.phone.message}</p>}
             </div>
           )}
         </>

@@ -105,6 +105,7 @@ Secured navigation with dedicated dashboards for:
 - GSAP ScrollTrigger entrance animations.
 - Shimmer Skeleton UI placeholders (`CardSkeleton`, `TableSkeleton`, `FormSkeleton`).
 - React Toastify notifications.
+- **Form Management & Validation**: Integrated **React Hook Form** with **Zod** for high-performance, schema-based form validation across all system modules (Booking, Auth, and Admin Wizards).
 - 100% mobile responsive touch-scrollable navigation.
 
 ---
@@ -118,6 +119,8 @@ Secured navigation with dedicated dashboards for:
 - React 18 (Vite)
 - Tailwind CSS v4
 - React Router v7
+- **React Hook Form** (High-performance form management)
+- **Zod** (Schema-based validation)
 - Lucide React Icons
 - GSAP (GreenSock Animation Platform & ScrollTrigger)
 - React Toastify
