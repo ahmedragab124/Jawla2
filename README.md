@@ -356,7 +356,7 @@ npm run build
 - 👨‍💻 **Ahmed Ragab Marzouk**
 - 👩‍💻 **Heba Alrawy Ahmed**
 - 👩‍💻 **Emy Ayoub Atallah**
-- 👩‍💻 **Rodina Ahmed Gamal Eldin**
+- 👩‍💻 **[Rodina Ahmed Gamal Eldin](https://github.com/RodinaAhmedd)**
 - 👨‍💻 **Elsam Ali Mahrous**
 - 👩‍💻 **Carol Akmal Fakhry**
 
